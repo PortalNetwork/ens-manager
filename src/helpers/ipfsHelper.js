@@ -1,4 +1,4 @@
-import multihash from 'multihashes'
+import multihash from './multihash';
 
 /**
  * store in content
