@@ -22,6 +22,7 @@ class IPFS extends Component {
   handleSetIPFSHash = () => {
     if (this.state.ipfs.length !== 46) {
       this.props.handleWarningOpen('IPFS Hash incorrect');
+      return;
     }
     let self = this;
     const to = getEthereumResolverAddress();

@@ -27,6 +27,7 @@ class Resolver extends Component {
   handleSetResovler = () => {
     if (this.state.resolverAddr.length !== 42) {
       this.props.handleWarningOpen('Resolver hash incorrect');
+      return;
     }
     let self = this;
     const to = getEthereumRegistryAddress();
