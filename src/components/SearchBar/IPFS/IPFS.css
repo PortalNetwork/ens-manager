@@ -1,0 +1,90 @@
+.ipfs {
+  position: relative;
+  height: auto;
+  max-height: 470px;
+  border-radius: 10px;
+  background-color: #2346f7;
+  box-shadow: 2px 2px 39px 10px rgba(0, 0, 0, 0.15);
+  margin-top: 33px;
+  padding: 10px 25px 10px 25px; }
+  .ipfs.open {
+    display: block; }
+  @media screen and (max-width: 600px) {
+    .ipfs {
+      width: 100%;
+      margin-top: 16px;
+      padding: 10px; } }
+  .ipfs > h1 {
+    font-family: Avenir;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    margin-bottom: 20px; }
+    @media screen and (max-width: 600px) {
+      .ipfs > h1 {
+        font-size: 5vw;
+        margin-bottom: 10px; } }
+  .ipfs p.titleinfo {
+    font-family: Avenir;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    margin-bottom: 15px; }
+    @media screen and (max-width: 600px) {
+      .ipfs p.titleinfo {
+        margin-bottom: 5px;
+        font-size: 16px; } }
+  .ipfs .setIPFS {
+    height: 30px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    margin: 0 auto; }
+    @media screen and (max-width: 600px) {
+      .ipfs .setIPFS {
+        height: 40px; } }
+    .ipfs .setIPFS > input {
+      display: block;
+      width: 90%;
+      height: 95%;
+      background-color: #ffffff;
+      border: 0;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      outline: none;
+      padding-left: 15px;
+      color: midnightblue;
+      font-family: Avenir;
+      font-size: 14px;
+      font-weight: 500;
+      float: left; }
+      .ipfs .setIPFS > input::placeholder {
+        color: rgba(102, 102, 102, 0.6); }
+      @media screen and (max-width: 600px) {
+        .ipfs .setIPFS > input {
+          font-size: 20px; } }
+  .ipfs .setIPFSBtn > button {
+    font-family: Avenir;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: midnightblue;
+    height: 30px;
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    border: 0;
+    cursor: pointer; }
+
+span.tx {
+  color: #ffffff; }
+  span.tx a:link {
+    color: #ffffff; }
+  span.tx a:hover {
+    color: #999999; }
+  span.tx a:visited {
+    color: #999999; }
+  span.tx a:active {
+    color: #999999; }
