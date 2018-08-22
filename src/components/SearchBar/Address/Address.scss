@@ -1,4 +1,4 @@
-.ipfs{
+.address{
     position: relative;
     height: auto;
     max-height: 470px;
@@ -44,7 +44,7 @@
             font-size: 16px;
         }
     }
-    .setIPFS{
+    .setAddress{
         height: 30px;
         border-radius: 20px;
         background-color: #ffffff;
@@ -54,7 +54,7 @@
         }
         >input{
             display: block;
-            width: 90%;
+            width: 70%;
             height: 90%;
             background-color: #ffffff;
             border: 0;
@@ -74,8 +74,32 @@
                 font-size: 20px;
             }
         }
+        >a.defaultAddress{
+            font-family: Avenir;
+            display: block;
+            width: 25%;
+            height: 100%;
+            float: right;
+            font-size: 14px;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-position: center center;
+            background-color: midnightblue;
+            color: #ffffff;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            text-align: center;
+            >p{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto;
+                height: 100%;
+            }
+        }
     }
-    .setIPFSBtn{
+    .setAddressBtn{
         >button {
             font-family: Avenir;
             border-top-right-radius: 20px;

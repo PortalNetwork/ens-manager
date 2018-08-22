@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {getEthereumResolverAddress, getEthereumRegistryAddress} from '../../../lib/web3Service';
 import {setResolver} from '../../../lib/registryService';
+import Tooltip from 'material-ui/Tooltip';
+import { Error, CheckCircle } from 'material-ui-icons';
 import './Resolver.css';
 
 class Resolver extends Component {
@@ -49,9 +51,17 @@ class Resolver extends Component {
   render() {
     return (
       <div className="resolver">
-        <h1>STEP 1. SET RESOLVER</h1>
-        <p className="titleinfo"><b>Owner:</b> {this.props.owner}</p>
-        <p className="titleinfo"><b>Resolver:</b> {this.props.resolver}</p>
+        <h1>SET RESOLVER 
+          <Tooltip title="You can set Resolver to your ENS and point to your address or bind IPFS">
+            <Error/>
+          </Tooltip>
+        </h1>
+        <p className="titleinfo"><b>Domain Owner:&nbsp;</b> {this.props.owner}</p>
+        <p className="titleinfo"><b>Resolver:&nbsp;</b> {this.props.resolver}&nbsp;
+          { this.props.resolver !== '0x0000000000000000000000000000000000000000' && 
+            <CheckCircle/>
+          }
+        </p>
         { this.props.owner !== '0x0000000000000000000000000000000000000000' &&
           this.props.owner === this.props.metaMask.account &&
         <div className="setResolver">
@@ -63,7 +73,9 @@ class Resolver extends Component {
             onChange={this.handleInputChange}
             />
           <a className="defaultResolver" onClick={() => this.handleDefaultResolver()}>
+            <Tooltip title="Default resolver is which deploy by Ethereum Foundation to resolve the ENS domain">
             <p>Default Resolver</p>
+            </Tooltip>
           </a>
         </div>
         }

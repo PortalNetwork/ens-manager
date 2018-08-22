@@ -24,7 +24,7 @@ const setWeb3Provider = () => {
  * @param {*} label
  * @param {*} owner
  */
-export const setSubnodeOwner = async (name, label, owner) => {
+export const setSubnodeOwner = (name, label, owner) => {
     try {
         // name 要用 namehash
         let byteData = "0x" +

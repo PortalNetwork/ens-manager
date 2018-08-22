@@ -1,4 +1,4 @@
-.resolver {
+.address {
   position: relative;
   height: auto;
   max-height: 470px;
@@ -7,14 +7,14 @@
   box-shadow: 2px 2px 39px 10px rgba(0, 0, 0, 0.15);
   margin-top: 33px;
   padding: 10px 25px 10px 25px; }
-  .resolver.open {
+  .address.open {
     display: block; }
   @media screen and (max-width: 600px) {
-    .resolver {
+    .address {
       width: 100%;
       margin-top: 16px;
       padding: 10px; } }
-  .resolver > h1 {
+  .address > h1 {
     display: flex;
     justify-content: space-between;
     font-family: Avenir;
@@ -24,10 +24,10 @@
     color: #ffffff;
     margin-bottom: 20px; }
     @media screen and (max-width: 600px) {
-      .resolver > h1 {
+      .address > h1 {
         font-size: 5vw;
         margin-bottom: 10px; } }
-  .resolver p.titleinfo {
+  .address p.titleinfo {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -38,21 +38,21 @@
     color: #ffffff;
     margin-bottom: 15px; }
     @media screen and (max-width: 600px) {
-      .resolver p.titleinfo {
+      .address p.titleinfo {
         margin-bottom: 5px;
         font-size: 16px; } }
-  .resolver .setResolver {
+  .address .setAddress {
     height: 30px;
     border-radius: 20px;
     background-color: #ffffff;
     margin: 0 auto; }
     @media screen and (max-width: 600px) {
-      .resolver .setResolver {
+      .address .setAddress {
         height: 40px; } }
-    .resolver .setResolver > input {
+    .address .setAddress > input {
       display: block;
       width: 70%;
-      height: 95%;
+      height: 90%;
       background-color: #ffffff;
       border: 0;
       border-top-left-radius: 20px;
@@ -64,12 +64,12 @@
       font-size: 14px;
       font-weight: 500;
       float: left; }
-      .resolver .setResolver > input::placeholder {
+      .address .setAddress > input::placeholder {
         color: rgba(102, 102, 102, 0.6); }
       @media screen and (max-width: 600px) {
-        .resolver .setResolver > input {
+        .address .setAddress > input {
           font-size: 20px; } }
-    .resolver .setResolver > a.defaultResolver {
+    .address .setAddress > a.defaultAddress {
       font-family: Avenir;
       display: block;
       width: 25%;
@@ -85,13 +85,13 @@
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
       text-align: center; }
-      .resolver .setResolver > a.defaultResolver > p {
+      .address .setAddress > a.defaultAddress > p {
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0 auto;
         height: 100%; }
-  .resolver .setResolverBtn > button {
+  .address .setAddressBtn > button {
     font-family: Avenir;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;

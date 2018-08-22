@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Loading from '../Loading/Loading';
 import Resolver from './Resolver/Resolver';
+import Subdomain from './Subdomain/Subdomain';
 import IPFS from './IPFS/IPFS';
+import Address from './Address/Address';
 import {getResolver, getOwner} from '../../lib/registryService';
-import {getContent} from '../../lib/resolverService';
+import {getContent, getAddress} from '../../lib/resolverService';
 import {fromContentHash} from '../../helpers/ipfsHelper';
 import './SearchBar.css';
 
@@ -14,10 +16,13 @@ class SearchBar extends Component {
       isKeyDown: false,
       isOpenResolver: false,
       isOpenIPFS: false,
+      isOpenAddress: false,
+      isOpenSubdomain: false,
       searchValue : "",
       owner: "",
       resolver: "",
-      ipfsHash: ""
+      ipfsHash: "",
+      address: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -51,7 +56,7 @@ class SearchBar extends Component {
       this.props.handleWarningOpen("ENS has the minimum character length of 7");
       return;
     }
-    this.setState({isKeyDown: true, isOpenResolver: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
+    this.setState({isKeyDown: true, isOpenResolver: false, isOpenSubdomain: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
     const resolver = await getResolver(this.state.searchValue);
     const owner = await getOwner(this.state.searchValue);
     let ipfsHash = "";
@@ -61,7 +66,7 @@ class SearchBar extends Component {
       this.setState({owner, getResolver});
       if (owner !== '0x0000000000000000000000000000000000000000' && 
         owner === this.props.metaMask.account) {
-        this.setState({isOpenIPFS: true})
+        this.setState({isOpenIPFS: true, isOpenAddress: true, isOpenSubdomain: true});
       }
       if (ipfsHash !== '0x0000000000000000000000000000000000000000000000000000000000000000') {
         this.setState({ipfsHash: fromContentHash(ipfsHash)});
@@ -70,7 +75,8 @@ class SearchBar extends Component {
     if (owner === '0x0000000000000000000000000000000000000000') {
       this.props.handleWarningOpen('This ENS is OPEN for bid!');
     }
-    this.setState({isOpenResolver: true});
+    const address = await getAddress(this.state.searchValue, resolver);
+    this.setState({isOpenResolver: true, address});
     this.handleLoadingClose();
   }
 
@@ -86,7 +92,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="ethereum">
-        <h1>ENS RESOLVER MANAGER</h1>
+        <h1>ENS MANAGER</h1>
         <div className="search">
           <input type="text" 
             onKeyDown={this.handleSearchItem} 
@@ -101,7 +107,9 @@ class SearchBar extends Component {
           ></a>
         </div>
         { this.state.isKeyDown && <Loading/> }
+        { this.state.isOpenSubdomain && <Subdomain {...this.props} {...this.state}/> }
         { this.state.isOpenResolver && <Resolver {...this.props} {...this.state}/> }
+        { this.state.isOpenAddress && <Address {...this.props} {...this.state}/> }
         { this.state.isOpenIPFS && <IPFS {...this.props} {...this.state}/> }
       </div>
     );

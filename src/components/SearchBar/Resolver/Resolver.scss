@@ -16,6 +16,8 @@
         padding: 10px;
     }
     >h1{
+        display: flex;
+        justify-content: space-between;
         font-family: Avenir;
         font-size: 24px;
         font-weight: 900;
@@ -28,6 +30,10 @@
         }
     }
     p.titleinfo{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
         font-family: Avenir;
         font-size: 14px;
         letter-spacing: 0.3px;

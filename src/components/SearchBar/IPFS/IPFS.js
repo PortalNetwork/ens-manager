@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {getEthereumResolverAddress} from '../../../lib/web3Service';
 import {setContent} from '../../../lib/resolverService';
+import Tooltip from 'material-ui/Tooltip';
+import { Error, CheckCircle } from 'material-ui-icons';
 import './IPFS.css';
 
 class IPFS extends Component {
@@ -44,8 +46,16 @@ class IPFS extends Component {
   render() {
     return (
       <div className="ipfs">
-        <h1>STEP 2. SET IPFS HASH</h1>
-        <p className="titleinfo"><b>IPFS Hash:</b> {this.props.ipfsHash}</p>
+        <h1>SET IPFS HASH
+          <Tooltip title="You can set IPFS Hash to the ENS and browse from MetaMask">
+            <Error/>
+          </Tooltip>
+        </h1>
+        <p className="titleinfo"><b>Current IPFS Hash:&nbsp;</b> {this.props.ipfsHash}&nbsp;
+          { this.props.ipfsHash !== '0x0000000000000000000000000000000000000000000000000000000000000000' && 
+            <CheckCircle/>
+          }
+        </p>
         <div className="setIPFS">
           <input 
             type="text" 

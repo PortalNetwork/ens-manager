@@ -1,4 +1,4 @@
-.ipfs{
+.subdomain{
     position: relative;
     height: auto;
     max-height: 470px;
@@ -44,29 +44,44 @@
             font-size: 16px;
         }
     }
-    .setIPFS{
+    .setNewOwner{
+        display: flex;
         height: 30px;
         border-radius: 20px;
         background-color: #ffffff;
         margin: 0 auto;
+        margin-top: 20px;
         @media screen and (max-width: 600px) {
             height: 40px;
         }
-        >input{
-            display: block;
-            width: 90%;
-            height: 90%;
-            background-color: #ffffff;
-            border: 0;
+        >span.title{
+            width: 120px;
+            background-color: midnightblue;
+            color: #ffffff;
+            padding-left: 15px;
+            text-align: center;
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+        >input{
+            display: block;
+            width: 70%;
+            height: 95%;
+            background-color: #ffffff;
+            border: 0;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
             outline: none;
             padding-left: 15px;
             color: midnightblue;
             font-family: Avenir;
             font-size: 14px;
             font-weight: 500;
-            float: left;
+            float: right;
             &::placeholder { 
                 color: rgba($color: #666666, $alpha: 0.6);
             }
@@ -75,7 +90,52 @@
             }
         }
     }
-    .setIPFSBtn{
+    .createSubdomain{
+        display: flex;
+        height: 30px;
+        border-radius: 20px;
+        background-color: #ffffff;
+        margin: 0 auto;
+        @media screen and (max-width: 600px) {
+            height: 40px;
+        }
+        >span.title{
+            width: 120px;
+            background-color: midnightblue;
+            color: #ffffff;
+            padding-left: 15px;
+            text-align: center;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+        >input{
+            display: block;
+            width: 70%;
+            height: 95%;
+            background-color: #ffffff;
+            border: 0;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            outline: none;
+            padding-left: 15px;
+            color: midnightblue;
+            font-family: Avenir;
+            font-size: 14px;
+            font-weight: 500;
+            float: right;
+            &::placeholder { 
+                color: rgba($color: #666666, $alpha: 0.6);
+            }
+            @media screen and (max-width: 600px) {
+                font-size: 20px;
+            }
+        }
+    }
+    .setSubdomainBtn{
         >button {
             font-family: Avenir;
             border-top-right-radius: 20px;

@@ -1,4 +1,4 @@
-.resolver {
+.subdomain {
   position: relative;
   height: auto;
   max-height: 470px;
@@ -7,14 +7,14 @@
   box-shadow: 2px 2px 39px 10px rgba(0, 0, 0, 0.15);
   margin-top: 33px;
   padding: 10px 25px 10px 25px; }
-  .resolver.open {
+  .subdomain.open {
     display: block; }
   @media screen and (max-width: 600px) {
-    .resolver {
+    .subdomain {
       width: 100%;
       margin-top: 16px;
       padding: 10px; } }
-  .resolver > h1 {
+  .subdomain > h1 {
     display: flex;
     justify-content: space-between;
     font-family: Avenir;
@@ -24,10 +24,10 @@
     color: #ffffff;
     margin-bottom: 20px; }
     @media screen and (max-width: 600px) {
-      .resolver > h1 {
+      .subdomain > h1 {
         font-size: 5vw;
         margin-bottom: 10px; } }
-  .resolver p.titleinfo {
+  .subdomain p.titleinfo {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -38,60 +38,93 @@
     color: #ffffff;
     margin-bottom: 15px; }
     @media screen and (max-width: 600px) {
-      .resolver p.titleinfo {
+      .subdomain p.titleinfo {
         margin-bottom: 5px;
         font-size: 16px; } }
-  .resolver .setResolver {
+  .subdomain .setNewOwner {
+    display: flex;
     height: 30px;
     border-radius: 20px;
     background-color: #ffffff;
-    margin: 0 auto; }
+    margin: 0 auto;
+    margin-top: 20px; }
     @media screen and (max-width: 600px) {
-      .resolver .setResolver {
+      .subdomain .setNewOwner {
         height: 40px; } }
-    .resolver .setResolver > input {
+    .subdomain .setNewOwner > span.title {
+      width: 120px;
+      background-color: midnightblue;
+      color: #ffffff;
+      padding-left: 15px;
+      text-align: center;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px; }
+    .subdomain .setNewOwner > input {
       display: block;
       width: 70%;
       height: 95%;
       background-color: #ffffff;
       border: 0;
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
       outline: none;
       padding-left: 15px;
       color: midnightblue;
       font-family: Avenir;
       font-size: 14px;
       font-weight: 500;
-      float: left; }
-      .resolver .setResolver > input::placeholder {
+      float: right; }
+      .subdomain .setNewOwner > input::placeholder {
         color: rgba(102, 102, 102, 0.6); }
       @media screen and (max-width: 600px) {
-        .resolver .setResolver > input {
+        .subdomain .setNewOwner > input {
           font-size: 20px; } }
-    .resolver .setResolver > a.defaultResolver {
-      font-family: Avenir;
-      display: block;
-      width: 25%;
-      height: 100%;
-      float: right;
-      font-size: 14px;
-      cursor: pointer;
-      background-repeat: no-repeat;
-      background-size: 20px 20px;
-      background-position: center center;
+  .subdomain .createSubdomain {
+    display: flex;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    margin: 0 auto; }
+    @media screen and (max-width: 600px) {
+      .subdomain .createSubdomain {
+        height: 40px; } }
+    .subdomain .createSubdomain > span.title {
+      width: 120px;
       background-color: midnightblue;
       color: #ffffff;
+      padding-left: 15px;
+      text-align: center;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px; }
+    .subdomain .createSubdomain > input {
+      display: block;
+      width: 70%;
+      height: 95%;
+      background-color: #ffffff;
+      border: 0;
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
-      text-align: center; }
-      .resolver .setResolver > a.defaultResolver > p {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-        height: 100%; }
-  .resolver .setResolverBtn > button {
+      outline: none;
+      padding-left: 15px;
+      color: midnightblue;
+      font-family: Avenir;
+      font-size: 14px;
+      font-weight: 500;
+      float: right; }
+      .subdomain .createSubdomain > input::placeholder {
+        color: rgba(102, 102, 102, 0.6); }
+      @media screen and (max-width: 600px) {
+        .subdomain .createSubdomain > input {
+          font-size: 20px; } }
+  .subdomain .setSubdomainBtn > button {
     font-family: Avenir;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
