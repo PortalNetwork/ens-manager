@@ -1,3 +1,9 @@
 ### Server Health
 GET http://localhost:3000/v1/health
 
+
+### Fetch decrypt
+POST https://preimagedb.appspot.com/keccak256/query
+Content-type: application/json
+
+["b0c6eadd867e320cd40b20985c64f2323643dcfb15ad44049d7915faf3da5eab", "7624778dedc75f8b322b9fa1632a610d40b85e106c7d9bf0e743a9ce291b9c6f"]

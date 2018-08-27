@@ -22,6 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         {/*<Top/>*/}
+        
         <Warning {...this.props}/>
         <MetaMask {...this.props} {...this.state} setWeb3={this.setWeb3}/>
         <SearchBar {...this.props} {...this.state}/>

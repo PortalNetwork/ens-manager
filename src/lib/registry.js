@@ -1,6 +1,6 @@
 var Promise = require("bluebird");
 
-const registryInterface = [
+export const registryInterface = [
   {
     constant: true,
     inputs: [{ name: "node", type: "bytes32" }],
@@ -115,6 +115,8 @@ const registryInterface = [
 function Registry(web3, address) {
   this.web3 = web3;
   const registryContract = web3.eth.contract(registryInterface);
+  this.registryContract = registryContract;
+  this.address = address;
   this.registryPromise = Promise.resolve(
     Promise.promisifyAll(registryContract.at(address))
   );
@@ -141,6 +143,13 @@ Registry.prototype.getResolver = function(node, callback) {
 Registry.prototype.getOwner = function(node, callback) {
   return this.registryPromise.then(function(registry) {
     return registry.ownerAsync(node);
+  });
+}
+
+Registry.prototype.events = function(callback) {
+  return this.registryPromise.then(function(registry) {
+    //console.log(registry);
+    return registry.NewOwnerAsync({}, {fromBlock: 3327417, toBlock: 'latest'});
   });
 }
 

@@ -56,7 +56,7 @@ class Address extends Component {
             <Error/>
           </Tooltip>
         </h1>
-        <p className="titleinfo"><b>Current Address:&nbsp;</b> {this.props.address}
+        <p className="titleinfo"><b>Current Address:&nbsp;</b> {this.props.address}&nbsp;
           { this.props.address !== '0x0000000000000000000000000000000000000000' && 
             <CheckCircle/>
           }

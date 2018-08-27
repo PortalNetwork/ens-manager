@@ -1,0 +1,31 @@
+.events {
+  position: relative;
+  height: auto;
+  max-height: 470px;
+  border-radius: 10px;
+  background-color: #2346f7;
+  box-shadow: 2px 2px 39px 10px rgba(0, 0, 0, 0.15);
+  margin-top: 33px;
+  padding: 10px 25px 10px 25px; }
+  .events.open {
+    display: block; }
+  @media screen and (max-width: 600px) {
+    .events {
+      width: 100%;
+      margin-top: 16px;
+      padding: 10px; } }
+  .events > h1 {
+    display: flex;
+    justify-content: space-between;
+    font-family: Avenir;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    margin-bottom: 20px; }
+    .events > h1 > button {
+      color: #ffffff; }
+    @media screen and (max-width: 600px) {
+      .events > h1 {
+        font-size: 5vw;
+        margin-bottom: 10px; } }

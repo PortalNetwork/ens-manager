@@ -1,12 +1,12 @@
 
-const URI = 'http://localhost:3000/v1';
+const URI = 'https://preimagedb.appspot.com/keccak256/query';
 
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json'
 };
 
-const route = (path, uri= URI) => (`${uri}/${path}`);
+//const route = (path, uri= URI) => (`${uri}/${path}`);
 
 const fetchPOST = async (route, payload) => {
   try {
@@ -53,4 +53,5 @@ const fetchGET = async (route, queryParams) => {
   }
 }
 
-export const getHealthResult = (payload) => fetchGET(route('health'), payload);
+//export const getHealthResult = (payload) => fetchGET(route('health'), payload);
+export const decryptLabel = (payload) => fetchPOST(URI, payload);

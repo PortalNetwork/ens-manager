@@ -4,6 +4,7 @@ import Resolver from './Resolver/Resolver';
 import Subdomain from './Subdomain/Subdomain';
 import IPFS from './IPFS/IPFS';
 import Address from './Address/Address';
+import Events from './Events/Events';
 import {getResolver, getOwner} from '../../lib/registryService';
 import {getContent, getAddress} from '../../lib/resolverService';
 import {fromContentHash} from '../../helpers/ipfsHelper';
@@ -107,6 +108,7 @@ class SearchBar extends Component {
           ></a>
         </div>
         { this.state.isKeyDown && <Loading/> }
+        { this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> }
         { this.state.isOpenSubdomain && <Subdomain {...this.props} {...this.state}/> }
         { this.state.isOpenResolver && <Resolver {...this.props} {...this.state}/> }
         { this.state.isOpenAddress && <Address {...this.props} {...this.state}/> }
