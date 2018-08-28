@@ -1,6 +1,6 @@
-# ENS Resolver Manager
+# ENS Manager
 
-> Easily set IPFS hash to the ENS Resolver
+> Easily management of ENS, include set IPFS hash, set address, create subdomain.
 
 ## Usage
 
