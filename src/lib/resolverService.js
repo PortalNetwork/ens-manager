@@ -6,14 +6,8 @@ import {
   getContentHash
 } from '../helpers/ipfsHelper';
 const abi = require('ethereumjs-abi');
-const Web3 = require('web3');
 const namehash = require('eth-ens-namehash');
-let web3 = new Web3();
 let resolver = null;
-
-const setWeb3Provider = () => {
-  web3.setProvider(new web3.providers.HttpProvider(getEthereumProvider(process.env.WNS_NETWORK)));
-}
 
 /**
  * 
@@ -39,10 +33,9 @@ export const setContent = (name, content) => {
  * @param {*} name 
  * @param {*} resolver 
  */
-export const getContent = async (name, resolverAddr) => {
+export const getContent = async (name, resolverAddr, web3Provider) => {
   try {
-    setWeb3Provider();
-    resolver = new Resolver(web3, resolverAddr);
+    resolver = new Resolver(web3Provider, resolverAddr);
     const content = await resolver.contentHash(namehash.hash(name));
     return content;
   } catch (err) {
@@ -73,10 +66,9 @@ export const setAddress = (name, address) => {
  * @param {*} name 
  * @param {*} resolver 
  */
-export const getAddress = async (name, resolverAddr) => {
+export const getAddress = async (name, resolverAddr, web3Provider) => {
   try {
-    setWeb3Provider();
-    resolver = new Resolver(web3, resolverAddr);
+    resolver = new Resolver(web3Provider, resolverAddr);
     const content = await resolver.address(namehash.hash(name));
     return content;
   } catch (err) {

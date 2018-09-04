@@ -10,11 +10,6 @@ const namehash = require('eth-ens-namehash');
 let web3 = new Web3();
 let registry = null;
 
-const setWeb3Provider = () => {
-  web3.setProvider(new web3.providers.HttpProvider(getEthereumProvider(process.env.ENS_NETWORK)));
-  registry = new Registry(web3, getEthereumRegistryAddress(process.env.ENS_NETWORK));
-}
-
 /**
  * @description 
  * 
@@ -56,10 +51,9 @@ export const setResolver = (name, resolver) => {
   }
 }
 
-export const getResolver = async (name) => {
+export const getResolver = async (name, web3Provider) => {
   try {
-    setWeb3Provider();
-    registry = new Registry(web3, getEthereumRegistryAddress(process.env.ENS_NETWORK));
+    registry = new Registry(web3Provider, getEthereumRegistryAddress(process.env.ENS_NETWORK));
     const resolver = await registry.getResolver(namehash.hash(name));
     return resolver;
   } catch (err) {
@@ -68,10 +62,9 @@ export const getResolver = async (name) => {
   }
 }
 
-export const getOwner = async (name) => {
+export const getOwner = async (name, web3Provider) => {
   try {
-    setWeb3Provider();
-    registry = new Registry(web3, getEthereumRegistryAddress(process.env.ENS_NETWORK));
+    registry = new Registry(web3Provider, getEthereumRegistryAddress(process.env.ENS_NETWORK));
     const owner = await registry.getOwner(namehash.hash(name));
     return owner;
   } catch (err) {

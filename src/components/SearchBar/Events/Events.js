@@ -21,7 +21,6 @@ class Events extends Component {
   handleWeb3Load = async () => {
     // console.log(window.web3, this.props.searchValue);
     if (window.web3 !== null) {
-      console.log('loaded')
       let web3 = new Web3(window.web3.currentProvider);
       const _newOwnerEvent = await newOwnerEvent(web3, this.props.searchValue);
       _newOwnerEvent.watch((error, result) => {

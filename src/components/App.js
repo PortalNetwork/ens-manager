@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {MetaMask} from './MetaMask/MetaMask';
+import MetamaskChecker from './Web3Checker/Web3Checker';
 import SearchBar from './SearchBar/SearchBar';
 import {Warning} from './Warning/Warning';
 import './App.css';
@@ -11,20 +12,33 @@ class App extends Component {
       web3: null,
       isKeyDown: false
     };
-    this.setWeb3 = this.setWeb3.bind(this);
+    //this.setWeb3 = this.setWeb3.bind(this);
   }
 
-  setWeb3(web3) {
+  /*setWeb3(web3) {
     this.setState({web3});
+  }*/
+
+  async initialize (web3, provider, account, network) {
+    this.setState({web3});
+    this.props.handleMetaMaskAccount(account);
+    this.props.handleMetaMaskNetwork(network);
+    //console.log(provider);
+    //this.props.handleMetaMaskNetwork(network);
   }
 
   render() {
+    const funcs = {
+      onCheckSuccess : async (web3, provider, account, network) => await this.initialize(web3, provider, account, network),
+    }
+
     return (
       <div className="App">
         {/*<Top/>*/}
         
         <Warning {...this.props}/>
-        <MetaMask {...this.props} {...this.state} setWeb3={this.setWeb3}/>
+        <MetamaskChecker {...funcs} />
+        {/*<MetaMask {...this.props} {...this.state} setWeb3={this.setWeb3}/>*/}
         <SearchBar {...this.props} {...this.state}/>
         <div className="urllink">
           <a href="https://twitter.com/itisportal" target="_blank"><i className="fab fa-twitter fa-3x"></i></a>

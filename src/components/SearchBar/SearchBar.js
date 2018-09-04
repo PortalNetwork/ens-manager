@@ -58,13 +58,13 @@ class SearchBar extends Component {
       return;
     }
     this.setState({isKeyDown: true, isOpenResolver: false, isOpenSubdomain: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
-    const resolver = await getResolver(this.state.searchValue);
-    const owner = await getOwner(this.state.searchValue);
+    const resolver = await getResolver(this.state.searchValue, this.props.web3);
+    const owner = await getOwner(this.state.searchValue, this.props.web3);
     let ipfsHash = "";
     this.setState({resolver, owner});
     if (resolver !== '0x0000000000000000000000000000000000000000') {
-      ipfsHash = await getContent(this.state.searchValue, resolver);
-      this.setState({owner, getResolver});
+      ipfsHash = await getContent(this.state.searchValue, resolver, this.props.web3);
+      this.setState({owner, resolver});
       if (owner !== '0x0000000000000000000000000000000000000000' && 
         owner === this.props.metaMask.account) {
         this.setState({isOpenIPFS: true, isOpenAddress: true, isOpenSubdomain: true});
@@ -76,7 +76,7 @@ class SearchBar extends Component {
     if (owner === '0x0000000000000000000000000000000000000000') {
       this.props.handleWarningOpen('This ENS is OPEN for bid!');
     }
-    const address = await getAddress(this.state.searchValue, resolver);
+    const address = await getAddress(this.state.searchValue, resolver, this.props.web3);
     this.setState({isOpenResolver: true, address});
     this.handleLoadingClose();
   }
