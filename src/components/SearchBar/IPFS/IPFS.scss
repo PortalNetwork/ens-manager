@@ -11,7 +11,7 @@
         display: block;
     }
     @media screen and (max-width: 600px) {
-        width: 100%;
+        //width: 100%;
         margin-top: 16px;
         padding: 10px;
     }
@@ -40,8 +40,16 @@
         color: #ffffff;
         margin-bottom: 15px;
         @media screen and (max-width: 600px) {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
             margin-bottom: 5px;
-            font-size: 16px;
+            font-size: 11px;
+        }
+        >svg {
+            @media screen and (max-width: 600px) {
+                display: none;
+            }
         }
     }
     .setIPFS{
@@ -71,7 +79,7 @@
                 color: rgba($color: #666666, $alpha: 0.6);
             }
             @media screen and (max-width: 600px) {
-                font-size: 20px;
+                font-size: 12px;
             }
         }
     }
@@ -90,6 +98,9 @@
             width: 100%;
             border: 0;
             cursor: pointer;
+            @media screen and (max-width: 600px) {
+                font-size: 12px;
+            }
         }
     }
 }

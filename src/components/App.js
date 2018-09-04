@@ -47,6 +47,10 @@ class App extends Component {
         <span className="text">
           <p>
             Powered by <a href="https://www.portal.network/" target="_blank">Portal Network</a>
+            <span className="links">
+              <a href="https://twitter.com/itisportal" target="_blank"><i className="fab fa-twitter fa-1x"></i></a>
+              <a href="https://t.me/portalnetworkofficial" target="_blank"><i className="fab fa-telegram fa-1x"></i></a>
+            </span>
           </p>
         </span>
       </div>

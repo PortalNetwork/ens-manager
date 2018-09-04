@@ -5,14 +5,14 @@
   align-items: center; }
   .App span.text {
     position: relative;
-    display: block;
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 30px;
     bottom: 5px;
     left: 0; }
     .App span.text > p {
       display: block;
-      width: 400px;
       text-align: center;
       margin: 0 auto 0px auto;
       font-size: 14px;
@@ -33,3 +33,16 @@
       color: #0027ec;
       float: left;
       margin-left: 10px; }
+    @media screen and (max-width: 600px) {
+      .App .urllink {
+        display: none; } }
+  .App .links {
+    display: none;
+    margin-top: 5px; }
+    .App .links > a {
+      color: #0027ec;
+      margin-left: 10px; }
+    @media screen and (max-width: 600px) {
+      .App .links {
+        display: inline-block;
+        font-size: 14px; } }

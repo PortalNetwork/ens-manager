@@ -11,7 +11,6 @@
     display: block; }
   @media screen and (max-width: 600px) {
     .subdomain {
-      width: 100%;
       margin-top: 16px;
       padding: 10px; } }
   .subdomain > h1 {
@@ -39,8 +38,8 @@
     margin-bottom: 15px; }
     @media screen and (max-width: 600px) {
       .subdomain p.titleinfo {
-        margin-bottom: 5px;
-        font-size: 16px; } }
+        margin-bottom: 10px;
+        font-size: 12px; } }
   .subdomain .setNewOwner {
     display: flex;
     height: 30px;
@@ -63,6 +62,11 @@
       justify-content: center;
       align-items: center;
       font-size: 14px; }
+      @media screen and (max-width: 600px) {
+        .subdomain .setNewOwner > span.title {
+          font-size: 12px;
+          width: 75px;
+          padding-left: 5px; } }
     .subdomain .setNewOwner > input {
       display: block;
       width: 70%;
@@ -82,7 +86,8 @@
         color: rgba(102, 102, 102, 0.6); }
       @media screen and (max-width: 600px) {
         .subdomain .setNewOwner > input {
-          font-size: 20px; } }
+          font-size: 12px;
+          padding-left: 5px; } }
   .subdomain .createSubdomain {
     display: flex;
     height: 30px;
@@ -104,6 +109,11 @@
       justify-content: center;
       align-items: center;
       font-size: 14px; }
+      @media screen and (max-width: 600px) {
+        .subdomain .createSubdomain > span.title {
+          font-size: 12px;
+          width: 75px;
+          padding-left: 5px; } }
     .subdomain .createSubdomain > input {
       display: block;
       width: 70%;
@@ -123,7 +133,8 @@
         color: rgba(102, 102, 102, 0.6); }
       @media screen and (max-width: 600px) {
         .subdomain .createSubdomain > input {
-          font-size: 20px; } }
+          font-size: 12px;
+          padding-left: 5px; } }
   .subdomain .setSubdomainBtn > button {
     font-family: Avenir;
     border-top-right-radius: 20px;
@@ -138,6 +149,10 @@
     width: 100%;
     border: 0;
     cursor: pointer; }
+    @media screen and (max-width: 600px) {
+      .subdomain .setSubdomainBtn > button {
+        font-size: 12px;
+        padding-left: 5px; } }
 
 span.tx {
   color: #ffffff; }

@@ -125,7 +125,8 @@
                 color: rgba($color: #fff, $alpha: 0.6);
             }
             @media screen and (max-width: 600px) {
-                font-size: 20px;
+                font-size: 16px;
+                height: 80%;
             }
         }
         >a.search_icon{

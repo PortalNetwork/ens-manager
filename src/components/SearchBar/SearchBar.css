@@ -112,7 +112,8 @@
         color: rgba(255, 255, 255, 0.6); }
       @media screen and (max-width: 600px) {
         .ethereum .search > input {
-          font-size: 20px; } }
+          font-size: 16px;
+          height: 80%; } }
     .ethereum .search > a.search_icon {
       display: block;
       width: 15%;

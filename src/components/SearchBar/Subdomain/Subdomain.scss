@@ -11,7 +11,7 @@
         display: block;
     }
     @media screen and (max-width: 600px) {
-        width: 100%;
+        //width: 100%;
         margin-top: 16px;
         padding: 10px;
     }
@@ -40,8 +40,8 @@
         color: #ffffff;
         margin-bottom: 15px;
         @media screen and (max-width: 600px) {
-            margin-bottom: 5px;
-            font-size: 16px;
+            margin-bottom: 10px;
+            font-size: 12px;
         }
     }
     .setNewOwner{
@@ -66,6 +66,11 @@
             justify-content: center;
             align-items: center;
             font-size: 14px;
+            @media screen and (max-width: 600px) {
+                font-size: 12px;
+                width: 75px;
+                padding-left: 5px;
+            }
         }
         >input{
             display: block;
@@ -86,7 +91,8 @@
                 color: rgba($color: #666666, $alpha: 0.6);
             }
             @media screen and (max-width: 600px) {
-                font-size: 20px;
+                font-size: 12px;
+                padding-left: 5px;
             }
         }
     }
@@ -111,6 +117,11 @@
             justify-content: center;
             align-items: center;
             font-size: 14px;
+            @media screen and (max-width: 600px) {
+                font-size: 12px;
+                width: 75px;
+                padding-left: 5px;
+            }
         }
         >input{
             display: block;
@@ -131,7 +142,8 @@
                 color: rgba($color: #666666, $alpha: 0.6);
             }
             @media screen and (max-width: 600px) {
-                font-size: 20px;
+                font-size: 12px;
+                padding-left: 5px;
             }
         }
     }
@@ -150,6 +162,10 @@
             width: 100%;
             border: 0;
             cursor: pointer;
+            @media screen and (max-width: 600px) {
+                font-size: 12px;
+                padding-left: 5px;
+            }
         }
     }
 }
