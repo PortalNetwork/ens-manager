@@ -121,6 +121,7 @@
             font-size: 16px;
             font-weight: 500;
             float: left;
+            padding-top: 2px;
             &::placeholder { 
                 color: rgba($color: #fff, $alpha: 0.6);
             }

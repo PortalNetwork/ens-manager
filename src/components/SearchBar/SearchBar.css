@@ -107,7 +107,8 @@
       font-family: Avenir;
       font-size: 16px;
       font-weight: 500;
-      float: left; }
+      float: left;
+      padding-top: 2px; }
       .ethereum .search > input::placeholder {
         color: rgba(255, 255, 255, 0.6); }
       @media screen and (max-width: 600px) {

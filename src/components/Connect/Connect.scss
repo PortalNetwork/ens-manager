@@ -1,0 +1,66 @@
+.connect{
+    position: relative;
+    height: auto;
+    max-height: 470px;
+    border-radius: 10px;
+    background-color: #2346f7;
+    box-shadow: 2px 2px 39px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 33px;
+    padding: 10px 25px 10px 25px;
+    &.open{
+        display: block;
+    }
+    @media screen and (max-width: 600px) {
+        //width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+    }
+    >h1{
+        display: flex;
+        justify-content: space-between;
+        font-family: Avenir;
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: 0.3px;
+        color: #ffffff;
+        margin-bottom: 20px;
+        @media screen and (max-width: 600px) {
+            font-size: 5vw;
+            margin-bottom: 10px;
+        }
+    }
+    .wallet {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: initial;
+        color: #ffffff;
+        font-family: Avenir;
+        .info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    >button {
+        font-family: Avenir;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: midnightblue;
+        height: 30px;
+        color: #ffffff;
+        font-size: 18px;
+        text-align: center;
+        width: 100%;
+        border: 0;
+        margin-top: 5px;
+        cursor: pointer;
+        @media screen and (max-width: 600px) {
+            font-size: 12px;
+            padding-left: 5px;
+            margin-bottom: 10px;
+        }
+    }
+}

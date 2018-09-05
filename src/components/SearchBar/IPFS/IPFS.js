@@ -47,7 +47,7 @@ class IPFS extends Component {
     return (
       <div className="ipfs">
         <h1>SET IPFS HASH
-          <Tooltip title="You can set IPFS Hash to the ENS and browse from MetaMask">
+          <Tooltip title="Set an IPFS hash that your ENS name will resolve to.">
             <Error/>
           </Tooltip>
         </h1>
@@ -56,6 +56,8 @@ class IPFS extends Component {
             <CheckCircle/>
           }
         </p>
+        { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
+          this.props.owner === this.props.metaMask.account &&
         <div className="setIPFS">
           <input 
             type="text" 
@@ -64,9 +66,13 @@ class IPFS extends Component {
             placeholder="QmSpuwejUGjREmgsvm8eq3ZdsS7mVTHCRPZmLiUq84S9x8" 
             onChange={this.handleInputChange}/>
         </div>
+        }
+        { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
+          this.props.owner === this.props.metaMask.account &&
         <p className="setIPFSBtn">
           <button onClick={() => this.handleSetIPFSHash()}>Set IPFS Hash</button>
         </p>
+        }
       </div>
     )
   }

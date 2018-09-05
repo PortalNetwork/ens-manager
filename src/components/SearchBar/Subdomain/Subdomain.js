@@ -18,7 +18,8 @@ class Subdomain extends Component {
   }
 
   componentDidMount = () => {
-    this.setState({ searchValue: this.props.searchValue })
+    const value = this.props.searchValue;
+    this.setState({ searchValue: value })
   }
 
   handleInputChange = (e) => {
@@ -57,7 +58,7 @@ class Subdomain extends Component {
     return (
       <div className="subdomain">
         <h1>SET SUBDOMAIN
-          <Tooltip title="You can set subdomain to your ENS and point to your address or bind IPFS">
+          <Tooltip title="Set a subdomain for your ENS and an address or an IPFS hash that the subdomain will resolve to.">
             <Error/>
           </Tooltip>
         </h1>

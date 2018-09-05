@@ -52,7 +52,7 @@ class Address extends Component {
     return (
       <div className="address">
         <h1>SET ADDRESS 
-          <Tooltip title="You can set address point by your ENS">
+          <Tooltip title="Set an address that your ENS name will resolve to.">
             <Error/>
           </Tooltip>
         </h1>

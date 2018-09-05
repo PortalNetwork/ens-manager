@@ -87,7 +87,7 @@ export default class Web3Checker extends Component {
         error
       })
 
-      setTimeout(() => this.check(window.web3), this.props.checkTimeout)
+      //setTimeout(() => this.check(window.web3), this.props.checkTimeout)
 
       return
     }

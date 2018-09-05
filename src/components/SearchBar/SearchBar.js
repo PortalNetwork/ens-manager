@@ -93,7 +93,6 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="ethereum">
-        <h1>ENS MANAGER</h1>
         <div className="search">
           <input type="text" 
             onKeyDown={this.handleSearchItem} 

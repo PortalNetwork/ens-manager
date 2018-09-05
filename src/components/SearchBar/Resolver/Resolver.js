@@ -52,7 +52,7 @@ class Resolver extends Component {
     return (
       <div className="resolver">
         <h1>SET RESOLVER 
-          <Tooltip title="You can set Resolver to your ENS and point to your address or bind IPFS">
+          <Tooltip title="Set a resolver for your ENS name. This will allow you to set address or IPFS hash that your name will resolve to.">
             <Error/>
           </Tooltip>
         </h1>
@@ -73,7 +73,7 @@ class Resolver extends Component {
             onChange={this.handleInputChange}
             />
           <a className="defaultResolver" onClick={() => this.handleDefaultResolver()}>
-            <Tooltip title="Default resolver is which deploy by Ethereum Foundation to resolve the ENS domain">
+            <Tooltip title="Default resolver is deploy by Ethereum Foundation to resolve the ENS domain">
             <p>Default Resolver</p>
             </Tooltip>
           </a>
