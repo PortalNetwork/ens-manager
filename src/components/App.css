@@ -56,3 +56,49 @@
       .App .links {
         display: inline-block;
         font-size: 14px; } }
+  .App .clients {
+    position: relative;
+    width: 530px;
+    height: auto;
+    max-height: 470px;
+    border-radius: 10px;
+    background-color: #2346f7;
+    box-shadow: 2px 2px 39px 10px rgba(0, 0, 0, 0.15); }
+    .App .clients.open {
+      display: block; }
+    @media screen and (max-width: 600px) {
+      .App .clients {
+        width: 90%; } }
+    .App .clients > h1 {
+      display: flex;
+      justify-content: space-between;
+      font-family: Avenir;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      color: #ffffff;
+      margin-bottom: 20px;
+      padding-left: 20px; }
+      @media screen and (max-width: 600px) {
+        .App .clients > h1 {
+          font-size: 5vw;
+          margin-bottom: 10px; } }
+    .App .clients p {
+      font-family: Avenir;
+      color: #ffffff;
+      padding-left: 20px;
+      padding-right: 20px; }
+    .App .clients div {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: center;
+      padding-left: 20px; }
+      .App .clients div a {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        color: #ffffff;
+        text-decoration: none;
+        padding-bottom: 10px; }

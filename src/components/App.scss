@@ -67,5 +67,57 @@
             font-size: 14px;
         }
     }
+    .clients {
+        position: relative;
+        width: 530px;
+        height: auto;
+        max-height: 470px;
+        border-radius: 10px;
+        background-color: #2346f7;
+        box-shadow: 2px 2px 39px 10px rgba(0, 0, 0, 0.15);
+        &.open{
+            display: block;
+        }
+        @media screen and (max-width: 600px) {
+            width: 90%;
+        }
+        >h1{
+            display: flex;
+            justify-content: space-between;
+            font-family: Avenir;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 0.3px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            @media screen and (max-width: 600px) {
+                font-size: 5vw;
+                margin-bottom: 10px;
+            }
+        }
+        p {
+            font-family: Avenir;
+            color: #ffffff;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+            align-items: center;
+            padding-left: 20px;
+            a {
+                display: flex;
+                flex-direction: row;
+                justify-content: left;
+                align-items: center;
+                color: #ffffff;
+                text-decoration: none;
+                padding-bottom: 10px;
+            }
+        }
+    }
 }
 
