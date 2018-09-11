@@ -74,11 +74,7 @@ class Resolver extends Component {
             <div className="type_enter">
               <input type="text" name="resolverAddr" value={this.state.resolverAddr} placeholder={getEthereumResolverAddress(process.env.ENS_NETWORK)} onChange={this.handleInputChange}/>
               <a href="javascript:;" className="setting_btn" onClick={() => this.handleDefaultResolver()}>Default
-<<<<<<< HEAD
-                {/* <Tooltip title="Default resolver is deploy by Ethereum Foundation to resolve the ENS domain"></Tooltip> */}
-=======
                 <Tooltip title="Default resolver is deploy by Ethereum Foundation to resolve the ENS domain"></Tooltip>
->>>>>>> 12fdee802fc9182fe81f0e739bd930962e4c365e
               </a>
             </div>
           }
