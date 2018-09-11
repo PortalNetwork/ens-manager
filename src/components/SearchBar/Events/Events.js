@@ -40,8 +40,11 @@ class Events extends Component {
   render() {
     const {searchValue} = this.props;
     return (
-      <div className="events">
-        <h1>SUBDOMAIN LIST<Button size="small" onClick={() => this.handleWeb3Load()}><Cached/></Button></h1>
+      <div className="setting_box">
+        <h3>
+          <span>SUBDOMAIN LIST</span>
+          <Button size="small" onClick={() => this.handleWeb3Load()}><Cached/></Button>
+        </h3>
         { 
           this.state.labels.map((hash,idx) => {
             return (

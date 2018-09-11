@@ -32,7 +32,7 @@ class Address extends Component {
       return;
     }
     let self = this;
-    const to = getEthereumResolverAddress();
+    const to = getEthereumResolverAddress(process.env.ENS_NETWORK);
     const addressData = setAddress(this.props.searchValue, this.state.address);
     this.props.web3.eth.sendTransaction({
       from: this.props.metaMask.account, 
@@ -50,20 +50,24 @@ class Address extends Component {
 
   render() {
     return (
-      <div className="address">
-        <h1>SET ADDRESS 
+      <div className="setting_box">
+        <h3><span>SET ADDRESS</span>
           <Tooltip title="Set an address that your ENS name will resolve to.">
             <Error/>
           </Tooltip>
-        </h1>
-        <p className="titleinfo"><b>Current Address:&nbsp;</b> {this.props.address}&nbsp;
+        </h3>
+        <div className="type_list">
+          <div className="type_box">
+            <label>Current Address</label>
+        <p className="status_check">{this.props.address}&nbsp;
           { this.props.address !== '0x0000000000000000000000000000000000000000' && 
-            <CheckCircle/>
+            <span class="icon_check"></span>
           }
         </p>
+          </div>
         { this.props.owner !== '0x0000000000000000000000000000000000000000' &&
           this.props.owner === this.props.metaMask.account &&
-        <div className="setAddress">
+        <div className="type_enter">
           <input 
             type="text" 
             name="address" 
@@ -71,7 +75,7 @@ class Address extends Component {
             placeholder="0x0000000000000000000000000000000000000000"
             onChange={this.handleInputChange}
             />
-          <a className="defaultAddress" onClick={() => this.handleDefaultAddress()}>
+          <a className="setting_btn" onClick={() => this.handleDefaultAddress()}>
             <Tooltip title="Set with your address">
                 <p>Your Address</p>
             </Tooltip>
@@ -80,10 +84,9 @@ class Address extends Component {
         }
         { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
           this.props.owner === this.props.metaMask.account &&
-        <p className="setAddressBtn">
           <button onClick={() => this.handleSetAddress()}>Set Address</button>
-        </p>
         }
+        </div>
       </div>
     )
   }
