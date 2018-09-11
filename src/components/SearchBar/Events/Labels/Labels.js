@@ -21,8 +21,10 @@ class Labels extends Component {
     const {subdomain} = this.state;
     const {searchValue} = this.props;
     return (
-      <div className="labels">
-        {subdomain}.{searchValue}
+      <div className="type_list">
+        <ul className="domain_list">
+          <li>{subdomain}.{searchValue}</li>
+        </ul>
       </div>
     )
   }

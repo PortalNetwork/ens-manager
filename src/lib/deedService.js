@@ -4,7 +4,7 @@ const Web3 = require('web3');
 let web3 = new Web3();
 
 const setWeb3Provider = () => {
-  web3.setProvider(new web3.providers.HttpProvider(getEthereumProvider(process.env.WNS_NETWORK)));
+  web3.setProvider(new web3.providers.HttpProvider(getEthereumProvider(process.env.ENS_NETWORK)));
 }
 
 export const getOwner = async (address) => {
