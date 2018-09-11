@@ -45,20 +45,24 @@ class IPFS extends Component {
 
   render() {
     return (
-      <div className="ipfs">
-        <h1>SET IPFS HASH
+      <div className="setting_box">
+        <h3><span>SET IPFS HASH</span>
           <Tooltip title="Set an IPFS hash that your ENS name will resolve to.">
             <Error/>
           </Tooltip>
-        </h1>
-        <p className="titleinfo"><b>Current IPFS Hash:&nbsp;</b> {this.props.ipfsHash}&nbsp;
+        </h3>
+        <div className="type_list">
+        <div className="type_box">
+        <label>Current IPFS Hash</label>
+        <p className="status_check">{this.props.ipfsHash}
           { this.props.ipfsHash !== '0x0000000000000000000000000000000000000000000000000000000000000000' && 
-            <CheckCircle/>
+            <span className="icon_check"></span>
           }
         </p>
+        </div>
         { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
           this.props.owner === this.props.metaMask.account &&
-        <div className="setIPFS">
+        <div className="type_box">
           <input 
             type="text" 
             name="ipfs" 
@@ -69,10 +73,9 @@ class IPFS extends Component {
         }
         { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
           this.props.owner === this.props.metaMask.account &&
-        <p className="setIPFSBtn">
           <button onClick={() => this.handleSetIPFSHash()}>Set IPFS Hash</button>
-        </p>
         }
+        </div>
       </div>
     )
   }

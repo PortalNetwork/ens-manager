@@ -1,3 +1,23 @@
-.labels {
-  color: #ffffff;
-  height: 30px; }
+.type_list {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-sizing: border-box; }
+
+.domain_list li {
+  border-bottom: dotted 1px #91a8ef; }
+  .domain_list li a {
+    display: block;
+    text-decoration: none;
+    padding: 12px 0px 12px 25px;
+    position: relative; }
+    .domain_list li a:before {
+      content: "";
+      display: block;
+      width: 14px;
+      height: 14px;
+      background: url("../../../../images/link.png") top left no-repeat;
+      background-size: 100% auto;
+      position: absolute;
+      left: 0px; }
