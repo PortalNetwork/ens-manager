@@ -54,7 +54,8 @@ class Subdomain extends Component {
   }
 
   render() {
-    const label = (this.state.subnode.length > 0) ? this.state.subnode + "." + this.state.searchValue : "<subdomain>." + this.state.searchValue;
+    const domain = this.state.searchValue;
+    const label = (this.state.subnode.length > 0) ? this.state.subnode + "." + domain : "<subdomain>." + domain;
     return (
 
       <div className="setting_box">
