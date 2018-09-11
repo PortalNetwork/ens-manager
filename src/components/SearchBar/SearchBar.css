@@ -142,6 +142,8 @@
       position: absolute;
       top: 12px;
       right: 0px; }
+      .type_list .type_enter .setting_btn p {
+        cursor: pointer; }
   .type_list button {
     width: 100%;
     height: 36px;
