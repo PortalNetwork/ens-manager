@@ -52,16 +52,16 @@ class Address extends Component {
     return (
       <div className="setting_box">
         <h3><span>SET ADDRESS</span>
-          <Tooltip title="Set an address that your ENS name will resolve to.">
+          {/*<Tooltip title="Set an address that your ENS name will resolve to.">
             <Error/>
-          </Tooltip>
+          </Tooltip>*/}
         </h3>
         <div className="type_list">
           <div className="type_box">
             <label>Current Address</label>
         <p className="status_check">{this.props.address}&nbsp;
           { this.props.address !== '0x0000000000000000000000000000000000000000' && 
-            <span class="icon_check"></span>
+            <span className="icon_check"></span>
           }
         </p>
           </div>
@@ -76,9 +76,7 @@ class Address extends Component {
             onChange={this.handleInputChange}
             />
           <a className="setting_btn" onClick={() => this.handleDefaultAddress()}>
-            <Tooltip title="Set with your address">
-                <p>Your Address</p>
-            </Tooltip>
+            <p>Your Address</p>
           </a>
         </div>
         }

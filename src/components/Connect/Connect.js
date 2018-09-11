@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Tooltip from 'material-ui/Tooltip';
-import { Error, CheckCircle } from 'material-ui-icons';
 import './Connect.css';
 import landing from './../../images/landing.png';
 import metaMaskLogo from './../../images/metamask.png';

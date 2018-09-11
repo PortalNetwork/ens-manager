@@ -60,9 +60,9 @@ class Subdomain extends Component {
       <div className="setting_box">
         <h3>
           <span>SET SUBDOMAIN</span>
-          <Tooltip title="Set a subdomain for your ENS and an address or an IPFS hash that the subdomain will resolve to.">
+          {/*<Tooltip title="Set a subdomain for your ENS and an address or an IPFS hash that the subdomain will resolve to.">
             <Error/>
-          </Tooltip>
+          </Tooltip>*/}
         </h3>
         <div className="type_list">
           <p><span>Domain:&nbsp;</span><span>{label}</span></p>

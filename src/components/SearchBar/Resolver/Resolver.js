@@ -54,9 +54,9 @@ class Resolver extends Component {
       <div className="setting_box">
         <h3>
           <span>SET RESOLVER</span>
-          <Tooltip title="Set a resolver for your ENS name. This will allow you to set address or IPFS hash that your name will resolve to.">
-            <Error/>
-          </Tooltip>
+            {/*<Tooltip title="Set a resolver for your ENS name. This will allow you to set address or IPFS hash that your name will resolve to.">
+              <Error/>
+            </Tooltip>*/}
         </h3>
         <div className="type_list">
           <div className="type_box">
@@ -74,7 +74,7 @@ class Resolver extends Component {
             <div className="type_enter">
               <input type="text" name="resolverAddr" value={this.state.resolverAddr} placeholder={getEthereumResolverAddress(process.env.ENS_NETWORK)} onChange={this.handleInputChange}/>
               <a href="javascript:;" className="setting_btn" onClick={() => this.handleDefaultResolver()}>Default
-                <Tooltip title="Default resolver is deploy by Ethereum Foundation to resolve the ENS domain"></Tooltip>
+                {/*<Tooltip title="Default resolver is deploy by Ethereum Foundation to resolve the ENS domain"></Tooltip>*/}
               </a>
             </div>
           }

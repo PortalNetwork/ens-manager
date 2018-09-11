@@ -47,9 +47,9 @@ class IPFS extends Component {
     return (
       <div className="setting_box">
         <h3><span>SET IPFS HASH</span>
-          <Tooltip title="Set an IPFS hash that your ENS name will resolve to.">
+          {/*<Tooltip title="Set an IPFS hash that your ENS name will resolve to.">
             <Error/>
-          </Tooltip>
+          </Tooltip>*/}
         </h3>
         <div className="type_list">
         <div className="type_box">
