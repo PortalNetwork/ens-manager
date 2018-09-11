@@ -27,7 +27,7 @@ class IPFS extends Component {
       return;
     }
     let self = this;
-    const to = getEthereumResolverAddress(process.env.ENS_NETWORK);
+    const to = getEthereumResolverAddress();
     const ipfsData = setContent(this.props.searchValue, this.state.ipfs);
     this.props.web3.eth.sendTransaction({
       from: this.props.metaMask.account, 
@@ -51,12 +51,12 @@ class IPFS extends Component {
             <Error/>
           </Tooltip>
         </h3>
-        <div class="type_list">
-        <div class="type_box">
+        <div className="type_list">
+        <div className="type_box">
         <label>Current IPFS Hash</label>
         <p className="status_check">{this.props.ipfsHash}
           { this.props.ipfsHash !== '0x0000000000000000000000000000000000000000000000000000000000000000' && 
-            <span class="icon_check"></span>
+            <span className="icon_check"></span>
           }
         </p>
         </div>
