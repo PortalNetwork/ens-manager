@@ -156,3 +156,6 @@
     outline: none;
     padding: 0px;
     cursor: pointer; }
+
+.tx > a {
+  color: #fff; }
