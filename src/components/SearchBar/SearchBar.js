@@ -104,8 +104,8 @@ class SearchBar extends Component {
           />
           <a href="javascript:;" className="search_icon" onClick={this.handleSearchItemClick}></a>
         </div>
-        <Loading/>
-        {/* { this.state.isKeyDown && <Loading/> } */}
+
+        { this.state.isKeyDown && <Loading/> }
         { this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> }
         { this.state.isOpenSubdomain && <Subdomain {...this.props} {...this.state}/> }
         { this.state.isOpenResolver && <Resolver {...this.props} {...this.state}/> }

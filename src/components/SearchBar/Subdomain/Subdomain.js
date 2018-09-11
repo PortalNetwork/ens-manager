@@ -37,7 +37,7 @@ class Subdomain extends Component {
       return;
     }
     let self = this;
-    const to = getEthereumRegistryAddress();
+    const to = getEthereumRegistryAddress(process.env.ENS_NETWORK);
     const subnodeData = setSubnodeOwner(this.props.searchValue, this.state.subnode, this.state.newOwner);
     this.props.web3.eth.sendTransaction({
       from: this.props.metaMask.account, 
@@ -56,6 +56,28 @@ class Subdomain extends Component {
   render() {
     const label = (this.state.subnode.length > 0) ? this.state.subnode + "." + this.state.searchValue : "<subdomain>." + this.state.searchValue;
     return (
+
+      // <div className="setting_box">
+      //   <h3>
+      //     <span>SET SUBDOMAIN</span>
+      //     <Tooltip title="Set a subdomain for your ENS and an address or an IPFS hash that the subdomain will resolve to.">
+      //       <Error/>
+      //     </Tooltip>
+      //   </h3>
+      //   <div class="type_list">
+      //     <p>Domain: <span>< subdomain ></span>.christopher.eth</p>
+      //     <div class="type_box">
+      //       <label>subdomain</label>
+      //       <input type="text" placeholder="yourdomain">
+      //     </div>
+      //     <div class="type_box">
+      //       <label>New Owner</label>
+      //       <input type="text" class="dasabled" placeholder="yourdomain">
+      //     </div>
+      //     <button type="button">Create Subdomain</button>
+      //   </div>
+      // </div>
+
       <div className="subdomain">
         <h1>SET SUBDOMAIN
           <Tooltip title="Set a subdomain for your ENS and an address or an IPFS hash that the subdomain will resolve to.">

@@ -22,7 +22,7 @@ class Resolver extends Component {
   }
 
   handleDefaultResolver = () => {
-    const resolverAddr = getEthereumResolverAddress();
+    const resolverAddr = getEthereumResolverAddress(process.env.ENS_NETWORK);
     this.setState({resolverAddr});
     this.props.handleWarningOpen("Default resolver is deploy by Ethereum Foundation to resolve the ENS domain");
   }
@@ -33,7 +33,7 @@ class Resolver extends Component {
       return;
     }
     let self = this;
-    const to = getEthereumRegistryAddress();
+    const to = getEthereumRegistryAddress(process.env.ENS_NETWORK);
     const resolverData = setResolver(this.props.searchValue, this.state.resolverAddr);
     this.props.web3.eth.sendTransaction({
       from: this.props.metaMask.account, 
@@ -72,7 +72,7 @@ class Resolver extends Component {
           { this.props.owner !== '0x0000000000000000000000000000000000000000' &&
             this.props.owner === this.props.metaMask.account &&
             <div className="type_enter">
-              <input type="text" name="resolverAddr" value={this.state.resolverAddr} placeholder={getEthereumResolverAddress()} onChange={this.handleInputChange}/>
+              <input type="text" name="resolverAddr" value={this.state.resolverAddr} placeholder={getEthereumResolverAddress(process.env.ENS_NETWORK)} onChange={this.handleInputChange}/>
               <a href="javascript:;" className="setting_btn" onClick={() => this.handleDefaultResolver()}>Default
                 {/* <Tooltip title="Default resolver is deploy by Ethereum Foundation to resolve the ENS domain"></Tooltip> */}
               </a>

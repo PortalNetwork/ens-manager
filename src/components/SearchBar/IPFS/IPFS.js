@@ -27,7 +27,7 @@ class IPFS extends Component {
       return;
     }
     let self = this;
-    const to = getEthereumResolverAddress();
+    const to = getEthereumResolverAddress(process.env.ENS_NETWORK);
     const ipfsData = setContent(this.props.searchValue, this.state.ipfs);
     this.props.web3.eth.sendTransaction({
       from: this.props.metaMask.account, 

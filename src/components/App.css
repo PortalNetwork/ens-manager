@@ -98,9 +98,7 @@ body {
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #19307d;
-  position: absolute;
-  bottom: 0px; }
+  background-color: #19307d; }
   .footer .content {
     max-width: 480px;
     width: 100%;

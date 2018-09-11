@@ -1,5 +1,5 @@
 .sk-circle {
-  margin: 100px auto;
+  margin: 100px auto 20px auto;
   width: 40px;
   height: 40px;
   position: relative; }
@@ -136,3 +136,7 @@
   40% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
+
+p {
+  color: #fff;
+  text-align: center; }
