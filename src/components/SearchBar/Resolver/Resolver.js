@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {getEthereumResolverAddress, getEthereumRegistryAddress} from '../../../lib/web3Service';
 import {setResolver} from '../../../lib/registryService';
 import Tooltip from 'material-ui/Tooltip';
-import { Error, CheckCircle } from 'material-ui-icons';
+import { Error } from 'material-ui-icons';
 import './Resolver.css';
 
 class Resolver extends Component {
@@ -22,8 +22,9 @@ class Resolver extends Component {
   }
 
   handleDefaultResolver = () => {
-    const resolverAddr = getEthereumResolverAddress();
+    const resolverAddr = getEthereumResolverAddress(process.env.ENS_NETWORK);
     this.setState({resolverAddr});
+    this.props.handleWarningOpen("Default resolver is deploy by Ethereum Foundation to resolve the ENS domain");
   }
 
   handleSetResovler = () => {
@@ -32,7 +33,7 @@ class Resolver extends Component {
       return;
     }
     let self = this;
-    const to = getEthereumRegistryAddress();
+    const to = getEthereumRegistryAddress(process.env.ENS_NETWORK);
     const resolverData = setResolver(this.props.searchValue, this.state.resolverAddr);
     this.props.web3.eth.sendTransaction({
       from: this.props.metaMask.account, 
@@ -50,41 +51,38 @@ class Resolver extends Component {
 
   render() {
     return (
-      <div className="resolver">
-        <h1>SET RESOLVER 
+      <div className="setting_box">
+        <h3>
+          <span>SET RESOLVER</span>
           <Tooltip title="Set a resolver for your ENS name. This will allow you to set address or IPFS hash that your name will resolve to.">
             <Error/>
           </Tooltip>
-        </h1>
-        <p className="titleinfo"><b>Domain Owner:&nbsp;</b> {this.props.owner}</p>
-        <p className="titleinfo"><b>Resolver:&nbsp;</b> {this.props.resolver}&nbsp;
-          { this.props.resolver !== '0x0000000000000000000000000000000000000000' && 
-            <CheckCircle/>
+        </h3>
+        <div className="type_list">
+          <div className="type_box">
+            <label>Domain Owner</label>
+            <p>{this.props.owner}</p>
+          </div>
+          <div className="type_box">
+            <label>Resolver</label>
+            <p className="status_check">{this.props.resolver}{ this.props.resolver !== '0x0000000000000000000000000000000000000000' && 
+              <span className="icon_check"></span>
+            }</p>
+          </div>
+          { this.props.owner !== '0x0000000000000000000000000000000000000000' &&
+            this.props.owner === this.props.metaMask.account &&
+            <div className="type_enter">
+              <input type="text" name="resolverAddr" value={this.state.resolverAddr} placeholder={getEthereumResolverAddress(process.env.ENS_NETWORK)} onChange={this.handleInputChange}/>
+              <a href="javascript:;" className="setting_btn" onClick={() => this.handleDefaultResolver()}>Default
+                {/* <Tooltip title="Default resolver is deploy by Ethereum Foundation to resolve the ENS domain"></Tooltip> */}
+              </a>
+            </div>
           }
-        </p>
-        { this.props.owner !== '0x0000000000000000000000000000000000000000' &&
-          this.props.owner === this.props.metaMask.account &&
-        <div className="setResolver">
-          <input 
-            type="text" 
-            name="resolverAddr" 
-            value={this.state.resolverAddr} 
-            placeholder={getEthereumResolverAddress()}
-            onChange={this.handleInputChange}
-            />
-          <a className="defaultResolver" onClick={() => this.handleDefaultResolver()}>
-            <Tooltip title="Default resolver is deploy by Ethereum Foundation to resolve the ENS domain">
-            <p>Default Resolver</p>
-            </Tooltip>
-          </a>
+          { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
+            this.props.owner === this.props.metaMask.account &&
+            <button type="button" onClick={() => this.handleSetResovler()}>Set Resolver</button>
+          }
         </div>
-        }
-        { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
-          this.props.owner === this.props.metaMask.account &&
-        <p className="setResolverBtn">
-          <button onClick={() => this.handleSetResovler()}>Set Resolver</button>
-        </p>
-        }
       </div>
     )
   }

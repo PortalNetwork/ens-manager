@@ -32,7 +32,7 @@ class Address extends Component {
       return;
     }
     let self = this;
-    const to = getEthereumResolverAddress();
+    const to = getEthereumResolverAddress(process.env.ENS_NETWORK);
     const addressData = setAddress(this.props.searchValue, this.state.address);
     this.props.web3.eth.sendTransaction({
       from: this.props.metaMask.account, 
