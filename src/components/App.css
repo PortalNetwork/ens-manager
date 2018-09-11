@@ -1,104 +1,149 @@
-.App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-  .App > h1 {
-    font-family: Avenir;
-    font-size: 40px;
-    font-weight: 900;
-    color: #0027ec;
-    text-align: center;
-    margin-bottom: 15px; }
-    @media screen and (max-width: 600px) {
-      .App > h1 {
-        font-size: 8vw; } }
-  .App span.text {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 30px;
-    bottom: 5px;
-    left: 0; }
-    .App span.text > p {
+@charset "UTF-8";
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+img {
+  display: block; }
+
+a, h1, h2, h3, h4, h5, h6, span, p, a, input, label, button, div, span {
+  font-family: sans-serif, 'Arial', 'Microsoft JhengHei';
+  font-size: 14px;
+  font-weight: 400; }
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%; }
+
+body {
+  background-color: #1f398f; }
+
+#root {
+  height: 100%;
+  min-height: 100%; }
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 100%; }
+  @media screen and (max-width: 720px) {
+    .wrap {
       display: block;
-      text-align: center;
-      margin: 0 auto 0px auto;
-      font-size: 14px;
-      color: #2346f7;
-      font-weight: bold;
-      text-align: center;
-      line-height: 30px; }
-      .App span.text > p > a {
-        color: #000000;
-        text-decoration: underline; }
-  .App .urllink {
-    position: fixed;
-    height: auto;
-    top: 15px;
-    right: 15px;
-    z-index: 300; }
-    .App .urllink > a {
-      color: #0027ec;
-      float: left;
-      margin-left: 10px; }
-    @media screen and (max-width: 600px) {
-      .App .urllink {
-        display: none; } }
-  .App .links {
-    display: none;
-    margin-top: 5px; }
-    .App .links > a {
-      color: #0027ec;
-      margin-left: 10px; }
-    @media screen and (max-width: 600px) {
-      .App .links {
-        display: inline-block;
-        font-size: 14px; } }
-  .App .clients {
-    position: relative;
-    width: 530px;
-    height: auto;
-    max-height: 470px;
-    border-radius: 10px;
-    background-color: #2346f7;
-    box-shadow: 2px 2px 39px 10px rgba(0, 0, 0, 0.15); }
-    .App .clients.open {
-      display: block; }
-    @media screen and (max-width: 600px) {
-      .App .clients {
-        width: 90%; } }
-    .App .clients > h1 {
-      display: flex;
-      justify-content: space-between;
-      font-family: Avenir;
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: 0.3px;
-      color: #ffffff;
-      margin-bottom: 20px;
-      padding-left: 20px; }
-      @media screen and (max-width: 600px) {
-        .App .clients > h1 {
-          font-size: 5vw;
-          margin-bottom: 10px; } }
-    .App .clients p {
-      font-family: Avenir;
-      color: #ffffff;
-      padding-left: 20px;
-      padding-right: 20px; }
-    .App .clients div {
-      display: flex;
-      flex-direction: row;
-      justify-content: left;
-      align-items: center;
-      padding-left: 20px; }
-      .App .clients div a {
-        display: flex;
-        flex-direction: row;
-        justify-content: left;
-        align-items: center;
-        color: #ffffff;
-        text-decoration: none;
-        padding-bottom: 10px; }
+      max-width: 720px;
+      position: relative; } }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 76px;
+  background-image: url("../images/bg_header.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+  position: relative; }
+
+.main {
+  max-width: 480px;
+  width: 100%;
+  margin: 0px auto;
+  padding: 48px 20px 60px 20px;
+  background-color: #1f398f;
+  box-sizing: border-box; }
+
+.footer {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #19307d; }
+  .footer .content {
+    max-width: 480px;
+    width: 100%;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 25px; }
+  .footer p {
+    max-width: 480px;
+    width: 100%;
+    margin: 0px auto;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: right; }
+  .footer .map_box h4 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px; }
+  .footer .map {
+    display: flex;
+    flex-direction: column; }
+    .footer .map li + li {
+      margin-top: 10px; }
+    .footer .map li a {
+      display: block;
+      text-decoration: none;
+      font-size: 12px;
+      color: #fff; }
+  .footer .social {
+    display: flex;
+    align-items: center; }
+    .footer .social li + li {
+      margin-left: 15px; }
+    .footer .social li a {
+      display: block;
+      width: 20px; }
+      .footer .social li a img {
+        width: 100%; }
+
+/* 警告提示 */
+#message-id {
+  color: #fff; }
+
+.MuiButton-label-78 {
+  color: #fff; }

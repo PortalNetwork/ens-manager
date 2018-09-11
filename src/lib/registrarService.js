@@ -6,8 +6,8 @@ let web3 = new Web3();
 let registrar = null;
 
 const setWeb3Provider = () => {
-  web3.setProvider(new web3.providers.HttpProvider(getEthereumProvider(process.env.WNS_NETWORK)));
-  registrar = new Registrar(web3, getEthereumRegistrarAddress(process.env.WNS_NETWORK));
+  web3.setProvider(new web3.providers.HttpProvider(getEthereumProvider()));
+  registrar = new Registrar(web3, getEthereumRegistrarAddress());
 }
 
 export const mode = ["Open", "Auction", "Owned", "Forbidden", "Reveal", "NotYetAvailable"];
