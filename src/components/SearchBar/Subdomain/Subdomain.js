@@ -68,7 +68,7 @@ class Subdomain extends Component {
           <p><span>Domain:&nbsp;</span><span>{label}</span></p>
         { this.props.owner !== '0x0000000000000000000000000000000000000000' &&
           this.props.owner === this.props.metaMask.account &&
-          <div class="type_box">
+          <div className="type_box">
           <label>subdomain</label>
           <input 
             type="text"
