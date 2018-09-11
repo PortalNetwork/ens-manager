@@ -57,38 +57,19 @@ class Subdomain extends Component {
     const label = (this.state.subnode.length > 0) ? this.state.subnode + "." + this.state.searchValue : "<subdomain>." + this.state.searchValue;
     return (
 
-      // <div className="setting_box">
-      //   <h3>
-      //     <span>SET SUBDOMAIN</span>
-      //     <Tooltip title="Set a subdomain for your ENS and an address or an IPFS hash that the subdomain will resolve to.">
-      //       <Error/>
-      //     </Tooltip>
-      //   </h3>
-      //   <div class="type_list">
-      //     <p>Domain: <span>< subdomain ></span>.christopher.eth</p>
-      //     <div class="type_box">
-      //       <label>subdomain</label>
-      //       <input type="text" placeholder="yourdomain">
-      //     </div>
-      //     <div class="type_box">
-      //       <label>New Owner</label>
-      //       <input type="text" class="dasabled" placeholder="yourdomain">
-      //     </div>
-      //     <button type="button">Create Subdomain</button>
-      //   </div>
-      // </div>
-
-      <div className="subdomain">
-        <h1>SET SUBDOMAIN
+      <div className="setting_box">
+        <h3>
+          <span>SET SUBDOMAIN</span>
           <Tooltip title="Set a subdomain for your ENS and an address or an IPFS hash that the subdomain will resolve to.">
             <Error/>
           </Tooltip>
-        </h1>
-        <p className="titleinfo"><b>Domain:&nbsp;</b> {label}</p>
+        </h3>
+        <div className="type_list">
+          <p><span>Domain:&nbsp;</span><span>{label}</span></p>
         { this.props.owner !== '0x0000000000000000000000000000000000000000' &&
           this.props.owner === this.props.metaMask.account &&
-        <div className="createSubdomain">
-          <span className="title">Subdomain</span>
+          <div className="type_box">
+          <label>subdomain</label>
           <input 
             type="text"
             name="subnode"
@@ -96,12 +77,12 @@ class Subdomain extends Component {
             placeholder="yoursubdomain"
             onChange={this.handleInputChange}
             />
-        </div>
+          </div>
         }
         { this.props.owner !== '0x0000000000000000000000000000000000000000' &&
           this.props.owner === this.props.metaMask.account &&
-        <div className="setNewOwner">
-          <span className="title">New Owner</span>
+        <div className="type_box">
+          <label>New Owner</label>
           <input 
             type="text" 
             name="newOwner"
@@ -113,11 +94,10 @@ class Subdomain extends Component {
         }
         { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
           this.props.owner === this.props.metaMask.account &&
-        <p className="setSubdomainBtn">
           <button onClick={() => this.handleSetSubnodeOwner()}>Create Subdomain</button>
-        </p>
         }
       </div>
+    </div>
     )
   }
 }
