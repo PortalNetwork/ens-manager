@@ -64,6 +64,7 @@ export const getResolver = async (name, web3Provider) => {
 
 export const getOwner = async (name, web3Provider) => {
   try {
+    console.log("getOwnergetOwnergetOwnergetOwner");
     registry = new Registry(web3Provider, getEthereumRegistryAddress(process.env.ENS_NETWORK));
     const owner = await registry.getOwner(namehash.hash(name));
     return owner;

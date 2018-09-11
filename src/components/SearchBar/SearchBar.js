@@ -92,21 +92,20 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="ethereum">
-        <div className="search">
+      <div className="main">
+        <div className="search_bar">
           <input type="text" 
+            className="search_type"
             onKeyDown={this.handleSearchItem} 
             name="searchValue"
             value={this.state.searchValue}
             onChange={this.handleInputChange}
-            placeholder="ethereum.eth"
+            placeholder="Your Domain Name"
           />
-          <a 
-            onClick={this.handleSearchItemClick} 
-            className="search_icon"
-          ></a>
+          <a href="javascript:;" className="search_icon" onClick={this.handleSearchItemClick}></a>
         </div>
-        { this.state.isKeyDown && <Loading/> }
+        <Loading/>
+        {/* { this.state.isKeyDown && <Loading/> } */}
         { this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> }
         { this.state.isOpenSubdomain && <Subdomain {...this.props} {...this.state}/> }
         { this.state.isOpenResolver && <Resolver {...this.props} {...this.state}/> }

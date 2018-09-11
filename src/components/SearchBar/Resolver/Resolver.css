@@ -1,134 +1,152 @@
-.resolver {
-  position: relative;
-  height: auto;
-  max-height: 470px;
-  border-radius: 10px;
-  background-color: #2346f7;
-  box-shadow: 2px 2px 39px 10px rgba(0, 0, 0, 0.15);
-  margin-top: 33px;
-  padding: 10px 25px 10px 25px; }
-  .resolver.open {
-    display: block; }
-  @media screen and (max-width: 600px) {
-    .resolver {
-      margin-top: 16px;
-      padding: 10px; } }
-  .resolver > h1 {
+.setting_box {
+  margin-bottom: 35px; }
+  .setting_box + .setting_box {
+    margin-top: 20px; }
+  .setting_box h3 {
+    position: relative;
+    margin-bottom: 15px;
+    padding: 0px 0px 0px 25px;
     display: flex;
-    justify-content: space-between;
-    font-family: Avenir;
-    font-size: 24px;
-    font-weight: 900;
-    letter-spacing: 0.3px;
-    color: #ffffff;
-    margin-bottom: 20px; }
-    @media screen and (max-width: 600px) {
-      .resolver > h1 {
-        font-size: 5vw;
-        margin-bottom: 10px; } }
-  .resolver p.titleinfo {
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
     align-items: center;
-    font-family: Avenir;
-    font-size: 14px;
-    letter-spacing: 0.3px;
-    color: #ffffff;
-    margin-bottom: 15px; }
-    @media screen and (max-width: 600px) {
-      .resolver p.titleinfo {
-        display: flex;
-        flex-direction: column;
-        align-items: baseline;
-        margin-bottom: 5px;
-        font-size: 12px; } }
-    @media screen and (max-width: 600px) {
-      .resolver p.titleinfo > svg {
-        display: none; } }
-  .resolver .setResolver {
-    height: 30px;
-    border-radius: 20px;
-    background-color: #ffffff;
-    margin: 0 auto; }
-    @media screen and (max-width: 600px) {
-      .resolver .setResolver {
-        height: 40px; } }
-    .resolver .setResolver > input {
+    justify-content: space-between; }
+    .setting_box h3:before {
+      content: "";
       display: block;
-      width: 70%;
-      height: 95%;
-      background-color: #ffffff;
-      border: 0;
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
-      outline: none;
-      padding-left: 15px;
-      color: midnightblue;
-      font-family: Avenir;
-      font-size: 14px;
-      font-weight: 500;
-      float: left; }
-      .resolver .setResolver > input::placeholder {
-        color: rgba(102, 102, 102, 0.6); }
-      @media screen and (max-width: 600px) {
-        .resolver .setResolver > input {
-          width: 75%;
-          font-size: 12px;
-          padding-left: 5px; } }
-    .resolver .setResolver > a.defaultResolver {
-      font-family: Avenir;
+      width: 20px;
+      height: 20px;
+      background: url("../../../images/bullet.png") top left no-repeat;
+      background-size: 100% auto;
+      position: absolute;
+      left: 0px;
+      top: -6px; }
+    .setting_box h3 span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff; }
+    .setting_box h3 .icon_sync {
       display: block;
-      width: 25%;
-      height: 100%;
-      float: right;
-      font-size: 14px;
-      cursor: pointer;
-      background-repeat: no-repeat;
-      background-size: 20px 20px;
-      background-position: center center;
-      background-color: midnightblue;
-      color: #ffffff;
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
-      text-align: center; }
-      .resolver .setResolver > a.defaultResolver > p {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-        height: 100%; }
-      @media screen and (max-width: 600px) {
-        .resolver .setResolver > a.defaultResolver {
-          width: 22%;
-          font-size: 12px;
-          padding-left: 0px; } }
-  .resolver .setResolverBtn > button {
-    font-family: Avenir;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    background-color: midnightblue;
-    height: 30px;
-    color: #ffffff;
-    font-size: 18px;
-    text-align: center;
-    width: 100%;
-    border: 0;
-    cursor: pointer; }
-    @media screen and (max-width: 600px) {
-      .resolver .setResolverBtn > button {
-        font-size: 12px;
-        padding-left: 5px; } }
+      width: 14px; }
+      .setting_box h3 .icon_sync img {
+        width: 100%; }
+    .setting_box h3 .icon_question {
+      display: block;
+      width: 16px; }
+      .setting_box h3 .icon_question img {
+        width: 100%; }
+    .setting_box h3 svg {
+      width: 16px !important;
+      height: 16px !important;
+      color: #fff; }
+  .setting_box .domain_list {
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    box-sizing: border-box; }
+    .setting_box .domain_list li {
+      border-bottom: dotted 1px #91a8ef; }
+      .setting_box .domain_list li a {
+        display: block;
+        text-decoration: none;
+        padding: 12px 0px 12px 25px;
+        position: relative; }
 
-span.tx {
-  color: #ffffff; }
-  span.tx a:link {
-    color: #ffffff; }
-  span.tx a:hover {
-    color: #999999; }
-  span.tx a:visited {
-    color: #999999; }
-  span.tx a:active {
-    color: #999999; }
+.type_list {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-sizing: border-box; }
+  .type_list > p {
+    font-size: 12px;
+    color: #848282;
+    padding: 12px 0px;
+    border-bottom: dotted 1px #91a8ef; }
+    .type_list > p span {
+      font-size: 12px;
+      color: #848282; }
+  .type_list .type_box {
+    padding: 12px 0px;
+    box-sizing: border-box; }
+    .type_list .type_box > label {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      color: #0c0c0c;
+      margin-bottom: 8px; }
+    .type_list .type_box > input {
+      width: 100%;
+      height: 36px;
+      font-size: 12px;
+      color: #aeaeae;
+      line-height: 36px;
+      border-radius: 4px;
+      border: solid 1px #dadada;
+      padding: 10px 15px;
+      box-sizing: border-box;
+      outline: none; }
+      .type_list .type_box > input.dasabled {
+        background-color: #e8e8e8;
+        color: #b6b2b2;
+        cursor: default; }
+    .type_list .type_box > p {
+      width: 100%;
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; }
+    .type_list .type_box .status_check {
+      position: relative; }
+    .type_list .type_box .icon_check {
+      display: block;
+      width: 12px;
+      height: 9px;
+      background: url("../../../images/tick.png") top left no-repeat;
+      background-size: 100% auto;
+      position: absolute;
+      top: 0px;
+      right: 0px; }
+  .type_list .type_enter {
+    border-top: dotted 1px #91a8ef;
+    position: relative; }
+    .type_list .type_enter > input {
+      width: 100%;
+      font-size: 12px;
+      color: #aeaeae;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 4px;
+      padding: 10px 15px;
+      border: solid 1px #dadada;
+      outline: none;
+      box-sizing: border-box;
+      margin: 12px 0px 14px 0px; }
+    .type_list .type_enter .setting_btn {
+      display: block;
+      text-decoration: none;
+      height: 36px;
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      line-height: 36px;
+      border-radius: 4px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      background-color: #1f2b84;
+      padding: 0px 12px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 12px;
+      right: 0px; }
+  .type_list button {
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    background-color: #0c1346;
+    border-radius: 4px;
+    outline: none;
+    padding: 0px;
+    cursor: pointer; }
