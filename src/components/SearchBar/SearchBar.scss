@@ -1,26 +1,203 @@
 .search_bar {
+  position: relative;
+  margin-bottom: 20px;
+  .search_type {
+    width: 100%;
+    height: 42px;
+    line-height: 42px;
+    border-radius: 21px;
+    padding: 10px 40px 10px 13px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+  }
+  .search_icon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: url('../../images/search.png') center center no-repeat;
+    background-size: auto 16px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 10px;
+    margin: auto;
+  }
+}
+.setting_box {
+  margin-bottom: 35px;
+
+  &+.setting_box {
+    margin-top: 20px;
+  }
+
+  h3 {
     position: relative;
-    margin-bottom: 20px;
-    .search_type {
-      width: 100%;
-      height: 42px;
-      line-height: 42px;
-      border-radius: 21px;
-      padding: 10px 40px 10px 13px;
-      border: none;
-      outline: none;
-      box-sizing: border-box;
-    }
-    .search_icon {
+    margin-bottom: 15px;
+    padding: 0px 0px 0px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:before {
+      content: "";
       display: block;
-      width: 30px;
-      height: 30px;
-      background: url('../../images/search.png') center center no-repeat;
-      background-size: auto 16px;
+      width: 20px;
+      height: 20px;
+      background: url('../../images/bullet.png') top left no-repeat;
+      background-size: 100% auto;
       position: absolute;
-      top: 0px;
-      bottom: 0px;
-      right: 10px;
-      margin: auto;
+      left: 0px;
+      top: -6px;
+    }
+
+    span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    svg {
+      width: 16px !important;
+      height: 16px !important;
+      color: #fff;
     }
   }
+}
+
+.type_list {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+
+  >p {
+    font-size: 12px;
+    color: #848282;
+    text-align: left;
+    padding: 12px 0px;
+    border-bottom: dotted 1px #91a8ef;
+
+    span {
+      font-size: 12px;
+      color: #848282;
+    }
+  }
+
+  .type_box {
+    padding: 12px 0px;
+    box-sizing: border-box;
+
+    >label {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      color: #0c0c0c;
+      margin-bottom: 8px;
+    }
+
+    >input {
+      width: 100%;
+      height: 36px;
+      font-size: 12px;
+      color: #000;
+      line-height: 36px;
+      border-radius: 4px;
+      border: solid 1px #dadada;
+      padding: 10px 15px;
+      box-sizing: border-box;
+      outline: none;
+
+      &.dasabled {
+        background-color: #e8e8e8;
+        color: #b6b2b2;
+        cursor: default;
+      }
+    }
+
+    >p {
+      width: 100%;
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #000;
+      text-align: left;
+    }
+
+    .status_check {
+      position: relative;
+    }
+
+    .icon_check {
+      display: block;
+      width: 12px;
+      height: 9px;
+      background: url('../../images/tick.png') top left no-repeat;
+      background-size: 100% auto;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+  }
+
+  .type_enter {
+    border-top: dotted 1px #91a8ef;
+    position: relative;
+
+    >input {
+      width: 100%;
+      font-size: 12px;
+      color: #000;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 4px;
+      padding: 10px 15px;
+      border: solid 1px #dadada;
+      outline: none;
+      box-sizing: border-box;
+      margin: 12px 0px 14px 0px;
+    }
+
+    .setting_btn {
+      display: block;
+      text-decoration: none;
+      height: 36px;
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      line-height: 36px;
+      border-radius: 4px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      background-color: #1f2b84;
+      padding: 0px 12px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 12px;
+      right: 0px;
+      p {
+        cursor: pointer;
+      }
+    }
+  }
+
+  button {
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    background-color: #0c1346;
+    border-radius: 4px;
+    outline: none;
+    padding: 0px;
+    cursor: pointer;
+  }
+}
+
+.tx > a {
+    color: #fff;
+}

@@ -1,34 +1,9 @@
 .setting_box {
-	margin-bottom: 35px;
-
-	&+.setting_box {
-		margin-top: 20px;
-	}
-
 	h3 {
-		position: relative;
-		margin-bottom: 15px;
-		padding: 0px 0px 0px 25px;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-
-		&:before {
-			content: "";
-			display: block;
-			width: 20px;
-			height: 20px;
-			background: url('../../../images/bullet.png') top left no-repeat;
-			background-size: 100% auto;
-			position: absolute;
-			left: 0px;
-			top: -6px;
-		}
-
-		span {
-			font-size: 12px;
-			font-weight: 600;
-			color: #fff;
+		>button {
+			min-width: auto;
+			min-height: auto;
+			padding: 0px;
 		}
 	}
 }

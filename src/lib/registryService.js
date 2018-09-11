@@ -53,7 +53,7 @@ export const setResolver = (name, resolver) => {
 
 export const getResolver = async (name, web3Provider) => {
   try {
-    registry = new Registry(web3Provider, getEthereumRegistryAddress(process.env.ENS_NETWORK));
+    registry = new Registry(web3Provider, getEthereumRegistryAddress());
     const resolver = await registry.getResolver(namehash.hash(name));
     return resolver;
   } catch (err) {
@@ -65,7 +65,7 @@ export const getResolver = async (name, web3Provider) => {
 export const getOwner = async (name, web3Provider) => {
   try {
     console.log("getOwnergetOwnergetOwnergetOwner");
-    registry = new Registry(web3Provider, getEthereumRegistryAddress(process.env.ENS_NETWORK));
+    registry = new Registry(web3Provider, getEthereumRegistryAddress());
     const owner = await registry.getOwner(namehash.hash(name));
     return owner;
   } catch (err) {
@@ -76,7 +76,7 @@ export const getOwner = async (name, web3Provider) => {
 
 export const newOwnerEvent = async (web3, name) => {
   try {
-    const registryInstance = await web3.eth.contract(registryJSON).at(getEthereumRegistryAddress(process.env.ENS_NETWORK));
+    const registryInstance = await web3.eth.contract(registryJSON).at(getEthereumRegistryAddress());
     
     const newOwnerEvent = registryInstance.NewOwner({node: namehash.hash(name)}, {fromBlock: 3327417, toBlock: 'latest'});
     return newOwnerEvent;
