@@ -19,7 +19,7 @@ export default class extends Component {
           <div className="sk-circle11 sk-child"></div>
           <div className="sk-circle12 sk-child"></div>
         </div>
-        <p>Loading...</p>
+        <p>Loading ...</p>
       </div>
     )
   }

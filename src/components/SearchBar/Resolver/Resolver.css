@@ -37,19 +37,6 @@
       width: 16px !important;
       height: 16px !important;
       color: #fff; }
-  .setting_box .domain_list {
-    border-radius: 4px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    box-sizing: border-box; }
-    .setting_box .domain_list li {
-      border-bottom: dotted 1px #91a8ef; }
-      .setting_box .domain_list li a {
-        display: block;
-        text-decoration: none;
-        padding: 12px 0px 12px 25px;
-        position: relative; }
 
 .type_list {
   background-color: #fff;
@@ -78,7 +65,7 @@
       width: 100%;
       height: 36px;
       font-size: 12px;
-      color: #aeaeae;
+      color: #000;
       line-height: 36px;
       border-radius: 4px;
       border: solid 1px #dadada;
@@ -94,7 +81,9 @@
       font-size: 12px;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap; }
+      white-space: nowrap;
+      color: #000;
+      text-align: left; }
     .type_list .type_box .status_check {
       position: relative; }
     .type_list .type_box .icon_check {
@@ -112,7 +101,7 @@
     .type_list .type_enter > input {
       width: 100%;
       font-size: 12px;
-      color: #aeaeae;
+      color: #000;
       height: 36px;
       line-height: 36px;
       border-radius: 4px;
