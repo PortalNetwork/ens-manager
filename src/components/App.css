@@ -67,11 +67,6 @@ body {
   width: 100%;
   height: 100%;
   min-height: 100%; }
-  @media screen and (max-width: 720px) {
-    .wrap {
-      display: block;
-      max-width: 720px;
-      position: relative; } }
 
 .header {
   display: flex;
@@ -82,17 +77,20 @@ body {
   background-image: url("../images/bg_header.png");
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover;
-  z-index: 1;
-  position: relative; }
+  background-size: cover; }
 
 .main {
   max-width: 480px;
   width: 100%;
+  height: auto;
+  min-height: 600px;
   margin: 0px auto;
   padding: 48px 20px 60px 20px;
   background-color: #1f398f;
   box-sizing: border-box; }
+  @media screen and (max-width: 720px) {
+    .main {
+      min-height: 500px; } }
 
 .footer {
   width: 100%;
