@@ -147,3 +147,30 @@ body {
 
 .MuiButton-label-78 {
   color: #fff; }
+
+.wallet {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  box-sizing: border-box; }
+
+.wallet_list {
+  border-radius: 3px;
+  border: solid 1px #dadada;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+  padding: 10px 15px; }
+  .wallet_list:hover {
+    border-color: #000; }
+  .wallet_list + .wallet_list {
+    margin-top: 12px; }
+  .wallet_list img {
+    width: 28px; }
+  .wallet_list p {
+    font-size: 12px;
+    font-weight: 500;
+    color: #000;
+    padding-left: 10px; }
