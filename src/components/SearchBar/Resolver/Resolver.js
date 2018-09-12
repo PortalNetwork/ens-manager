@@ -24,7 +24,6 @@ class Resolver extends Component {
   handleDefaultResolver = () => {
     const resolverAddr = getEthereumResolverAddress();
     this.setState({resolverAddr});
-    this.props.handleWarningOpen("Default resolver is deploy by Ethereum Foundation to resolve the ENS domain");
   }
 
   handleSetResovler = () => {
