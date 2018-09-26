@@ -54,8 +54,8 @@ class SearchBar extends Component {
     }
     const domain = keydomain[keydomain.length - 2].split(".");
     const seachdamain = domain[domain.length-1];
-    if (seachdamain.length < 7) {
-      this.props.handleWarningOpen("WNS has the minimum character length of 7");
+    if (seachdamain.length < 5) {
+      this.props.handleWarningOpen("WNS has the minimum character length of 5");
       return;
     }
     this.setState({isKeyDown: true, isOpenResolver: false, isOpenSubdomain: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
