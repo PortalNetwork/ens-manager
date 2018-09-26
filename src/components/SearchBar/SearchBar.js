@@ -45,16 +45,17 @@ class SearchBar extends Component {
   }
 
   handleSearchData = async () => {
+
     this.props.handleWarningClose();
-    const keydomain = this.state.searchValue.toLowerCase().split(".eth");
+    const keydomain = this.state.searchValue.toLowerCase().split(".wan");
     if (keydomain[keydomain.length - 1] !== "") {
-      this.props.handleWarningOpen("ENS format error");
+      this.props.handleWarningOpen("WNS format error");
       return;
     }
     const domain = keydomain[keydomain.length - 2].split(".");
     const seachdamain = domain[domain.length-1];
     if (seachdamain.length < 7) {
-      this.props.handleWarningOpen("ENS has the minimum character length of 7");
+      this.props.handleWarningOpen("WNS has the minimum character length of 7");
       return;
     }
     this.setState({isKeyDown: true, isOpenResolver: false, isOpenSubdomain: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
@@ -74,7 +75,7 @@ class SearchBar extends Component {
       }
     }
     if (owner === '0x0000000000000000000000000000000000000000') {
-      this.props.handleWarningOpen('This ENS is OPEN for bid!');
+      this.props.handleWarningOpen('This WNS is OPEN for bid!');
     }
     const address = await getAddress(this.state.searchValue, resolver, this.props.web3);
     this.setState({isOpenResolver: true, address});

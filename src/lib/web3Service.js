@@ -1,7 +1,7 @@
 export const getEthereumProvider = (networkId = '1') => {
   switch (networkId) {
     case '1':
-      return 'https://mainnet.infura.io/';
+      return "http://wanchain-testnet.portal.network" //Wanchain testnet
     case '3':
       return 'https://ropsten.infura.io/';
     case '4':
@@ -14,9 +14,10 @@ export const getEthereumProvider = (networkId = '1') => {
 }
 
 export const getEthereumRegistrarAddress = (networkId = '1') => {
+  alert(networkId)
   switch (networkId) {
-    case '1': 
-      return '0x6090A6e47849629b7245Dfa1Ca21D94cd15878Ef';
+    case '1':
+      return "0xeec6bc4d213bf5d7b247a578b9bf13d7443b5546" //Wanchain testnet
     case '3':
       return '0x0';
     default:
@@ -27,7 +28,7 @@ export const getEthereumRegistrarAddress = (networkId = '1') => {
 export const getEthereumRegistryAddress = (networkId = '1') => {
   switch (networkId) {
     case '1':
-      return '0x314159265dD8dbb310642f98f50C066173C1259b';
+      return "0xe85cFDF43a0db4aa0ec054A57451AF7C73d4625b" //Wanchain testnet
     case '3':
       return '0x0';
     default:
@@ -38,7 +39,7 @@ export const getEthereumRegistryAddress = (networkId = '1') => {
 export const getEthereumResolverAddress = (networkId = '1') => {
   switch (networkId) {
     case '1':
-      return '0x5ffc014343cd971b7eb70732021e26c35b744cc4';
+      return "0x3f5ad0ab415d451bcec48cfcbd61aee126687cd4" //Wanchain testnet
     case '3':
       return '0x0';
     default:
