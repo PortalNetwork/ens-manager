@@ -1,41 +1,67 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Loading from '../Loading/Loading';
 import Resolver from './Resolver/Resolver';
 import Subdomain from './Subdomain/Subdomain';
 import IPFS from './IPFS/IPFS';
 import Address from './Address/Address';
-import Events from './Events/Events';
-import {getResolver, getOwner} from '../../lib/registryService';
-import {getContent, getAddress} from '../../lib/resolverService';
-import {fromContentHash} from '../../helpers/ipfsHelper';
+// import Events from './Events/Events';
+
+import Overview from './Overview';
+import { getResolver, getOwner } from '../../lib/registryService';
+import { getContent, getAddress } from '../../lib/resolverService';
+import { fromContentHash } from '../../helpers/ipfsHelper';
+import { getEntries } from '../../lib/registrarService';
+
 import './SearchBar.css';
-
-
 import Introduction from '../Introduction';
+import MenuBar from './MenuBar';
+import overview from '../../images/ic-overview-on.svg';
+import resolver from '../../images/ic-resolver-on.svg';
+import subdomain from '../../images/ic-subdomain-on.svg';
+import wallet from '../../images/ic-wallet-on.svg';
+import ipfs from '../../images/ic-ipfs-on.svg';
+
+const Main = styled.div`
+    max-width: 480px;
+    width: 100%;
+    height: auto;
+    min-height: 600px;
+    margin: 0px auto;
+    padding: 48px 20px 161px 20px;
+    background-color: #1f398f;
+    box-sizing: border-box;
+    @media screen and (max-width: 720px) {
+      min-height: 500px;
+    }
+`;
+
 
 class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isKeyDown: false,
-      isOpenResolver: false,
-      isOpenIPFS: false,
-      isOpenAddress: false,
-      isOpenSubdomain: false,
-      searchValue : "",
-      owner: "",
-      resolver: "",
-      ipfsHash: "",
-      address: ""
-    };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSearchItem = this.handleSearchItem.bind(this);
-    this.handleSearchData = this.handleSearchData.bind(this);
-    this.handleSearchItemClick = this.handleSearchItemClick.bind(this);
-    this.handleLoadingClose = this.handleLoadingClose.bind(this);
+  state = {
+    isKeyDown: false,
+    isSeach: false,
+    isOpenResolver: false,
+    isOpenIPFS: false,
+    isOpenAddress: false,
+    isOpenSubdomain: false,
+    isOverview: false,
+    searchValue : "",
+    owner: "",
+    resolver: "",
+    ipfsHash: "",
+    address: "",
+    menuAcitveidx: 0,
+    domainValue: "",
+    entries:"",
+    menuItem: [
+      { imgurl: overview, name: "Overview" },
+      { imgurl: resolver, name: "Resolver" },
+      { imgurl: subdomain, name: "Subdomain" },
+      { imgurl: wallet, name: "Address" },
+      { imgurl: ipfs, name: "Set IPFS" }
+    ]
   }
-
   handleInputChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value.toLowerCase() });
@@ -45,40 +71,58 @@ class SearchBar extends Component {
     if(this.state.isKeyDown) return;
     if(e.keyCode !== 13) return;
     this.handleSearchData();
+    this.props.footerOutFn(true);
+  }
+
+  handleSearchItemClick = () => {
+    if(this.state.isKeyDown) return;
+    this.handleSearchData();
+    this.props.footerOutFn(true);
   }
 
   handleSearchData = async () => {
     this.props.handleWarningClose();
     const keydomain = this.state.searchValue.toLowerCase().split(".eth");
-    if (keydomain[keydomain.length - 1] !== "") {
-      this.props.handleWarningOpen("ENS format error");
-      return;
-    }
+
+    if (keydomain[keydomain.length - 1] !== "") return this.props.handleWarningOpen("ENS format error");
+
     const domain = keydomain[keydomain.length - 2].split(".");
     const seachdamain = domain[domain.length-1];
-    if (seachdamain.length < 7) {
-      this.props.handleWarningOpen("ENS has the minimum character length of 7");
-      return;
-    }
-    this.setState({isKeyDown: true, isOpenResolver: false, isOpenSubdomain: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
+
+    if (seachdamain.length < 7) return this.props.handleWarningOpen("ENS has the minimum character length of 7");
+
+    this.setState({isSeach: true, isOverview: true, isKeyDown: true, isOpenResolver: false, isOpenSubdomain: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
+    
     const resolver = await getResolver(this.state.searchValue, this.props.web3);
     const owner = await getOwner(this.state.searchValue, this.props.web3);
+    const entries = await getEntries(seachdamain);
+
+
+
+    
+
     let ipfsHash = "";
-    this.setState({resolver, owner});
+    this.setState({resolver, owner, entries});
+
     if (resolver !== '0x0000000000000000000000000000000000000000') {
+
       ipfsHash = await getContent(this.state.searchValue, resolver, this.props.web3);
-      this.setState({owner, resolver});
+      this.setState({owner, resolver, entries});
+
       if (owner !== '0x0000000000000000000000000000000000000000' && 
         owner === this.props.metaMask.account) {
         this.setState({isOpenIPFS: true, isOpenAddress: true, isOpenSubdomain: true});
       }
+
       if (ipfsHash !== '0x0000000000000000000000000000000000000000000000000000000000000000') {
         this.setState({ipfsHash: fromContentHash(ipfsHash)});
       }
     }
+
     if (owner === '0x0000000000000000000000000000000000000000') {
       this.props.handleWarningOpen('This ENS is OPEN for bid!');
     }
+
     const address = await getAddress(this.state.searchValue, resolver, this.props.web3);
     this.setState({isOpenResolver: true, address});
     this.handleLoadingClose();
@@ -88,15 +132,30 @@ class SearchBar extends Component {
     this.setState({isKeyDown: false});
   }
   
-  handleSearchItemClick = () => {
-    if(this.state.isKeyDown) return;
-    this.handleSearchData();
+  handMenuAcitve = (idx) =>{
+    const {isOpenResolver, isOpenSubdomain, isOpenAddress, isOpenIPFS} = this.state;
+    if(!isOpenResolver || !isOpenSubdomain || !isOpenAddress || !isOpenIPFS) return;
+    
+    this.setState({menuAcitveidx: idx});
   }
+
+
+  overResolver =(eth)=>{
+    console.log(this.state.entries);
+    this.setState({
+        domainValue: eth,
+    })
+  }
+
+
+
 
   render() {
     return (
-      <div className="main">
-        <Introduction/>
+      <Main>
+        <Introduction
+          isSeach={this.state.isSeach}
+        />
         <div className="search_bar">
           <input type="text" 
             className="search_type"
@@ -110,12 +169,19 @@ class SearchBar extends Component {
         </div>
 
         { this.state.isKeyDown && <Loading/> }
-        { this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> }
-        { this.state.isOpenSubdomain && <Subdomain {...this.props} {...this.state}/> }
-        { this.state.isOpenResolver && <Resolver {...this.props} {...this.state}/> }
-        { this.state.isOpenAddress && <Address {...this.props} {...this.state}/> }
-        { this.state.isOpenIPFS && <IPFS {...this.props} {...this.state}/> }
-      </div>
+        {/* { this.menuAcitveidx === 0 && this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> } */}
+        { this.state.menuAcitveidx === 0 && this.state.isOverview && <Overview {...this.props} {...this.state}/> }
+        { this.state.menuAcitveidx === 1 && this.state.isOpenResolver && <Resolver {...this.props} {...this.state}/> }
+        { this.state.menuAcitveidx === 2 && this.state.isOpenSubdomain && <Subdomain {...this.props} {...this.state}/> }
+        { this.state.menuAcitveidx === 3 && this.state.isOpenAddress && <Address {...this.props} {...this.state}/> }
+        { this.state.menuAcitveidx === 4 && this.state.isOpenIPFS && <IPFS {...this.props} {...this.state}/> }
+
+        <MenuBar
+          menuAcitveidx={this.state.menuAcitveidx}
+          menuItem={this.state.menuItem} 
+          handMenuAcitve={this.handMenuAcitve}
+        />
+      </Main>
     );
   }
 }

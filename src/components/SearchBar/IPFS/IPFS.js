@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import {getEthereumResolverAddress} from '../../../lib/web3Service';
 import {setContent} from '../../../lib/resolverService';
-import Tooltip from 'material-ui/Tooltip';
-import { Error, CheckCircle } from 'material-ui-icons';
+// import Tooltip from 'material-ui/Tooltip';
+// import { Error, CheckCircle } from 'material-ui-icons';
 import './IPFS.css';
 
 class IPFS extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ipfs: ""
-    };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSetIPFSHash = this.handleSetIPFSHash.bind(this);
-  }
+  state = {
+    ipfs: ""
+  };
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,19 +21,18 @@ class IPFS extends Component {
       this.props.handleWarningOpen('IPFS Hash incorrect');
       return;
     }
-    let self = this;
     const to = getEthereumResolverAddress();
     const ipfsData = setContent(this.props.searchValue, this.state.ipfs);
     this.props.web3.eth.sendTransaction({
       from: this.props.metaMask.account, 
       to: to,
       value: 0,
-      data: ipfsData }, function(err, result) {
+      data: ipfsData },(err, result)=> {
         if (err) {
-          self.props.handleWarningOpen(err.message);
+          this.props.handleWarningOpen(err.message);
         } else {
           const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
-          self.props.handleWarningOpen(tx);
+          this.props.handleWarningOpen(tx);
         }
       });
   }

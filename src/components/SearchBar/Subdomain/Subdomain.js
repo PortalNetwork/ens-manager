@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {getEthereumRegistryAddress} from '../../../lib/web3Service';
 import {setSubnodeOwner} from '../../../lib/registryService';
-import Tooltip from 'material-ui/Tooltip';
-import { Error } from 'material-ui-icons';
+// import Tooltip from 'material-ui/Tooltip';
+// import { Error } from 'material-ui-icons';
 import './Subdomain.css';
 
 class Subdomain extends Component {

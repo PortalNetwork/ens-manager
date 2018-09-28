@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {getEthereumResolverAddress} from '../../../lib/web3Service';
 import {setAddress} from '../../../lib/resolverService';
-import Tooltip from 'material-ui/Tooltip';
-import { Error, CheckCircle } from 'material-ui-icons';
+// import Tooltip from 'material-ui/Tooltip';
+// import { Error, CheckCircle } from 'material-ui-icons';
 import './Address.css';
 
 class Address extends Component {
