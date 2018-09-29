@@ -38,7 +38,7 @@ export const getEthereumRegistryAddress = (networkId = '1') => {
 export const getEthereumResolverAddress = (networkId = '1') => {
   switch (networkId) {
     case '1':
-      return '0x5ffc014343cd971b7eb70732021e26c35b744cc4';
+      return '0x0b3ebeccc00e9ceae2bf3235d558eda7398be91e';
     case '3':
       return '0x0';
     default:
