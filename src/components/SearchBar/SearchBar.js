@@ -3,10 +3,11 @@ import Loading from '../Loading/Loading';
 import Resolver from './Resolver/Resolver';
 import Subdomain from './Subdomain/Subdomain';
 import IPFS from './IPFS/IPFS';
+import URL from './URL/URL';
 import Address from './Address/Address';
 import Events from './Events/Events';
 import {getResolver, getOwner} from '../../lib/registryService';
-import {getContent, getAddress} from '../../lib/resolverService';
+import {getContent, getAddress, getText, getSupportsInterface} from '../../lib/resolverService';
 import {fromContentHash} from '../../helpers/ipfsHelper';
 import './SearchBar.css';
 
@@ -23,7 +24,8 @@ class SearchBar extends Component {
       owner: "",
       resolver: "",
       ipfsHash: "",
-      address: ""
+      address: "",
+      url: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -57,7 +59,7 @@ class SearchBar extends Component {
       this.props.handleWarningOpen("ENS has the minimum character length of 7");
       return;
     }
-    this.setState({isKeyDown: true, isOpenResolver: false, isOpenSubdomain: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
+    this.setState({isKeyDown: true, isOpenResolver: false, isOpenSubdomain: false, isOpenAddress: false, isOpenIPFS: false, isOpenURL: false, ipfsHash: "", owner: "", resolver: ""})
     const resolver = await getResolver(this.state.searchValue, this.props.web3);
     const owner = await getOwner(this.state.searchValue, this.props.web3);
     let ipfsHash = "";
@@ -67,7 +69,7 @@ class SearchBar extends Component {
       this.setState({owner, resolver});
       if (owner !== '0x0000000000000000000000000000000000000000' && 
         owner === this.props.metaMask.account) {
-        this.setState({isOpenIPFS: true, isOpenAddress: true, isOpenSubdomain: true});
+        this.setState({isOpenIPFS: true, isOpenAddress: true, isOpenURL: true, isOpenSubdomain: true});
       }
       if (ipfsHash !== '0x0000000000000000000000000000000000000000000000000000000000000000') {
         this.setState({ipfsHash: fromContentHash(ipfsHash)});
@@ -77,6 +79,12 @@ class SearchBar extends Component {
       this.props.handleWarningOpen('This ENS is OPEN for bid!');
     }
     const address = await getAddress(this.state.searchValue, resolver, this.props.web3);
+    const textInterface = await getSupportsInterface("0x59d1d43c", resolver, this.props.web3);
+    const multihashInterface = await getSupportsInterface("0xe89401a1", resolver, this.props.web3);
+    if (textInterface) {
+      const url = await getText(this.state.searchValue, "url", resolver, this.props.web3);
+      this.setState({url});
+    }
     this.setState({isOpenResolver: true, address});
     this.handleLoadingClose();
   }
@@ -111,6 +119,7 @@ class SearchBar extends Component {
         { this.state.isOpenResolver && <Resolver {...this.props} {...this.state}/> }
         { this.state.isOpenAddress && <Address {...this.props} {...this.state}/> }
         { this.state.isOpenIPFS && <IPFS {...this.props} {...this.state}/> }
+        { this.state.isOpenURL && <URL {...this.props} {...this.state}/> }
       </div>
     );
   }
