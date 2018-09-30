@@ -6,6 +6,7 @@ import IPFS from './IPFS/IPFS';
 import URL from './URL/URL';
 import Address from './Address/Address';
 import Events from './Events/Events';
+import FileUpload from './FileUpload/FileUpload';
 import {getResolver, getOwner} from '../../lib/registryService';
 import {getContent, getAddress, getText, getSupportsInterface} from '../../lib/resolverService';
 import {fromContentHash} from '../../helpers/ipfsHelper';
@@ -101,6 +102,9 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="main">
+        <div className="ens_title">
+          <h3><span>SEARCH ENS</span></h3>
+        </div>
         <div className="search_bar">
           <input type="text" 
             className="search_type"
@@ -120,6 +124,7 @@ class SearchBar extends Component {
         { this.state.isOpenAddress && <Address {...this.props} {...this.state}/> }
         { this.state.isOpenIPFS && <IPFS {...this.props} {...this.state}/> }
         { this.state.isOpenURL && <URL {...this.props} {...this.state}/> }
+        <FileUpload {...this.props} {...this.state}/>
       </div>
     );
   }
