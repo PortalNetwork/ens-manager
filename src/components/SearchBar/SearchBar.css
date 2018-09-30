@@ -52,6 +52,34 @@
       height: 16px !important;
       color: #fff; }
 
+.ens_title {
+  margin-bottom: 20px; }
+  .ens_title h3 {
+    position: relative;
+    margin-bottom: 15px;
+    padding: 0px 0px 0px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+    .ens_title h3:before {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 24px;
+      background: url("../../images/bullet.png") top left no-repeat;
+      background-size: 100% auto;
+      position: absolute;
+      left: 0px;
+      top: -6px; }
+    .ens_title h3 span {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff; }
+    .ens_title h3 svg {
+      width: 20px !important;
+      height: 20px !important;
+      color: #fff; }
+
 .type_list {
   background-color: #fff;
   border-radius: 4px;
