@@ -1,0 +1,58 @@
+.file_upload {
+  .uploader > div {
+    width: 100% !important;
+    height : 75px !important;
+  }
+
+  .uploader > div > p {
+    color: #ffffff;
+    padding: 15px;
+    text-align: left;
+    line-height: 24px;
+  }
+
+  h3 {
+    position: relative;
+    margin-bottom: 15px;
+    padding: 0px 0px 0px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: url('../../../images/bullet.png') top left no-repeat;
+      background-size: 100% auto;
+      position: absolute;
+      left: 0px;
+      top: -6px;
+    }
+
+    span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    svg {
+      width: 16px !important;
+      height: 16px !important;
+      color: #fff;
+    }
+  }
+}
+
+.link {
+  font-size: 12px;
+  a {
+    color: #ffffff;
+  }
+}
+
+.status_check > a{
+  color: #000000;
+  font-size: 12px;
+}

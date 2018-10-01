@@ -31,7 +31,8 @@ export const setContent = (name, content) => {
 /**
  * 
  * @param {*} name 
- * @param {*} resolver 
+ * @param {*} resolverAddr 
+ * @param {*} web3Provider 
  */
 export const getContent = async (name, resolverAddr, web3Provider) => {
   try {
@@ -64,7 +65,8 @@ export const setAddress = (name, address) => {
 /**
  * 
  * @param {*} name 
- * @param {*} resolver 
+ * @param {*} resolverAddr 
+ * @param {*} web3Provider 
  */
 export const getAddress = async (name, resolverAddr, web3Provider) => {
   try {
@@ -74,5 +76,53 @@ export const getAddress = async (name, resolverAddr, web3Provider) => {
   } catch (err) {
     console.log('getAddress: ', name, err);
     return 'getAddress not found';
+  }
+}
+
+/**
+ * 
+ * @param {*} name 
+ * @param {*} key 
+ * @param {*} value 
+ */
+export const setText = (name, key, value) => {
+  try {
+    let byteData = "0x" +
+      abi.methodID("setText", ["bytes32", "string", "string"]).toString("hex") +
+      abi.rawEncode(["bytes32", "string", "string"], [namehash.hash(name), key, value]).toString("hex");
+    return byteData;
+  } catch (err) {
+    console.log('setText: ', name, key, value, err);
+    return 'setText error';
+  }
+}
+
+/**
+ * 
+ * @param {*} name 
+ * @param {*} key 
+ * @param {*} resolverAddr 
+ * @param {*} web3Provider 
+ */
+export const getText = async (name, key, resolverAddr, web3Provider) => {
+  try {
+    resolver = new Resolver(web3Provider, resolverAddr);
+    const content = await resolver.getText(namehash.hash(name), key);
+    console.log('text', content);
+    return content;
+  } catch (err) {
+    console.log('getText: ', name, key, err);
+    return 'getText not found';
+  }
+}
+
+export const getSupportsInterface = async (method, resolverAddr, web3Provider) => {
+  try {
+    resolver = new Resolver(web3Provider, resolverAddr);
+    const content = await resolver.supportsInterface(method);
+    return content;
+  } catch (err) {
+    console.log('getSupportsInterface: ', method, err);
+    return 'getSupportsInterface not found';
   }
 }

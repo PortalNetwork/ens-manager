@@ -86,7 +86,6 @@ export default class extends Component {
         // const SubmitBidsTime = moment.utc(SubmitBidsTimeregDate.removeDays(3)).format('MMMM Do YYYY, h:mm:ss a');
         const RevealTime = moment.utc(entries.registrationDate).format('MMMM Do YYYY, h:mm:ss a');
 
-        console.log(this.props);
         return (
             <OverviewBox isKeyDown={isKeyDown} bulletpng={bulletpng}>
                 <h3><span>OVERVIEW</span></h3>

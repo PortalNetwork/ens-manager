@@ -43,7 +43,7 @@ export const getEthereumRegistryAddress = (networkId = nId) => {
 export const getEthereumResolverAddress = (networkId = nId) => {
   switch (networkId) {
     case '1':
-      return '0x5ffc014343cd971b7eb70732021e26c35b744cc4';
+      return '0x0b3ebeccc00e9ceae2bf3235d558eda7398be91e';
     case '3':
       return isSupTestNet ? ResolverAddr : '0x0';
     default:

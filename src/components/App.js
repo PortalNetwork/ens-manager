@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 import MetamaskChecker from './Web3Checker/Web3Checker';
 import SearchBar from './SearchBar/SearchBar';
-import {Warning} from './Warning/Warning';
+import { Warning } from './Warning/Warning';
 import Connect from './Connect/Connect';
 import './App.css';
 import logo from '../images/logo.png';
 import Clients from '../components/Clients';
 import Footer from '../components/Footer';
+import SetResolver from "./SetResolver";
+
+const FilterDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  transition: filter .05s;
+  ${props => props.Filter && css`
+    filter: blur(15px);
+    ${'' /* background-color: #1f398f; */}
+  `}
+`
+
 
 class App extends Component {
   
@@ -16,6 +29,8 @@ class App extends Component {
     isConnect: false,
     isLock: false,
     isFooterOut: false,
+    isFilter: false,
+    reoverData:{}
   };
 
   handleConnect = () => {
@@ -40,13 +55,20 @@ class App extends Component {
     this.fetchAccount(web3);
   }
 
-  async initError (error) {
-    //alert('ERROR');
-    //this.props.handleWarningOpen('ERROR');
-  }
-
   footerOutFn = (isOut) =>{
     this.setState({isFooterOut: isOut})
+  }
+
+  EditResOverFn =()=>{
+    this.setState({isFilter: true});
+  }
+
+  EditResCloseFn =()=>{
+    this.setState({isFilter: false});
+  }
+
+  getReoverData = (data) =>{
+    this.setState({reoverData: data});
   }
 
   render() {
@@ -54,22 +76,26 @@ class App extends Component {
       onCheckSuccess : async (web3, provider, account, network) => await this.initialize(web3, provider, account, network),
       onCheckError : async (error) => await this.initError(error)
     }
+    const { isFilter, hasProvider, isConnect, reoverData } = this.state;
 
     return (
       <div className="wrap">
-        <div className="header">
-          <h1><img src={logo} alt=""/></h1>
-        </div>
+        <FilterDiv Filter={isFilter}>
+          <div className="header">
+            <h1><img src={logo} alt=""/></h1>
+          </div>
+          <Warning {...this.props}/>
+          <MetamaskChecker {...funcs} />
 
-        <Warning {...this.props}/>
-        <MetamaskChecker {...funcs} />
+          {(!hasProvider) ? <Clients/> : null}
+          {(hasProvider && !this.state.isConnect) ? <Connect {...this.props} {...this.state} handleConnect={this.handleConnect}/> : null}
+          {(isConnect) && <SearchBar getReoverData={this.getReoverData} EditResOverFn={this.EditResOverFn} {...this.props} {...this.state} footerOutFn={this.footerOutFn} />}
+          <Footer isFooterOut={this.state.isFooterOut}/>
+        
+        </FilterDiv>
+        
 
-        {(!this.state.hasProvider) ? <Clients/> : null}
-        {(this.state.hasProvider && !this.state.isConnect) ? <Connect {...this.props} {...this.state} handleConnect={this.handleConnect}/> : null}
-        {(this.state.isConnect) && <SearchBar {...this.props} {...this.state} footerOutFn={this.footerOutFn} />}
-
-        <Footer isFooterOut={this.state.isFooterOut}/>
-
+        {isFilter && <SetResolver EditResCloseFn={this.EditResCloseFn} reoverData={reoverData} />}
       </div>
     );
   }

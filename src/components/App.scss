@@ -26,7 +26,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
-ol, ul {
+ol, ul, li {
 	list-style: none;
 }
 blockquote, q {
@@ -126,5 +126,13 @@ body {
     font-weight: 500;
     color: #000;
     padding-left: 10px;
+  }
+}
+
+.link {
+  font-size: 12px;
+  a {
+    color: #ffffff;
+    font-size: 12px;
   }
 }
