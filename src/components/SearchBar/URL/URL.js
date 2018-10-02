@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {getEthereumResolverAddress} from '../../../lib/web3Service';
 import {setText} from '../../../lib/resolverService';
-import Tooltip from 'material-ui/Tooltip';
-import { Error, CheckCircle } from 'material-ui-icons';
-import './URL.css';
 
 class URL extends Component {
   constructor(props) {
@@ -46,9 +43,6 @@ class URL extends Component {
     return (
       <div className="setting_box">
         <h3><span>SET URL</span>
-          {/*<Tooltip title="Set an address that your ENS name will resolve to.">
-            <Error/>
-          </Tooltip>*/}
         </h3>
         <div className="type_list">
           <div className="type_box">

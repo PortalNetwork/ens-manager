@@ -40,7 +40,6 @@ class Resolver extends Component {
 
   render() {
     const { resolver, EditResOverFn } = this.props;
-    console.log('resolver:',resolver);
     return (
       <div className="setting_box">
         <h3>
