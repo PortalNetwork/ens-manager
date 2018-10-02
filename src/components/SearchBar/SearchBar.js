@@ -162,7 +162,7 @@ class SearchBar extends Component {
 
   // baerwerew.eth
   render() {
-    const { EditResOverFn } = this.props;
+    const { EditResOverFn, TransferOwnerOpen } = this.props;
     return (
       <Main>
         <Introduction
@@ -182,7 +182,7 @@ class SearchBar extends Component {
 
         { this.state.isKeyDown && <Loading/> }
         {/* { this.menuAcitveidx === 0 && this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> } */}
-        { this.state.menuAcitveidx === 0 && this.state.isOverview && <Overview {...this.props} {...this.state}/> }
+        { this.state.menuAcitveidx === 0 && this.state.isOverview && <Overview TransferOwnerOpen={TransferOwnerOpen} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 1 && this.state.isOpenResolver && <Resolver EditResOverFn={EditResOverFn} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 2 && this.state.isOpenSubdomain && <Subdomain {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 3 && this.state.isOpenAddress && <Address {...this.props} {...this.state}/> }

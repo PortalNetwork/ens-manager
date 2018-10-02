@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import {getEthereumResolverAddress, getEthereumRegistryAddress} from '../../../lib/web3Service';
-// import { setResolver } from '../../../lib/registryService';
 import IconEdit from '../../../images/ic-edit.svg'
 import styled from 'styled-components';
 
@@ -39,42 +37,6 @@ const AddrResolver = styled.p`
 `
 
 class Resolver extends Component {
-
-  // state = {
-  //   resolverAddr: ""
-  // }
-
-  // handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   this.setState({ [name]: value.toLowerCase() });
-  // }
-
-  // handleDefaultResolver = () => {
-  //   const resolverAddr = getEthereumResolverAddress();
-  //   this.setState({resolverAddr});
-  // }
-
-  // handleSetResovler = () => {
-  //   if (this.state.resolverAddr.length !== 42) {
-  //     this.props.handleWarningOpen('Resolver hash incorrect');
-  //     return;
-  //   }
-    
-  //   const to = getEthereumRegistryAddress();
-  //   const resolverData = setResolver(this.props.searchValue, this.state.resolverAddr);
-  //   this.props.web3.eth.sendTransaction({
-  //     from: this.props.metaMask.account, 
-  //     to: to,
-  //     value: 0,
-  //     data: resolverData }, (err, result)=> {
-  //       if (err) {
-  //         this.props.handleWarningOpen(err.message);
-  //       } else {
-  //         const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
-  //         this.props.handleWarningOpen(tx);
-  //       }
-  //     });
-  // }
 
   render() {
     const { resolver, EditResOverFn } = this.props;

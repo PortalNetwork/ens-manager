@@ -80,6 +80,7 @@ const SerResoverBtn = styled.a`
 
   ${props => props.Resolver && css`
     background-color: #314184;
+    border: 0px;
   `}
 `
 

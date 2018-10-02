@@ -9,13 +9,14 @@ import logo from '../images/logo.png';
 import Clients from '../components/Clients';
 import Footer from '../components/Footer';
 import SetResolver from "./SetResolver";
+import TransferOwnerPop from "./TransferOwnerPop";
 
 const FilterDiv = styled.div`
   width: 100%;
   height: 100%;
   transition: filter .05s;
   ${props => props.Filter && css`
-    filter: blur(15px);
+    filter: blur(25px);
     ${'' /* background-color: #1f398f; */}
   `}
 `
@@ -29,8 +30,10 @@ class App extends Component {
     isConnect: false,
     isLock: false,
     isFooterOut: false,
+    reoverData:{},
     isFilter: false,
-    reoverData:{}
+    isEditResover: false,
+    isTransferOwner: false,
   };
 
   handleConnect = () => {
@@ -59,11 +62,38 @@ class App extends Component {
     this.setState({isFooterOut: isOut})
   }
 
-  EditResOverFn =()=>{
+  // 打開編輯ResOver
+  EditResOverFn = () =>{
+    this.FilterOpen();
+    this.setState({isEditResover: true});
+  }
+
+  // 關閉編輯ResOver
+  EditResCloseFn = () =>{
+    this.FilterClose();
+    this.setState({isEditResover: false});
+  }
+
+  //打開TransferOwner
+  TransferOwnerOpen = () =>{
+    this.FilterOpen();
+    this.setState({isTransferOwner: true});
+
+  }
+
+  //關閉TransferOwner
+  TransferOwnerClose = () =>{
+    this.FilterClose();
+    this.setState({isTransferOwner: false});
+  }
+
+  //打開模糊背景
+  FilterOpen = () =>{
     this.setState({isFilter: true});
   }
 
-  EditResCloseFn =()=>{
+  //關閉模糊背景
+  FilterClose = () =>{
     this.setState({isFilter: false});
   }
 
@@ -76,7 +106,7 @@ class App extends Component {
       onCheckSuccess : async (web3, provider, account, network) => await this.initialize(web3, provider, account, network),
       onCheckError : async (error) => await this.initError(error)
     }
-    const { isFilter, hasProvider, isConnect, reoverData } = this.state;
+    const {hasProvider, isConnect, reoverData, isEditResover, isFilter, isTransferOwner  } = this.state;
 
     return (
       <div className="wrap">
@@ -89,13 +119,23 @@ class App extends Component {
 
           {(!hasProvider) ? <Clients/> : null}
           {(hasProvider && !this.state.isConnect) ? <Connect {...this.props} {...this.state} handleConnect={this.handleConnect}/> : null}
-          {(isConnect) && <SearchBar getReoverData={this.getReoverData} EditResOverFn={this.EditResOverFn} {...this.props} {...this.state} footerOutFn={this.footerOutFn} />}
+          {(isConnect) && 
+            <SearchBar 
+              {...this.props} 
+              {...this.state} 
+              TransferOwnerOpen={this.TransferOwnerOpen}
+              getReoverData={this.getReoverData} 
+              EditResOverFn={this.EditResOverFn} 
+              footerOutFn={this.footerOutFn}
+            />}
+          
+          
           <Footer isFooterOut={this.state.isFooterOut}/>
         
         </FilterDiv>
-        
+        {isEditResover && <SetResolver EditResCloseFn={this.EditResCloseFn} reoverData={reoverData} />}
+        {isTransferOwner && <TransferOwnerPop TransferOwnerClose={this.TransferOwnerClose} reoverData={reoverData}/>}
 
-        {isFilter && <SetResolver EditResCloseFn={this.EditResCloseFn} reoverData={reoverData} />}
       </div>
     );
   }

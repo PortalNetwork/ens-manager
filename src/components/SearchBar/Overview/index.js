@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import bulletpng from "../../../images/bullet.png";
+import transfer from "../../../images/ic-transfer.svg";
 const OverviewBox = styled.div`
     width: 100%;
     display: ${props => (props.isKeyDown ? 'none' : 'black')};
@@ -53,6 +54,22 @@ const ListItem = styled.div`
     overflow: hidden;
     margin-bottom: 10px;
 `;
+const TransferOwnerBtn = styled.a`
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 155px;
+    height: 29px;
+    border-radius: 2px;
+    border: solid 0.8px #cecbcb;
+    margin: 13px 0 15px 0;
+    font-family: SFProText;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.92;
+    color: #000000;
+`;
 const Titlebar = styled.div`
     float: left;
     width: 35%;
@@ -77,9 +94,10 @@ export default class extends Component {
     web3fromWei = (value) =>{
         return this.props.web3.fromWei(value, 'ether')
     }
+    
 
     render() {
-        const {isKeyDown, entries, owner} = this.props;
+        const {isKeyDown, entries, owner, TransferOwnerOpen} = this.props;
         // const AuctionTimeregDate = new Date(entries.registrationDate);
         // const SubmitBidsTimeregDate = new Date(entries.registrationDate);
         // const AuctionTime = moment.utc(AuctionTimeregDate.removeDays(5)).format('MMMM Do YYYY, h:mm:ss a');
@@ -97,7 +115,13 @@ export default class extends Component {
                     </ListItem>
                     <ListItem>
                         <Titlebar>Owner</Titlebar>
-                        <Valuebox>{owner}</Valuebox>
+                        <Valuebox>
+                            {owner}
+                            <TransferOwnerBtn onClick={TransferOwnerOpen}>
+                                <img src={transfer} alt=""/>
+                                TRANSFER OWNER
+                            </TransferOwnerBtn>
+                        </Valuebox>
                     </ListItem>
                     <ListItem>
                         <Titlebar>Winning Deed</Titlebar>
