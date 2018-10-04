@@ -40,14 +40,17 @@ class Subdomain extends Component {
     const to = getEthereumRegistryAddress(process.env.ENS_NETWORK);
     const subnodeData = setSubnodeOwner(this.props.searchValue, this.state.subnode, this.state.newOwner);
     this.props.web3.eth.sendTransaction({
+      Txtype: '0x01',
       from: this.props.metaMask.account, 
       to: to,
       value: 0,
       data: subnodeData }, function(err, result) {
         if (err) {
+          console.log("Create subdomain err:", err);
           self.props.handleWarningOpen(err.message);
         } else {
-          const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
+          console.log("Create subdomain result:", result);
+          const tx = <span className="tx">Tx: <a href={`http://47.104.61.26/block/trans/${result}`} target="_blank">Press Me</a></span>;
           self.props.handleWarningOpen(tx);
         }
       });

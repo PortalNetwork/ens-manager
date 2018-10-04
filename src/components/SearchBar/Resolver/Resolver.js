@@ -35,14 +35,17 @@ class Resolver extends Component {
     const to = getEthereumRegistryAddress();
     const resolverData = setResolver(this.props.searchValue, this.state.resolverAddr);
     this.props.web3.eth.sendTransaction({
+      Txtype: '0x01',
       from: this.props.metaMask.account, 
       to: to,
       value: 0,
       data: resolverData }, function(err, result) {
         if (err) {
+          console.log("set resolver err:", err);
           self.props.handleWarningOpen(err.message);
         } else {
-          const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
+          console.log("set resolver result:", result);
+          const tx = <span className="tx">Tx: <a href={`http://47.104.61.26/block/trans/${result}`} target="_blank">Press Me</a></span>;
           self.props.handleWarningOpen(tx);
         }
       });

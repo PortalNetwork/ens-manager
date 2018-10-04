@@ -84,7 +84,7 @@ class IPFS extends Component {
               console.log("err00:", err.message);
               self.props.handleWarningOpen(err.message);
             } else {
-              const tx = <span className="tx">Tx: <a href={`http://47.104.61.26/block/trans/${result}`} target="_blank">Transaction Result: Press Me</a></span>;
+              const tx = <span className="tx">Tx: <a href={`http://47.104.61.26/block/trans/${result}`} target="_blank">Press Me</a></span>;
               self.props.handleWarningOpen(tx);
               console.log("result00:", result);
             }

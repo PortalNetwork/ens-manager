@@ -35,14 +35,17 @@ class Address extends Component {
     const to = getEthereumResolverAddress(process.env.ENS_NETWORK);
     const addressData = setAddress(this.props.searchValue, this.state.address);
     this.props.web3.eth.sendTransaction({
+      Txtype: '0x01',
       from: this.props.metaMask.account, 
       to: to,
       value: 0,
       data: addressData }, function(err, result) {
         if (err) {
+          console.log("set address err:", err);
           self.props.handleWarningOpen(err.message);
         } else {
-          const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
+          console.log("set address result:", result);
+          const tx = <span className="tx">Tx: <a href={`http://47.104.61.26/block/trans/${result}`} target="_blank">Press Me</a></span>;
           self.props.handleWarningOpen(tx);
         }
       });
