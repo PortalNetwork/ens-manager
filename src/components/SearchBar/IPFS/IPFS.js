@@ -4,6 +4,8 @@ import {setContent} from '../../../lib/resolverService';
 import Tooltip from 'material-ui/Tooltip';
 import { Error, CheckCircle } from 'material-ui-icons';
 import './IPFS.css';
+import wanUtil from 'wanchain-util';
+
 
 class IPFS extends Component {
   constructor(props) {
@@ -21,26 +23,136 @@ class IPFS extends Component {
     this.setState({ [name]: value });
   }
 
-  handleSetIPFSHash = () => {
+  handleSetIPFSHash = async () => {
+
     if (this.state.ipfs.length !== 46) {
       this.props.handleWarningOpen('IPFS Hash incorrect');
       return;
     }
     let self = this;
+    const web3 = this.props.web3
     const to = getEthereumResolverAddress();
     const ipfsData = setContent(this.props.searchValue, this.state.ipfs);
-    this.props.web3.eth.sendTransaction({
-      from: this.props.metaMask.account, 
+    const from = this.props.metaMask.account;
+    const nonceOrigin = await this.getNonce(this.props.web3, from);
+    const nonce = `0x${nonceOrigin.toString(16)}`;
+    // const gasPrice = `0x${(200000000000).toString(16)}`;
+    const gasPrice = await this.getGasPrices(this.props.web3);
+    
+
+    const txnObject = {
+      Txtype: '0x01',
+      nonce: nonce,
+      gasPrice: gasPrice, 
+      from: from, 
       to: to,
-      value: 0,
-      data: ipfsData }, function(err, result) {
-        if (err) {
-          self.props.handleWarningOpen(err.message);
-        } else {
-          const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
-          self.props.handleWarningOpen(tx);
+      value: '0x00',
+      data: ipfsData,
+    };
+
+    // SAMPLE: sendRawTransaction
+    // web3.eth.estimateGas(txnObject, function(err, result){
+    //   const estimateGas = result
+    //   const estimateGasHex = web3.toHex(estimateGas);
+    //   txnObject.gasLimit = estimateGasHex;
+    //   const hexPrivateKey = Buffer.from(window.privateKey, 'hex');
+    //   console.log("txnObject", txnObject)
+    //   const tx = new wanUtil.wanchainTx(txnObject);
+    //   tx.sign(hexPrivateKey);
+    //   const rawTxHash = `0x${tx.serialize().toString('hex')}`;
+
+    //   const transactionHash = web3.eth.sendRawTransaction(rawTxHash, function(err, txHash) {
+    //     if (err) {
+    //       console.log("RawTransaction:", err);
+    //     } else {
+    //       console.log("RawTransaction:", txHash);
+    //     }
+    //   });
+    // });
+
+    
+    
+    console.log("tx from:", from, "tx to:", to);
+    try{
+
+      var batch = web3.createBatch();
+      
+      batch.add(
+        web3.eth.sendTransaction.request(txnObject, 
+          function(err, result) {
+            if (err) {
+              console.log("err00:", err.message);
+              self.props.handleWarningOpen(err.message);
+            } else {
+              const tx = <span className="tx">Tx: <a href={`http://47.104.61.26/block/trans/${result}`} target="_blank">Transaction Result: Press Me</a></span>;
+              self.props.handleWarningOpen(tx);
+              console.log("result00:", result);
+            }
+          }
+        )
+      );
+
+      batch.add(
+        web3.eth.getTransactionCount.request(from, function(err, result){
+          if(err) {
+            console.log("err2", err);
+          } else {
+            console.log("result2:", result);
+          }
+        })
+      );
+
+      batch.add(
+        web3.eth.getBlock.request("latest", function(error,result){
+          if(error){
+              console.log("err1:", error);
+          } else {
+            console.log("resutl1:", result);
+          }
+        })
+      );
+
+      batch.add(
+        web3.eth.getBalance.request(from, function (error, result) {
+          if (!error) {
+              console.log("result3:", result);
+          } else {
+              // const balance = web3.fromWei(result,'ether').toFixed(2);
+              // console.log("balance", balance)
+              console.error("error3:", error);
+          }
+        })
+      );
+
+      batch.execute();
+
+    } catch(error) {
+      console.log("error:", error);
+    }
+  }
+
+  getGasPrices = (web3) => {
+    return new Promise((resolve, reject) => {
+      web3.eth.getGasPrice(function(err, gasPrice){
+        if(err) {
+          reject(err);
+          return;
         }
+        resolve(gasPrice);
+      })
+    })
+  }
+
+  getNonce = (web3, from) => {
+    return new Promise((resolve, reject) => {
+      web3.eth.getTransactionCount(from, function(err, value) {
+        if(err) {
+          reject(err);
+          return;
+        }
+        resolve(value);
       });
+    })
   }
 
   render() {
