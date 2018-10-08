@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getEthereumResolverAddress, getEthereumRegistryAddress} from '../../../lib/web3Service';
+import {getEthereumResolverAddress, getEthereumRegistryAddress, getTransactionExplorerURL} from '../../../lib/web3Service';
 import {setResolver} from '../../../lib/registryService';
 import Tooltip from 'material-ui/Tooltip';
 import { Error } from 'material-ui-icons';
@@ -45,7 +45,8 @@ class Resolver extends Component {
           self.props.handleWarningOpen(err.message);
         } else {
           console.log("set resolver result:", result);
-          const tx = <span className="tx">Tx: <a href={`http://47.104.61.26/block/trans/${result}`} target="_blank">Press Me</a></span>;
+          let explorerUrl = getTransactionExplorerURL(process.env.ENS_NETWORK)
+          const tx = <span className="tx">Tx: <a href={`${explorerUrl}${result}`} target="_blank">Press Me</a></span>;
           self.props.handleWarningOpen(tx);
         }
       });

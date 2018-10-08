@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getEthereumRegistryAddress} from '../../../lib/web3Service';
+import {getEthereumRegistryAddress, getTransactionExplorerURL} from '../../../lib/web3Service';
 import {setSubnodeOwner} from '../../../lib/registryService';
 import Tooltip from 'material-ui/Tooltip';
 import { Error } from 'material-ui-icons';
@@ -35,7 +35,7 @@ class Subdomain extends Component {
     if (/[a-zA-Z0-9]+/g.test(this.state.subnode) === false) {
       this.props.handleWarningOpen('Subdomain incorrect');
       return;
-    }
+    }  
     let self = this;
     const to = getEthereumRegistryAddress(process.env.ENS_NETWORK);
     const subnodeData = setSubnodeOwner(this.props.searchValue, this.state.subnode, this.state.newOwner);
@@ -50,7 +50,8 @@ class Subdomain extends Component {
           self.props.handleWarningOpen(err.message);
         } else {
           console.log("Create subdomain result:", result);
-          const tx = <span className="tx">Tx: <a href={`http://47.104.61.26/block/trans/${result}`} target="_blank">Press Me</a></span>;
+          let explorerUrl = getTransactionExplorerURL(process.env.ENS_NETWORK)
+          const tx = <span className="tx">Tx: <a href={`${explorerUrl}${result}`} target="_blank">Press Me</a></span>;
           self.props.handleWarningOpen(tx);
         }
       });

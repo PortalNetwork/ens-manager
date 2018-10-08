@@ -47,6 +47,17 @@ export const getEthereumResolverAddress = (networkId = '1') => {
   }
 }
 
+export const getTransactionExplorerURL = (networkId = '1') => {
+  switch (networkId) {
+    case '1':
+      return "http://47.104.61.26/block/trans/" //Wanchain testnet
+    case '3':
+      return '0x0';
+    default:
+      return '0x0';
+  }
+}
+
 export const getCurrentAddress = (web3) => {
   if (web3 === null) return;
   return web3.eth.accounts[0];
