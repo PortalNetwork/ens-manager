@@ -8,6 +8,7 @@ import addIcon from '../../../images/ic-add.svg'
 import { getEthereumRegistryAddress } from '../../../lib/web3Service';
 import { setSubnodeOwner, newOwnerEvent } from '../../../lib/registryService';
 import { decryptLabel } from '../../../apis/api';
+import Loading from '../../Loading/Loading';
 const SettingBox = styled.div`
     >h3{
         position: relative;
@@ -93,6 +94,7 @@ class Subdomain extends Component {
     subdomain: [],
     searchValueitem: "",
     subdomainArray: [],
+    isItemShow: false
   };
   
   handleInputChange = (e) => {
@@ -100,33 +102,33 @@ class Subdomain extends Component {
     this.setState({ [name]: value.toLowerCase() });
   }
 
-  handleSetSubnodeOwner = () => {
-    if (this.state.newOwner.length !== 42) {
-      alert('New Owner hash incorrect')
-      // this.props.handleWarningOpen('New Owner hash incorrect');
-      return;
-    }
-    if (/[a-zA-Z0-9]+/g.test(this.state.subnode) === false) {
-      alert('Subdomain incorrect')
-      // this.props.handleWarningOpen('Subdomain incorrect');
-      return;
-    }
-    // const to = getEthereumRegistryAddress(process.env.ENS_NETWORK);
-    const to = getEthereumRegistryAddress();
-    const subnodeData = setSubnodeOwner(this.props.searchValue, this.state.subnode, this.state.newOwner);
-    this.props.web3.eth.sendTransaction({
-      from: this.props.metaMask.account, 
-      to: to,
-      value: 0,
-      data: subnodeData 
-    },(err, result)=> {
-      if (err) return alert(err.message);
-      const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
-      alert("Success");
-      window.open(`https://ropsten.etherscan.io/tx/${result}`)
-      // this.props.handleWarningOpen(tx);
-    });
-  }
+  // handleSetSubnodeOwner = () => {
+  //   if (this.state.newOwner.length !== 42) {
+  //     alert('New Owner hash incorrect')
+  //     // this.props.handleWarningOpen('New Owner hash incorrect');
+  //     return;
+  //   }
+  //   if (/[a-zA-Z0-9]+/g.test(this.state.subnode) === false) {
+  //     alert('Subdomain incorrect')
+  //     // this.props.handleWarningOpen('Subdomain incorrect');
+  //     return;
+  //   }
+  //   // const to = getEthereumRegistryAddress(process.env.ENS_NETWORK);
+  //   const to = getEthereumRegistryAddress();
+  //   const subnodeData = setSubnodeOwner(this.props.searchValue, this.state.subnode, this.state.newOwner);
+  //   this.props.web3.eth.sendTransaction({
+  //     from: this.props.metaMask.account, 
+  //     to: to,
+  //     value: 0,
+  //     data: subnodeData 
+  //   },(err, result)=> {
+  //     if (err) return alert(err.message);
+  //     // const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
+  //     alert("Success");
+  //     window.open(`https://ropsten.etherscan.io/tx/${result}`)
+  //     // this.props.handleWarningOpen(tx);
+  //   });
+  // }
 
   handleWeb3Load = async () => {
     if (window.web3 === null) return 
@@ -134,32 +136,44 @@ class Subdomain extends Component {
     const newOwnerEvents = await newOwnerEvent(web3, this.props.searchValue);
     let labelsArr = [];
     let unique = null;
+    
+    let idx = 0;
+    let BidLength = newOwnerEvents.constructor.length;
     newOwnerEvents.watch((error, result) => {
+      idx ++;
       if (error) return console.log('error', error);
       labelsArr.push(result.args.label.substring(2));
       unique = Array.from(new Set(labelsArr));
-      this.setState({labels: unique},()=> this.labelsMap(this.state.labels));
-    });
+      if(BidLength === idx){
+        this.setState({labels: unique},()=> this.labelsMap(this.state.labels));
+      }
+    })
   }
 
-  
   labelsMap = labels =>{
     let labelHash = [];
+    let BidLength = labels.length;
+    let idx = 0;
     labels.forEach(async hash => {
       let dL = await decryptLabel([hash]);
+      idx ++;
       labelHash.push(dL.data[0]);
       let result = [...(new Set(labelHash))];
-      this.subdomainCombination(result)
+      if(BidLength === idx){
+        this.subdomainCombination(result)
+      }
     });
   }
 
   subdomainCombination = (result) =>{
-    const { searchValue, subdomain } = this.state;
+    const { searchValue } = this.state;
     let arr = [];
-    result.forEach(item =>{
+    result.forEach((item, idx) =>{
       if(item !== null){
         arr.push(`${item}.${searchValue}`);
-        this.setState({"subdomainArray": arr})
+      }
+      if(idx === result.length - 1){
+        this.setState({"subdomainArray": arr, "isItemShow": true})
       }
     })
   }
@@ -171,33 +185,38 @@ class Subdomain extends Component {
   }
 
   render() {
-    const domain = this.state.searchValue;
+    // const domain = this.state.searchValue;
     const { subdomainArray } = this.state;
-    const label = (this.state.subnode.length > 0) ? this.state.subnode + "." + domain : "<subdomain>." + domain;
+    const { SetSubdomainPopOpen, handleSearchItemClick } = this.props;
+    // const label = (this.state.subnode.length > 0) ? this.state.subnode + "." + domain : "<subdomain>." + domain;
     return (
       <SettingBox bulletpng={bulletpng}>
         <h3>
           <span>SET SUBDOMAIN</span>
-          <a><img src={syncpng} alt=""/></a>
+          <a onClick={handleSearchItemClick}><img src={syncpng} alt=""/></a>
         </h3>
-        <Rectangle>
-          <TitleH1>
-            Current Resolver
-            <a><img src={addIcon} alt=""/></a>
-          </TitleH1>
-          <ul>
-            {
-              subdomainArray.map(domain =>{
-                return (
-                  <DemainItem key={domain}>
-                    <img src={linkIcon} alt=""/>
-                    {domain}
-                  </DemainItem>
-                )
-              })
-            }
-          </ul>
-        </Rectangle>
+          { 
+            !this.state.isItemShow ? 
+            <Loading/> : 
+            <Rectangle>
+              <TitleH1>
+                Current Resolver
+                <a onClick={SetSubdomainPopOpen}><img src={addIcon} alt=""/></a>
+              </TitleH1>
+                <ul>
+                  {
+                    subdomainArray.map(domain =>{
+                      return (
+                        <DemainItem key={domain}>
+                          <img src={linkIcon} alt=""/>
+                          {domain}
+                        </DemainItem>
+                      )
+                    })
+                  }
+                </ul>
+            </Rectangle>
+          }
         {/* <div className="setting_box">
           <h3>
             <span>SUBDOMAIN LIST</span>

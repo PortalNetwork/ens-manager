@@ -10,6 +10,7 @@ import Clients from '../components/Clients';
 import Footer from '../components/Footer';
 import SetResolver from "./SetResolver";
 import TransferOwnerPop from "./TransferOwnerPop";
+import SetSubdomainPop from "./SetSubdomainPop";
 
 const FilterDiv = styled.div`
   width: 100%;
@@ -20,7 +21,6 @@ const FilterDiv = styled.div`
     ${'' /* background-color: #1f398f; */}
   `}
 `
-
 
 class App extends Component {
   
@@ -34,6 +34,7 @@ class App extends Component {
     isFilter: false,
     isEditResover: false,
     isTransferOwner: false,
+    isSetSubdomain: false,
   };
 
   handleConnect = () => {
@@ -87,6 +88,17 @@ class App extends Component {
     this.setState({isTransferOwner: false});
   }
 
+  //打開 Set Subdomain
+  SetSubdomainPopOpen = () =>{
+    this.FilterOpen();
+    this.setState({isSetSubdomain: true});
+  }
+  //關閉 Set Subdomain
+  SetSubdomainPopClose = () =>{
+    this.FilterClose();
+    this.setState({isSetSubdomain: false});
+  }
+
   //打開模糊背景
   FilterOpen = () =>{
     this.setState({isFilter: true});
@@ -106,7 +118,7 @@ class App extends Component {
       onCheckSuccess : async (web3, provider, account, network) => await this.initialize(web3, provider, account, network),
       onCheckError : async (error) => await this.initError(error)
     }
-    const {hasProvider, isConnect, reoverData, isEditResover, isFilter, isTransferOwner  } = this.state;
+    const {hasProvider, isConnect, reoverData, isEditResover, isFilter, isTransferOwner, isSetSubdomain  } = this.state;
 
     return (
       <div className="wrap">
@@ -122,7 +134,8 @@ class App extends Component {
           {(isConnect) && 
             <SearchBar 
               {...this.props} 
-              {...this.state} 
+              {...this.state}
+              SetSubdomainPopOpen={this.SetSubdomainPopOpen}
               TransferOwnerOpen={this.TransferOwnerOpen}
               getReoverData={this.getReoverData} 
               EditResOverFn={this.EditResOverFn} 
@@ -131,10 +144,12 @@ class App extends Component {
           
           
           <Footer isFooterOut={this.state.isFooterOut}/>
-        
+          
+
         </FilterDiv>
         {isEditResover && <SetResolver EditResCloseFn={this.EditResCloseFn} reoverData={reoverData} />}
         {isTransferOwner && <TransferOwnerPop TransferOwnerClose={this.TransferOwnerClose} reoverData={reoverData}/>}
+        {isSetSubdomain && <SetSubdomainPop SetSubdomainPopClose={this.SetSubdomainPopClose} reoverData={reoverData}/>}
 
       </div>
     );
