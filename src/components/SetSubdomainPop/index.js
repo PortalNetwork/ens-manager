@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components';
 import closeSvg from "../../images/ic-close.svg";
 import { getEthereumRegistryAddress } from '../../lib/web3Service';
-import { setSubnodeOwner } from '../../lib/registryService';
+import { setSubnodeOwner, getOwner } from '../../lib/registryService';
 const half = num =>{
   return `${-(num / 2)}px`
 }
@@ -100,17 +100,17 @@ export default class extends Component {
     web3.eth.sendTransaction({
       from: metaMask.account, 
       to: to,
-      value: 0,
+      value: web3.toWei(0.01, 'ether'),
       data: subnodeData 
     },(err, result)=> {
       if (err) return alert(err.message);
       alert("Success");
       window.open(`https://ropsten.etherscan.io/tx/${result}`);
-      this.props.SetSubdomainPopClose();
+      this.props.SetAddressClose();
     });
 
   }
-
+  
   render() {
     const { SetSubdomainPopClose } = this.props;
 

@@ -137,27 +137,29 @@ class Subdomain extends Component {
     let labelsArr = [];
     let unique = null;
     
-    let idx = 0;
-    let BidLength = newOwnerEvents.constructor.length;
     newOwnerEvents.watch((error, result) => {
-      idx ++;
       if (error) return console.log('error', error);
       labelsArr.push(result.args.label.substring(2));
       unique = Array.from(new Set(labelsArr));
-      if(BidLength === idx){
-        this.setState({labels: unique},()=> this.labelsMap(this.state.labels));
-      }
     })
+      
+    setTimeout(() => {
+      this.setState({labels: unique},()=> this.labelsMap(this.state.labels));
+    }, 5000);
+
   }
 
   labelsMap = labels =>{
+
     let labelHash = [];
     let BidLength = labels.length;
     let idx = 0;
+
     labels.forEach(async hash => {
       let dL = await decryptLabel([hash]);
       idx ++;
       labelHash.push(dL.data[0]);
+      console.log("labelHash:", labelHash);
       let result = [...(new Set(labelHash))];
       if(BidLength === idx){
         this.subdomainCombination(result)

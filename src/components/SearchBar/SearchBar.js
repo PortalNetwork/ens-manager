@@ -10,7 +10,7 @@ import Loading from '../Loading/Loading';
 import Resolver from './Resolver/Resolver';
 import Subdomain from './Subdomain/Subdomain';
 import IPFS from './IPFS/IPFS';
-import Address from './Address/Address';
+import Address from './Address';
 import Overview from './Overview';
 // import Events from './Events/Events';
 import Introduction from '../Introduction';
@@ -20,8 +20,8 @@ import resolver from '../../images/ic-resolver-on.svg';
 import subdomain from '../../images/ic-subdomain-on.svg';
 import wallet from '../../images/ic-wallet-on.svg';
 import ipfs from '../../images/ic-ipfs-on.svg';
-import URL from './URL/URL';
-import FileUpload from "./FileUpload"
+// import URL from './URL/URL';
+// import FileUpload from "./FileUpload"
 import './SearchBar.css';
 
 const Main = styled.div`
@@ -162,7 +162,7 @@ class SearchBar extends Component {
 
   // baerwerew.eth
   render() {
-    const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen } = this.props;
+    const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen } = this.props;
     return (
       <Main>
         <Introduction
@@ -185,7 +185,7 @@ class SearchBar extends Component {
         { this.state.menuAcitveidx === 0 && this.state.isOverview && <Overview TransferOwnerOpen={TransferOwnerOpen} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 1 && this.state.isOpenResolver && <Resolver EditResOverFn={EditResOverFn} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 2 && this.state.isOpenSubdomain && <Subdomain handleSearchItemClick={this.handleSearchItemClick} SetSubdomainPopOpen={SetSubdomainPopOpen} {...this.props} {...this.state}/> }
-        { this.state.menuAcitveidx === 3 && this.state.isOpenAddress && <Address {...this.props} {...this.state}/> }
+        { this.state.menuAcitveidx === 3 && this.state.isOpenAddress && <Address SetAddressOpen={SetAddressOpen} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 4 && this.state.isOpenIPFS && <IPFS {...this.props} {...this.state}/> }
         {/* { this.state.isOpenURL && <URL {...this.props} {...this.state}/> }
         <FileUpload {...this.props} {...this.state}/> */}

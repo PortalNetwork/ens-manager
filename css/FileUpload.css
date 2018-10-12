@@ -1,0 +1,67 @@
+.file_upload .uploader > div {
+  width: 100% !important;
+  height: 75px !important;
+}
+
+.file_upload .uploader > div > p {
+  color: #ffffff;
+  padding: 15px;
+  text-align: left;
+  line-height: 24px;
+}
+
+.file_upload h3 {
+  position: relative;
+  margin-bottom: 15px;
+  padding: 0px 0px 0px 25px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.file_upload h3:before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url("../../../images/bullet.png") top left no-repeat;
+  background-size: 100% auto;
+  position: absolute;
+  left: 0px;
+  top: -6px;
+}
+
+.file_upload h3 span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.file_upload h3 svg {
+  width: 16px !important;
+  height: 16px !important;
+  color: #fff;
+}
+
+.link {
+  font-size: 12px;
+}
+
+.link a {
+  color: #ffffff;
+}
+
+.status_check > a {
+  color: #000000;
+  font-size: 12px;
+}
+/*# sourceMappingURL=FileUpload.css.map */

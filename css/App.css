@@ -1,0 +1,170 @@
+@charset "UTF-8";
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul, li {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  display: block;
+}
+
+a, h1, h2, h3, h4, h5, h6, span, p, a, input, label, button, div, span {
+  font-family: sans-serif, 'Arial', 'Microsoft JhengHei';
+  font-size: 14px;
+  font-weight: 400;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  background-color: #1f398f;
+}
+
+#root {
+  height: 100%;
+  min-height: 100%;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 76px;
+  background-image: url("../images/bg_header.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* 警告提示 */
+#message-id {
+  color: #fff;
+}
+
+.MuiButton-label-78 {
+  color: #fff;
+}
+
+.wallet {
+  background-color: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.wallet_list {
+  border-radius: 3px;
+  border: solid 1px #dadada;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+.wallet_list:hover {
+  border-color: #000;
+}
+
+.wallet_list + .wallet_list {
+  margin-top: 12px;
+}
+
+.wallet_list img {
+  width: 28px;
+}
+
+.wallet_list p {
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+  padding-left: 10px;
+}
+
+.link {
+  font-size: 12px;
+}
+
+.link a {
+  color: #ffffff;
+  font-size: 12px;
+}
+/*# sourceMappingURL=App.css.map */
