@@ -12,6 +12,7 @@ import SetResolver from "./SetResolver";
 import TransferOwnerPop from "./TransferOwnerPop";
 import SetSubdomainPop from "./SetSubdomainPop";
 import SetAddressPop from "./SetAddressPop";
+import SetIfpsPop from "./SetIfpsPop";
 
 const FilterDiv = styled.div`
   width: 100%;
@@ -37,6 +38,7 @@ class App extends Component {
     isTransferOwner: false,
     isSetSubdomain: false,
     isSetAddress: false,
+    isSetIpfs: false,
   };
 
   handleConnect = () => {
@@ -114,6 +116,19 @@ class App extends Component {
     this.setState({isSetAddress: false});
   }
 
+
+  //打開 Set ipfs
+  SetIpfsOpen = ()=>{
+    this.FilterOpen();
+    this.setState({isSetIpfs: true});
+  }
+
+  //關閉 Set ipfs
+  SetIpfsClose = ()=>{
+    this.FilterClose();
+    this.setState({isSetIpfs: false});
+  }
+
   //打開模糊背景
   FilterOpen = () =>{
     this.setState({isFilter: true});
@@ -133,7 +148,7 @@ class App extends Component {
       onCheckSuccess : async (web3, provider, account, network) => await this.initialize(web3, provider, account, network),
       onCheckError : async (error) => await this.initError(error)
     }
-    const {hasProvider, isConnect, reoverData, isEditResover, isFilter, isTransferOwner, isSetSubdomain, isSetAddress } = this.state;
+    const {hasProvider, isConnect, reoverData, isEditResover, isFilter, isTransferOwner, isSetSubdomain, isSetAddress, isSetIpfs } = this.state;
 
     return (
       <div className="wrap">
@@ -151,8 +166,9 @@ class App extends Component {
               {...this.props} 
               {...this.state}
               SetSubdomainPopOpen={this.SetSubdomainPopOpen}
-              SetAddressOpen={this.SetAddressOpen}
+              SetIpfsOpen={this.SetIpfsOpen}
               TransferOwnerOpen={this.TransferOwnerOpen}
+              SetAddressOpen={this.SetAddressOpen}
               getReoverData={this.getReoverData} 
               EditResOverFn={this.EditResOverFn} 
               footerOutFn={this.footerOutFn}
@@ -167,6 +183,7 @@ class App extends Component {
         {isTransferOwner && <TransferOwnerPop TransferOwnerClose={this.TransferOwnerClose} reoverData={reoverData}/>}
         {isSetSubdomain && <SetSubdomainPop SetSubdomainPopClose={this.SetSubdomainPopClose} reoverData={reoverData}/>}
         {isSetAddress && <SetAddressPop SetAddressClose={this.SetAddressClose} reoverData={reoverData}/>}
+        {isSetIpfs && <SetIfpsPop SetIpfsClose={this.SetIpfsClose} reoverData={reoverData}/>}
 
       </div>
     );

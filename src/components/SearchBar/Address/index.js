@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {getEthereumResolverAddress} from '../../../lib/web3Service';
-import {setAddress} from '../../../lib/resolverService';
+// import {getEthereumResolverAddress} from '../../../lib/web3Service';
+// import {setAddress} from '../../../lib/resolverService';
 import IconEdit from '../../../images/ic-edit.svg'
 import styled from 'styled-components';
 

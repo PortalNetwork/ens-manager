@@ -9,7 +9,7 @@ import { getEntries } from '../../lib/registrarService';
 import Loading from '../Loading/Loading';
 import Resolver from './Resolver/Resolver';
 import Subdomain from './Subdomain/Subdomain';
-import IPFS from './IPFS/IPFS';
+import IPFS from './IPFS';
 import Address from './Address';
 import Overview from './Overview';
 // import Events from './Events/Events';
@@ -162,7 +162,7 @@ class SearchBar extends Component {
 
   // baerwerew.eth
   render() {
-    const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen } = this.props;
+    const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen, SetIpfsOpen  } = this.props;
     return (
       <Main>
         <Introduction
@@ -186,7 +186,7 @@ class SearchBar extends Component {
         { this.state.menuAcitveidx === 1 && this.state.isOpenResolver && <Resolver EditResOverFn={EditResOverFn} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 2 && this.state.isOpenSubdomain && <Subdomain handleSearchItemClick={this.handleSearchItemClick} SetSubdomainPopOpen={SetSubdomainPopOpen} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 3 && this.state.isOpenAddress && <Address SetAddressOpen={SetAddressOpen} {...this.props} {...this.state}/> }
-        { this.state.menuAcitveidx === 4 && this.state.isOpenIPFS && <IPFS {...this.props} {...this.state}/> }
+        { this.state.menuAcitveidx === 4 && this.state.isOpenIPFS && <IPFS SetIpfsOpen={SetIpfsOpen} {...this.props} {...this.state}/> }
         {/* { this.state.isOpenURL && <URL {...this.props} {...this.state}/> }
         <FileUpload {...this.props} {...this.state}/> */}
 
