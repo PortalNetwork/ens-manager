@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import closeSvg from "../../images/ic-close.svg";
+import { getEthereumRegistrarAddress } from '../../lib/web3Service';
+import { transfer } from '../../lib/registrarService';
 const half = num =>{
   return `${-(num / 2)}px`
 }
@@ -113,20 +115,40 @@ export default class extends Component {
     this.setState({[name]: value})
   }
 
+  seedTransFerAddress = () =>{
+    if(this.state.address === "") return alert("Address must not be empty");
+    if(this.state.address.length < 42) return alert("Address format error");
+    const { searchValue, web3, metaMask } = this.props.reoverData;
+    const to = getEthereumRegistrarAddress();
+    const subnodeData = transfer(searchValue.replace(".eth", ""), this.state.address);
+    web3.eth.sendTransaction({
+      from: metaMask.account, 
+      to: to,
+      value: 0,
+      data: subnodeData 
+    },(err, result)=> {
+      if (err) return alert(err.message);
+      alert("Success");
+      window.open(`https://ropsten.etherscan.io/tx/${result}`);
+      this.props.TransferOwnerClose();
+    });
+  }
+
   render() {
     const { TransferOwnerClose } = this.props;
+    const { searchValue } = this.props.reoverData;
     return (
       <TOPop>
         <h1>Transfer Domain Name Owner <a onClick={TransferOwnerClose}><img src={closeSvg} alt=""/></a></h1>
         <p>Domain transfer needs to wait for the transaction to be confirmed, you won’t be able to access it during this period</p>
         <Title>
           <h2>TRANSFERING DOMAIN NAME</h2>
-          <p>christopher.eth</p>
+          <p>{searchValue}</p>
         </Title>
 
         <InputItem name="address" value={this.state.address} onChange={this.handAddress} placeholder="Transferred address"/>
 
-        <TransferBtn>Transfer</TransferBtn>
+        <TransferBtn onClick={this.seedTransFerAddress}>Transfer</TransferBtn>
       
       </TOPop>
     )

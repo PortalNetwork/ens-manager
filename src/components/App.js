@@ -12,7 +12,7 @@ import SetResolver from "./SetResolver";
 import TransferOwnerPop from "./TransferOwnerPop";
 import SetSubdomainPop from "./SetSubdomainPop";
 import SetAddressPop from "./SetAddressPop";
-import SetIfpsPop from "./SetIfpsPop";
+import SetIpfsPop from "./SetIpfsPop";
 
 const FilterDiv = styled.div`
   width: 100%;
@@ -183,7 +183,7 @@ class App extends Component {
         {isTransferOwner && <TransferOwnerPop TransferOwnerClose={this.TransferOwnerClose} reoverData={reoverData}/>}
         {isSetSubdomain && <SetSubdomainPop SetSubdomainPopClose={this.SetSubdomainPopClose} reoverData={reoverData}/>}
         {isSetAddress && <SetAddressPop SetAddressClose={this.SetAddressClose} reoverData={reoverData}/>}
-        {isSetIpfs && <SetIfpsPop SetIpfsClose={this.SetIpfsClose} reoverData={reoverData}/>}
+        {isSetIpfs && <SetIpfsPop SetIpfsClose={this.SetIpfsClose} reoverData={reoverData}/>}
 
       </div>
     );

@@ -97,7 +97,7 @@ export default class extends Component {
     
 
     render() {
-        const {isKeyDown, entries, owner, TransferOwnerOpen} = this.props;
+        const {isKeyDown, entries, owner, TransferOwnerOpen, metaMask} = this.props;
         // const AuctionTimeregDate = new Date(entries.registrationDate);
         // const SubmitBidsTimeregDate = new Date(entries.registrationDate);
         // const AuctionTime = moment.utc(AuctionTimeregDate.removeDays(5)).format('MMMM Do YYYY, h:mm:ss a');
@@ -117,10 +117,13 @@ export default class extends Component {
                         <Titlebar>Owner</Titlebar>
                         <Valuebox>
                             {owner}
-                            <TransferOwnerBtn onClick={TransferOwnerOpen}>
-                                <img src={transfer} alt=""/>
-                                TRANSFER OWNER
-                            </TransferOwnerBtn>
+                            {
+                                owner === metaMask.account && 
+                                <TransferOwnerBtn onClick={TransferOwnerOpen}>
+                                    <img src={transfer} alt=""/>
+                                    TRANSFER OWNER
+                                </TransferOwnerBtn>
+                            }
                         </Valuebox>
                     </ListItem>
                     <ListItem>

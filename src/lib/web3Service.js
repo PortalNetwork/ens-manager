@@ -1,4 +1,4 @@
-const isSupTestNet = true;
+const isSupTestNet = false;
 const nId = isSupTestNet ? "3" : "1";
 const RegistrarAddr = '0xc19fd9004b5c9789391679de6d766b981db94610';
 const RegistryAddr = '0x112234455c3a32fd11230c42e7bccd4a84e02010';

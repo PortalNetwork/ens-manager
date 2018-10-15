@@ -100,13 +100,13 @@ export default class extends Component {
     web3.eth.sendTransaction({
       from: metaMask.account, 
       to: to,
-      value: web3.toWei(0.01, 'ether'),
+      value: 0,
       data: subnodeData 
     },(err, result)=> {
       if (err) return alert(err.message);
       alert("Success");
       window.open(`https://ropsten.etherscan.io/tx/${result}`);
-      this.props.SetAddressClose();
+      this.props.SetSubdomainPopClose();
     });
 
   }

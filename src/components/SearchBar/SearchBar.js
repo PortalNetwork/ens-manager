@@ -40,8 +40,9 @@ const Main = styled.div`
 
 
 class SearchBar extends Component {
-
+  // baerwerew.eth
   state = {
+    searchValue : "",
     isKeyDown: false,
     isSeach: false,
     isOpenResolver: false,
@@ -50,7 +51,6 @@ class SearchBar extends Component {
     isOpenSubdomain: false,
     isOverview: false,
     isOpenURL: true,
-    searchValue : "baerwerew.eth",
     owner: "",
     resolver: "",
     ipfsHash: "",
@@ -74,6 +74,7 @@ class SearchBar extends Component {
   }
 
   handleSearchItem = (e) => {
+    if(this.state.searchValue === "") return;
     if(this.state.isKeyDown) return;
     if(e.keyCode !== 13) return;
     this.handleSearchData();
@@ -81,6 +82,7 @@ class SearchBar extends Component {
   }
 
   handleSearchItemClick = () => {
+    if(this.state.searchValue === "") return;
     if(this.state.isKeyDown) return;
     this.handleSearchData();
     this.props.footerOutFn(true);
@@ -89,7 +91,6 @@ class SearchBar extends Component {
   handleSearchData = async () => {
     this.props.handleWarningClose();
     const keydomain = this.state.searchValue.toLowerCase().split(".eth");
-
     if (keydomain[keydomain.length - 1] !== "") return this.props.handleWarningOpen("ENS format error");
 
     const domain = keydomain[keydomain.length - 2].split(".");

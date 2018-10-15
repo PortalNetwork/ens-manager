@@ -159,7 +159,6 @@ class Subdomain extends Component {
       let dL = await decryptLabel([hash]);
       idx ++;
       labelHash.push(dL.data[0]);
-      console.log("labelHash:", labelHash);
       let result = [...(new Set(labelHash))];
       if(BidLength === idx){
         this.subdomainCombination(result)
