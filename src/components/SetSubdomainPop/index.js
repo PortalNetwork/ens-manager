@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import closeSvg from "../../images/ic-close.svg";
-import { getEthereumRegistryAddress } from '../../lib/web3Service';
+import { getEthereumRegistryAddress, getEtherscanUrl } from '../../lib/web3Service';
 import { setSubnodeOwner, getOwner } from '../../lib/registryService';
 const half = num =>{
   return `${-(num / 2)}px`
@@ -105,7 +105,7 @@ export default class extends Component {
     },(err, result)=> {
       if (err) return alert(err.message);
       alert("Success");
-      window.open(`https://ropsten.etherscan.io/tx/${result}`);
+      window.open(getEtherscanUrl(result));
       this.props.SetSubdomainPopClose();
     });
 

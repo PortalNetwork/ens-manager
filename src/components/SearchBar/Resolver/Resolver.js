@@ -39,7 +39,7 @@ const AddrResolver = styled.p`
 class Resolver extends Component {
 
   render() {
-    const { resolver, EditResOverFn } = this.props;
+    const { resolver, EditResOverFn, owner, metaMask } = this.props;
     return (
       <div className="setting_box">
         <h3>
@@ -48,7 +48,10 @@ class Resolver extends Component {
         <TypeList>
           <TitleH1>
             Current Resolver
-            <a onClick={EditResOverFn}><img src={IconEdit} alt=""/></a>
+            {
+              owner !== '0x0000000000000000000000000000000000000000' && owner === metaMask.account &&
+              <a onClick={EditResOverFn}><img src={IconEdit} alt=""/></a>
+            }
           </TitleH1>
           <AddrResolver>{ resolver }</AddrResolver>
         </TypeList>

@@ -39,6 +39,7 @@ class App extends Component {
     isSetSubdomain: false,
     isSetAddress: false,
     isSetIpfs: false,
+    accounts: ''
   };
 
   handleConnect = () => {
@@ -48,6 +49,7 @@ class App extends Component {
   async fetchAccount(web3) {
     web3.eth.getAccounts((err, accounts) => {
       if (accounts && accounts.length > 0) {
+        this.setState({accounts: accounts[0]})
         if (accounts[0] !== this.props.metaMask.account) {
           this.props.handleMetaMaskAccount(accounts[0]);
         }

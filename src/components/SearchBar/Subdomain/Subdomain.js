@@ -150,20 +150,25 @@ class Subdomain extends Component {
   }
 
   labelsMap = labels =>{
-
+    let labelsArr = labels == null ? [] : labels;
     let labelHash = [];
-    let BidLength = labels.length;
+    let BidLength = labelsArr.length;
     let idx = 0;
 
-    labels.forEach(async hash => {
-      let dL = await decryptLabel([hash]);
-      idx ++;
-      labelHash.push(dL.data[0]);
-      let result = [...(new Set(labelHash))];
-      if(BidLength === idx){
-        this.subdomainCombination(result)
-      }
-    });
+    if(BidLength!=0){
+      labelsArr.forEach(async hash => {
+        let dL = await decryptLabel([hash]);
+        idx ++;
+        labelHash.push(dL.data[0]);
+        let result = [...(new Set(labelHash))];
+        if(BidLength === idx){
+          this.subdomainCombination(result)
+        }
+      });
+    }else{
+      this.setState({"isItemShow": true});
+    }
+    
   }
 
   subdomainCombination = (result) =>{

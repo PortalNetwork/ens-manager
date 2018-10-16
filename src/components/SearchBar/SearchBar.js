@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
 import { getResolver, getOwner } from '../../lib/registryService';
 import { getContent, getAddress, getText, getSupportsInterface } from '../../lib/resolverService';
 import { fromContentHash } from '../../helpers/ipfsHelper';
 import { getEntries } from '../../lib/registrarService';
-
 import Loading from '../Loading/Loading';
 import Resolver from './Resolver/Resolver';
 import Subdomain from './Subdomain/Subdomain';
@@ -42,7 +40,7 @@ const Main = styled.div`
 class SearchBar extends Component {
   // baerwerew.eth
   state = {
-    searchValue : "",
+    searchValue : "apphost.eth",
     isKeyDown: false,
     isSeach: false,
     isOpenResolver: false,
@@ -59,6 +57,7 @@ class SearchBar extends Component {
     domainValue: "",
     entries:"",
     url: "",
+    accounts: '',
     menuItem: [
       { imgurl: overview, name: "Overview" },
       { imgurl: resolver, name: "Resolver" },
@@ -90,6 +89,7 @@ class SearchBar extends Component {
 
   handleSearchData = async () => {
     this.props.handleWarningClose();
+    // 
     const keydomain = this.state.searchValue.toLowerCase().split(".eth");
     if (keydomain[keydomain.length - 1] !== "") return this.props.handleWarningOpen("ENS format error");
 
@@ -106,13 +106,13 @@ class SearchBar extends Component {
     let ipfsHash = "";
     this.setState({resolver, owner, entries});
 
+
     if (resolver !== '0x0000000000000000000000000000000000000000') {
 
       ipfsHash = await getContent(this.state.searchValue, resolver, this.props.web3);
       this.setState({owner, resolver, entries});
 
-      if (owner !== '0x0000000000000000000000000000000000000000' && 
-        owner === this.props.metaMask.account) {
+      if (owner !== '0x0000000000000000000000000000000000000000' && owner === this.props.metaMask.account) {
         this.setState({isOpenIPFS: true, isOpenAddress: true, isOpenURL: true, isOpenSubdomain: true});
       }
 
@@ -120,7 +120,7 @@ class SearchBar extends Component {
         this.setState({ipfsHash: fromContentHash(ipfsHash)});
       }
     }
-
+    
     if (owner === '0x0000000000000000000000000000000000000000') {
       this.props.handleWarningOpen('This ENS is OPEN for bid!');
     }
@@ -146,22 +146,29 @@ class SearchBar extends Component {
   
   handMenuAcitve = (idx) =>{
     const {isOpenResolver, isOpenSubdomain, isOpenAddress, isOpenIPFS} = this.state;
-    if(!isOpenResolver || !isOpenSubdomain || !isOpenAddress || !isOpenIPFS) return;
-    
+    const state = [true, isOpenResolver, isOpenSubdomain, isOpenAddress, isOpenIPFS];
+    if(!state[idx]) return;
     this.setState({menuAcitveidx: idx});
   }
 
 
   overResolver =(eth)=>{
-    // console.log(this.state.entries);
     this.setState({
         domainValue: eth,
     })
   }
+  
+  componentWillUpdate(nextProps, nextState) {
+    if(nextProps.accounts != this.props.accounts){
+      this.setState({menuAcitveidx:0, isKeyDown: true, isSeach: true, isOverview: true, isOpenResolver: false, isOpenSubdomain: false, isOpenURL: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
+      this.handleSearchData();
+    }
+  }
+  componentDidMount(){
+    this.setState({accounts: this.props.accounts})
+  }
 
-
-
-  // baerwerew.eth
+  // baerwerew.ethEditResOverFn
   render() {
     const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen, SetIpfsOpen  } = this.props;
     return (

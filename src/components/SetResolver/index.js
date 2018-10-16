@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import closeSvg from "../../images/ic-close.svg";
-import { getEthereumResolverAddress, getEthereumRegistryAddress } from '../../lib/web3Service';
+import { getEthereumResolverAddress, getEthereumRegistryAddress, getEtherscanUrl } from '../../lib/web3Service';
 import { setResolver } from '../../lib/registryService';
 const half = num =>{
   return `${-(num / 2)}px`
@@ -97,20 +97,20 @@ export default class extends Component {
 
   handleDefaultResolver = (callback) => {
     const resolverAddr = getEthereumResolverAddress();
-    this.setState({resolverAddr}, ()=>{
+    console.log('resolverAddr:',resolverAddr);
+    this.setState({resolverAddr: resolverAddr}, ()=>{
       if(callback) callback();
     });
   }
 
   handleSetResovler = (type) => {
     const { EditResCloseFn } = this.props;
+    if(type === "Default"){
+      return this.handleDefaultResolver(()=> this.gotoSetResovler());
+    }
     if (this.state.resolverAddr.length !== 42) {
       EditResCloseFn();
       return alert("Resolver hash incorrect")
-    }
-    
-    if(type === "Default"){
-      return this.handleDefaultResolver(()=> this.gotoSetResovler());
     }
     this.gotoSetResovler();
   }
@@ -130,7 +130,7 @@ export default class extends Component {
           EditResCloseFn();
           return alert(err.message);
         }
-        const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
+        const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
         EditResCloseFn();
         handleWarningOpen(tx);
     });
@@ -145,14 +145,14 @@ export default class extends Component {
       <SetResoverPop>
         <h1>Set Resolver <a onClick={EditResCloseFn}><img src={closeSvg} alt=""/></a></h1>
         <p>Enter the resolver you assigned, or use the default value to complete the setup.</p>
-        { 
-            owner !== '0x0000000000000000000000000000000000000000' && owner === metaMask.account &&
+        {/* { 
+            owner !== '0x0000000000000000000000000000000000000000' && owner === metaMask.account && */}
             <div>
                 <ResoverInout
                   type="text" 
                   name="resolverAddr" 
                   value={resolverAddr} 
-                  placeholder={getEthereumResolverAddress(process.env.ENS_NETWORK)} 
+                  placeholder={getEthereumResolverAddress()} 
                   onChange={this.handleInputChange}
                 >
                 </ResoverInout>
@@ -162,7 +162,7 @@ export default class extends Component {
                   <SerResoverBtn Resolver onClick={ ()=> this.handleSetResovler()}>Set Resolver</SerResoverBtn>
                 </BtnBox>
             </div>
-        }
+        {/* } */}
       </SetResoverPop>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getEthereumResolverAddress} from '../../../lib/web3Service';
+import {getEthereumResolverAddress, getEtherscanUrl} from '../../../lib/web3Service';
 import {setText} from '../../../lib/resolverService';
 
 class URL extends Component {
@@ -33,7 +33,7 @@ class URL extends Component {
         if (err) {
           self.props.handleWarningOpen(err.message);
         } else {
-          const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
+          const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
           self.props.handleWarningOpen(tx);
         }
       });

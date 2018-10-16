@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import closeSvg from "../../images/ic-close.svg";
-import { getEthereumResolverAddress } from '../../lib/web3Service';
+import { getEthereumResolverAddress, getEtherscanUrl } from '../../lib/web3Service';
 import { setAddress } from '../../lib/resolverService';
 const half = num =>{
   return `${-(num / 2)}px`
@@ -115,7 +115,7 @@ export default class extends Component {
     }, (err, result)=> {
         if (err) return alert(err.message);
         alert("Success");
-        window.open(`https://ropsten.etherscan.io/tx/${result}`);
+        window.open(getEtherscanUrl(result));
         this.props.SetAddressClose();
         // const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
         // this.props.handleWarningOpen(tx);
