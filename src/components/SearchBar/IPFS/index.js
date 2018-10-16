@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import FileUpload from "../FileUpload";
 // import {getEthereumResolverAddress} from '../../../lib/web3Service';
 // import {setContent} from '../../../lib/resolverService';
 import IconEdit from '../../../images/ic-edit.svg'
@@ -88,34 +89,8 @@ export default class extends Component {
             }
           </Ipfs>
         </TypeList>
-
-
-
-        {/* <div className="type_list">
-        <div className="type_box">
-        <label>Current IPFS Hash</label>
-        <p className="status_check">{this.props.ipfsHash}
-          { this.props.ipfsHash !== '0x0000000000000000000000000000000000000000000000000000000000000000' && 
-            <span className="icon_check"></span>
-          }
-        </p>
-        </div>
-        { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
-          this.props.owner === this.props.metaMask.account &&
-        <div className="type_box">
-          <input 
-            type="text" 
-            name="ipfs" 
-            value={this.state.ipfs} 
-            placeholder="QmSpuwejUGjREmgsvm8eq3ZdsS7mVTHCRPZmLiUq84S9x8" 
-            onChange={this.handleInputChange}/>
-        </div>
-        }
-        { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
-          this.props.owner === this.props.metaMask.account &&
-          <button onClick={() => this.handleSetIPFSHash()}>Set IPFS Hash</button>
-        }
-        </div> */}
+        
+        <FileUpload {...this.props}/>
       </div>
     )
   }

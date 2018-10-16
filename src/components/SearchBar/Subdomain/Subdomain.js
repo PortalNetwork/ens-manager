@@ -102,50 +102,22 @@ class Subdomain extends Component {
     this.setState({ [name]: value.toLowerCase() });
   }
 
-  // handleSetSubnodeOwner = () => {
-  //   if (this.state.newOwner.length !== 42) {
-  //     alert('New Owner hash incorrect')
-  //     // this.props.handleWarningOpen('New Owner hash incorrect');
-  //     return;
-  //   }
-  //   if (/[a-zA-Z0-9]+/g.test(this.state.subnode) === false) {
-  //     alert('Subdomain incorrect')
-  //     // this.props.handleWarningOpen('Subdomain incorrect');
-  //     return;
-  //   }
-  //   // const to = getEthereumRegistryAddress(process.env.ENS_NETWORK);
-  //   const to = getEthereumRegistryAddress();
-  //   const subnodeData = setSubnodeOwner(this.props.searchValue, this.state.subnode, this.state.newOwner);
-  //   this.props.web3.eth.sendTransaction({
-  //     from: this.props.metaMask.account, 
-  //     to: to,
-  //     value: 0,
-  //     data: subnodeData 
-  //   },(err, result)=> {
-  //     if (err) return alert(err.message);
-  //     // const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
-  //     alert("Success");
-  //     window.open(`https://ropsten.etherscan.io/tx/${result}`)
-  //     // this.props.handleWarningOpen(tx);
-  //   });
-  // }
-
   handleWeb3Load = async () => {
     if (window.web3 === null) return 
     let web3 = new Web3(window.web3.currentProvider);
     const newOwnerEvents = await newOwnerEvent(web3, this.props.searchValue);
     let labelsArr = [];
     let unique = null;
-    
+
     newOwnerEvents.watch((error, result) => {
       if (error) return console.log('error', error);
       labelsArr.push(result.args.label.substring(2));
       unique = Array.from(new Set(labelsArr));
     })
-      
+
     setTimeout(() => {
       this.setState({labels: unique},()=> this.labelsMap(this.state.labels));
-    }, 5000);
+    }, 15000);
 
   }
 
@@ -153,17 +125,14 @@ class Subdomain extends Component {
     let labelsArr = labels == null ? [] : labels;
     let labelHash = [];
     let BidLength = labelsArr.length;
-    let idx = 0;
-
+    // let idx = 0;
     if(BidLength!=0){
       labelsArr.forEach(async hash => {
         let dL = await decryptLabel([hash]);
-        idx ++;
+        // idx ++;
         labelHash.push(dL.data[0]);
         let result = [...(new Set(labelHash))];
-        if(BidLength === idx){
-          this.subdomainCombination(result)
-        }
+        this.subdomainCombination(result);
       });
     }else{
       this.setState({"isItemShow": true});
@@ -206,7 +175,7 @@ class Subdomain extends Component {
             <Loading/> : 
             <Rectangle>
               <TitleH1>
-                Current Resolver
+                Current Subdomain
                 <a onClick={SetSubdomainPopOpen}><img src={addIcon} alt=""/></a>
               </TitleH1>
                 <ul>
