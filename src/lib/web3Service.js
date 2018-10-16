@@ -1,4 +1,22 @@
-export const getEthereumProvider = (networkId = '1') => {
+const isSupTestNet = false;
+const nId = isSupTestNet ? "3" : "1";
+const RegistrarAddr = '0xc19fd9004b5c9789391679de6d766b981db94610';
+const RegistryAddr = '0x112234455c3a32fd11230c42e7bccd4a84e02010';
+const ResolverAddr = '0x4c641fb9bad9b60ef180c31f56051ce826d21a9a';
+
+export const getEtherscanUrl = (result, networkId = nId) => {
+  switch (networkId) {
+    case '1':
+      return `https://etherscan.io/tx/${result}`;
+    case '3':
+      return `https://ropsten.etherscan.io/tx/${result}`;
+    default:
+      return `https://ropsten.etherscan.io/tx/${result}`;
+  }
+}
+
+
+export const getEthereumProvider = (networkId = nId) => {
   switch (networkId) {
     case '1':
       return 'https://mainnet.infura.io/';
@@ -13,34 +31,34 @@ export const getEthereumProvider = (networkId = '1') => {
   }
 }
 
-export const getEthereumRegistrarAddress = (networkId = '1') => {
+export const getEthereumRegistrarAddress = (networkId = nId) => {
   switch (networkId) {
     case '1': 
       return '0x6090A6e47849629b7245Dfa1Ca21D94cd15878Ef';
     case '3':
-      return '0x0';
+      return isSupTestNet ? RegistrarAddr : '0x0';
     default:
       return '0x0';
   }
 }
 
-export const getEthereumRegistryAddress = (networkId = '1') => {
+export const getEthereumRegistryAddress = (networkId = nId) => {
   switch (networkId) {
     case '1':
       return '0x314159265dD8dbb310642f98f50C066173C1259b';
     case '3':
-      return '0x0';
+      return isSupTestNet ? RegistryAddr : '0x0';
     default:
       return '0x0';
   }
 }
 
-export const getEthereumResolverAddress = (networkId = '1') => {
+export const getEthereumResolverAddress = (networkId = nId) => {
   switch (networkId) {
     case '1':
       return '0x0b3ebeccc00e9ceae2bf3235d558eda7398be91e';
     case '3':
-      return '0x0';
+      return isSupTestNet ? ResolverAddr : '0x0';
     default:
       return '0x0';
   }

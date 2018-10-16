@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './Connect.css';
-import landing from './../../images/landing.png';
 import metaMaskLogo from './../../images/metamask.png';
 import statusLogo from './../../images/status.png';
 import toshiLogo from './../../images/toshi.png';
-
+import Introduction from '../Introduction'
 class Connect extends Component {
 
   client() {
@@ -27,11 +26,7 @@ class Connect extends Component {
 
     return (
       <div className="main">
-        <div className="introduction">
-          <div className="figure"><img src={landing} alt=""/></div>
-          <h3>Connect DWeb/DApp & Wallet</h3>
-          <p>BNS resolver enables any users to easily set the default resolver contract and bind its BNS with an IPFS hash. Below image is the first ENS resolver built by Portal Network for Ethereum Name Service, which helps both the ENS and IPFS communities to easily connect their DWeb with the ENS.</p>
-        </div>
+        <Introduction/>
         <div className="status">
           <div className="status_text">
             <div className="wallet_logo">
@@ -47,7 +42,14 @@ class Connect extends Component {
               {client === 'No Client' ? <span>No Client In Use</span> : null}
             </div>
           </div>
-          {(client === 'MetaMask' || client === 'Status' || client === 'Toshi') ? <button type="button" className="status_btn" onClick={() => this.props.handleConnect()}>Continue</button> : null}
+          {(
+            client === 'MetaMask' || client === 'Status' || client === 'Toshi') ? 
+              <button 
+                type="button" 
+                className="status_btn" 
+                onClick={() => this.props.handleConnect()}>
+                Continue
+              </button> : null}
         </div>
       </div>
     )

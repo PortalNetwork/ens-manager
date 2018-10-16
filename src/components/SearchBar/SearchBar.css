@@ -86,15 +86,6 @@
   padding: 15px 20px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box; }
-  .type_list > p {
-    font-size: 12px;
-    color: #848282;
-    text-align: left;
-    padding: 12px 0px;
-    border-bottom: dotted 1px #91a8ef; }
-    .type_list > p span {
-      font-size: 12px;
-      color: #848282; }
   .type_list .type_box {
     padding: 12px 0px;
     box-sizing: border-box; }

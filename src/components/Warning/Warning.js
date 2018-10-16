@@ -11,7 +11,7 @@ export const Warning = (props) => (
     autoHideDuration={6000}
     open={props.warning.open}
     onRequestClose={props.handleWarningClose}
-    SnackbarContentProps={{
+    snackbarContentProps={{
       'aria-describedby': 'message-id',
     }}
     message={<span id="message-id">{props.warning.message}</span>}

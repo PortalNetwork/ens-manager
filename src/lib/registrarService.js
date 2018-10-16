@@ -1,5 +1,6 @@
 import { getEthereumProvider, getEthereumRegistrarAddress } from './web3Service';
 import Registrar from './registrar';
+import namehash from "eth-ens-namehash";
 const abi = require('ethereumjs-abi');
 const Web3 = require('web3');
 let web3 = new Web3();

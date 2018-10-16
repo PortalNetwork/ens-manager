@@ -27,7 +27,7 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1; }
 
-ol, ul {
+ol, ul, li {
   list-style: none; }
 
 blockquote, q {
@@ -78,66 +78,6 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover; }
-
-.main {
-  max-width: 480px;
-  width: 100%;
-  height: auto;
-  min-height: 600px;
-  margin: 0px auto;
-  padding: 48px 20px 60px 20px;
-  background-color: #1f398f;
-  box-sizing: border-box; }
-  @media screen and (max-width: 720px) {
-    .main {
-      min-height: 500px; } }
-
-.footer {
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #19307d; }
-  .footer .content {
-    max-width: 480px;
-    width: 100%;
-    margin: 0px auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 25px; }
-  .footer p {
-    max-width: 480px;
-    width: 100%;
-    margin: 0px auto;
-    font-size: 10px;
-    text-transform: uppercase;
-    color: #fff;
-    text-align: right; }
-  .footer .map_box h4 {
-    font-size: 12px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 10px; }
-  .footer .map {
-    display: flex;
-    flex-direction: column; }
-    .footer .map li + li {
-      margin-top: 10px; }
-    .footer .map li a {
-      display: block;
-      text-decoration: none;
-      font-size: 12px;
-      color: #fff; }
-  .footer .social {
-    display: flex;
-    align-items: center; }
-    .footer .social li + li {
-      margin-left: 15px; }
-    .footer .social li a {
-      display: block;
-      width: 20px; }
-      .footer .social li a img {
-        width: 100%; }
 
 /* 警告提示 */
 #message-id {
