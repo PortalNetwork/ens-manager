@@ -65,6 +65,43 @@
   }
 }
 
+.ens_title {
+  margin-bottom: 20px;
+
+  h3 {
+    position: relative;
+    margin-bottom: 15px;
+    padding: 0px 0px 0px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 24px;
+      background: url('../../images/bullet.png') top left no-repeat;
+      background-size: 100% auto;
+      position: absolute;
+      left: 0px;
+      top: -6px;
+    }
+
+    span {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    svg {
+      width: 20px !important;
+      height: 20px !important;
+      color: #fff;
+    }
+  }
+}
+
 .type_list {
   background-color: #fff;
   border-radius: 4px;
@@ -72,18 +109,18 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
 
-  >p {
-    font-size: 12px;
-    color: #848282;
-    text-align: left;
-    padding: 12px 0px;
-    border-bottom: dotted 1px #91a8ef;
+  // >p {
+  //   font-size: 12px;
+  //   color: #848282;
+  //   text-align: left;
+  //   padding: 12px 0px;
+  //   border-bottom: dotted 1px #91a8ef;
 
-    span {
-      font-size: 12px;
-      color: #848282;
-    }
-  }
+  //   span {
+  //     font-size: 12px;
+  //     color: #848282;
+  //   }
+  // }
 
   .type_box {
     padding: 12px 0px;

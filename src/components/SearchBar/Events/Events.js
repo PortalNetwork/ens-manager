@@ -19,18 +19,15 @@ class Events extends Component {
   }
   
   handleWeb3Load = async () => {
-    // console.log(window.web3, this.props.searchValue);
     if (window.web3 !== null) {
       let web3 = new Web3(window.web3.currentProvider);
-      const _newOwnerEvent = await newOwnerEvent(web3, this.props.searchValue);
-      _newOwnerEvent.watch((error, result) => {
+      const newOwnerEvent = await newOwnerEvent(web3, this.props.searchValue);
+      newOwnerEvent.watch((error, result) => {
         if (error) {
           console.log('error', error)
         } else {
           labelsArr.push(result.args.label.substring(2));
-          //console.log("labelsArr=>",labelsArr);
           let unique = Array.from(new Set(labelsArr));
-          //console.log("unique=>",unique);
           this.setState({labels: unique});
         }
       });
