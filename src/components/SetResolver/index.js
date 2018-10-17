@@ -128,7 +128,7 @@ export default class extends Component {
     }, (err, result)=> {
         if (err) {
           EditResCloseFn();
-          return alert(err.message);
+          return handleWarningOpen(err.message);
         }
         const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
         EditResCloseFn();
