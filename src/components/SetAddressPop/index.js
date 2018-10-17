@@ -113,8 +113,8 @@ export default class extends Component {
       value: 0,
       data: addressData 
     }, (err, result)=> {
-        if (err) return alert(err.message);
-        alert("Success");
+        if (err) return handleWarningOpen(err.message);
+        // alert("Success");
         // window.open(getEtherscanUrl(result));
         this.props.SetAddressClose();
         const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
