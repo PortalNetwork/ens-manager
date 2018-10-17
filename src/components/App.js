@@ -5,7 +5,7 @@ import SearchBar from './SearchBar/SearchBar';
 import { Warning } from './Warning/Warning';
 import Connect from './Connect/Connect';
 import './App.css';
-import logo from '../images/logo.png';
+import logo from '../images/ic-ens-manager.svg';
 import Clients from '../components/Clients';
 import Footer from '../components/Footer';
 import SetResolver from "./SetResolver";
@@ -181,7 +181,7 @@ class App extends Component {
           
 
         </FilterDiv>
-        {isEditResover && <SetResolver EditResCloseFn={this.EditResCloseFn} reoverData={reoverData} />}
+        {isEditResover && <SetResolver EditResCloseFn={this.EditResCloseFn} reoverData={reoverData}/>}
         {isTransferOwner && <TransferOwnerPop TransferOwnerClose={this.TransferOwnerClose} reoverData={reoverData}/>}
         {isSetSubdomain && <SetSubdomainPop SetSubdomainPopClose={this.SetSubdomainPopClose} reoverData={reoverData}/>}
         {isSetAddress && <SetAddressPop SetAddressClose={this.SetAddressClose} reoverData={reoverData}/>}
