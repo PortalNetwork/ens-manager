@@ -103,7 +103,7 @@ export default class extends Component {
         return;
     }
 
-    const { searchValue, metaMask, web3 } = this.props.reoverData;
+    const { searchValue, metaMask, web3, handleWarningOpen } = this.props.reoverData;
     const to = getEthereumResolverAddress();
     const addressData = setAddress(searchValue, this.state.address);
 
@@ -115,14 +115,16 @@ export default class extends Component {
     }, (err, result)=> {
         if (err) return alert(err.message);
         alert("Success");
-        window.open(getEtherscanUrl(result));
+        // window.open(getEtherscanUrl(result));
         this.props.SetAddressClose();
-        // const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
-        // this.props.handleWarningOpen(tx);
+        const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
+        handleWarningOpen(tx);
     });
   }
 
-
+  componentDidMount(){
+    console.log(this.props);
+  }
 
   SetDefaultBtn = (account) =>{
     this.setState({address: account},()=> this.handleSetAddress());
