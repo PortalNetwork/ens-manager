@@ -40,7 +40,7 @@ const Main = styled.div`
 class SearchBar extends Component {
   // baerwerew.eth
   state = {
-    searchValue: "baerwerew.eth",
+    searchValue: "",
     isKeyDown: false,
     isSeach: false,
     isOpenResolver: false,
