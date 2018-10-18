@@ -95,7 +95,7 @@ export default class extends Component {
       return;
     }
 
-    const { metaMask, web3, searchValue } = this.props.reoverData;
+    const { metaMask, web3, searchValue, handleWarningOpen } = this.props.reoverData;
     const to = getEthereumResolverAddress();
     const ipfsData = setContent(searchValue, this.state.hash);
     web3.eth.sendTransaction({
@@ -104,10 +104,12 @@ export default class extends Component {
       value: 0,
       data: ipfsData 
     },(err, result)=> {
-        if (err) return alert(err.message);
-        alert("Success");
-        window.open(getEtherscanUrl(result));
+        if (err) return handleWarningOpen(err.message);
+        // alert("Success");
+        // window.open(getEtherscanUrl(result));
         this.props.SetIpfsClose();
+        const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
+        handleWarningOpen(tx);
     });
   }
 

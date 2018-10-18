@@ -45,8 +45,12 @@ table {
 img {
   display: block; }
 
+@font-face {
+  font-family: "SFProText";
+  src: url("../font/SFProText-Regular.ttf"); }
+
 a, h1, h2, h3, h4, h5, h6, span, p, a, input, label, button, div, span {
-  font-family: sans-serif, 'Arial', 'Microsoft JhengHei';
+  font-family: "SFProText", 'Arial', sans-serif;
   font-size: 14px;
   font-weight: 400; }
 

@@ -118,7 +118,7 @@ export default class extends Component {
   seedTransFerAddress = () =>{
     if(this.state.address === "") return alert("Address must not be empty");
     if(this.state.address.length < 42) return alert("Address format error");
-    const { searchValue, web3, metaMask } = this.props.reoverData;
+    const { searchValue, web3, metaMask, handleWarningOpen } = this.props.reoverData;
     const to = getEthereumRegistrarAddress();
     const subnodeData = transfer(searchValue.replace(".eth", ""), this.state.address);
     web3.eth.sendTransaction({
@@ -127,10 +127,12 @@ export default class extends Component {
       value: 0,
       data: subnodeData 
     },(err, result)=> {
-      if (err) return alert(err.message);
-      alert("Success");
-      window.open(getEtherscanUrl(result));
+      if (err) return handleWarningOpen(err.message);
+      // alert("Success");
+      // window.open(getEtherscanUrl(result));
       this.props.TransferOwnerClose();
+      const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
+      handleWarningOpen(tx);
     });
   }
 
