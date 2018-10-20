@@ -18,8 +18,7 @@ import resolver from '../../images/ic-resolver-on.svg';
 import subdomain from '../../images/ic-subdomain-on.svg';
 import wallet from '../../images/ic-wallet-on.svg';
 import ipfs from '../../images/ic-ipfs-on.svg';
-// import URL from './URL/URL';
-// import FileUpload from "./FileUpload"
+import test from '../../images/metamask.png';
 import './SearchBar.css';
 
 const Main = styled.div`
@@ -35,6 +34,52 @@ const Main = styled.div`
       min-height: 500px;
     }
 `;
+
+const IdentityBtn = styled.a`
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: rgba(5, 21, 74, 0.9);
+    justify-content: center;
+    align-items: center;
+    padding: 14px 16px;
+    >img{
+      width: 46px;
+      height: 35px;
+      margin-right: 20px;
+    }
+    >div{
+      >h1 ,>p{
+        color: #fff;
+      }
+      >h1{
+        font-family: SFProText;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.73;
+        letter-spacing: 0.6px;
+        color: #ffffff;
+      }
+      >p{
+        font-family: SFProText;
+        font-size: 12px;
+        letter-spacing: 0.4px;
+        color: #ffffff;
+      }
+    }
+`
+const IdentityText = styled.p`
+    font-family: SFProText;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+    color: #6878ad;
+    margin-bottom: 16px;
+
+`
 
 
 class SearchBar extends Component {
@@ -173,20 +218,35 @@ class SearchBar extends Component {
     const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen, SetIpfsOpen  } = this.props;
     return (
       <Main>
-        <Introduction
-          isSeach={this.state.isSeach}
-        />
-        <div className="search_bar">
-          <input type="text" 
-            className="search_type"
-            onKeyDown={this.handleSearchItem} 
-            name="searchValue"
-            value={this.state.searchValue}
-            onChange={this.handleInputChange}
-            placeholder="Your Domain Name"
+
+        <div>
+          <Introduction
+            isSeach={this.state.isSeach}
           />
-          <a href="javascript:;" className="search_icon" onClick={this.handleSearchItemClick}></a>
+
+          <div className="search_bar">
+            <input type="text" 
+              className="search_type"
+              onKeyDown={this.handleSearchItem} 
+              name="searchValue"
+              value={this.state.searchValue}
+              onChange={this.handleInputChange}
+              placeholder="Your Domain Name"
+            />
+            <a href="javascript:;" className="search_icon" onClick={this.handleSearchItemClick}></a>
+          </div>
+
+          <IdentityText>The wallet address you choose to logged in must be the owner of the domain to be able to manage it.</IdentityText>
+        
+          <IdentityBtn>
+              <img src={test} alt=""/>
+              <div>
+                <h1>Get your exclusive identity</h1>
+                <p>Claim domain name as your wallet address.</p>
+              </div>
+          </IdentityBtn>
         </div>
+
 
         { this.state.isKeyDown && <Loading/> }
         {/* { this.menuAcitveidx === 0 && this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> } */}
@@ -203,6 +263,9 @@ class SearchBar extends Component {
           menuItem={this.state.menuItem} 
           handMenuAcitve={this.handMenuAcitve}
         />
+
+
+
       </Main>
     );
   }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import landing from '../../images/landing.png';
 const Introduction = styled.div`
 	margin-bottom: 25px;
-    height: ${props => (props.isSeach ? '0px' : '198px')};
+    height: ${props => (props.isSeach ? '0px' : '110px')};
     transition: height .4s;
     overflow: hidden;
     img {
@@ -29,8 +29,8 @@ export default class extends Component {
     return (
         <Introduction isSeach={isSeach}>
             <img src={landing} alt=""/>
-            <h3>Connect DWeb/DApp & Wallet</h3>
-            <p>You can easily manage your domain by using ENS Manager, such as set resolver, set top-level domain, bind or set IPFS Hash.</p>
+            {/* <h3>Connect DWeb/DApp & Wallet</h3>
+            <p>You can easily manage your domain by using ENS Manager, such as set resolver, set top-level domain, bind or set IPFS Hash.</p> */}
         </Introduction>
     )
   }
