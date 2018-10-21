@@ -28,7 +28,7 @@ const Main = styled.div`
     height: auto;
     min-height: 600px;
     margin: 0px auto;
-    padding: 48px 20px 161px 20px;
+    padding: 10px 20px 161px 20px;
     background-color: #1f398f;
     box-sizing: border-box;
     @media screen and (max-width: 720px) {

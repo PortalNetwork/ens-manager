@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import styled from 'styled-components';
 import landing from '../../images/landing.png';
 const Introduction = styled.div`
-	margin-bottom: 25px;
-    height: ${props => (props.isSeach ? '0px' : '198px')};
+	margin-bottom: 10px;
+    height: ${props => (props.isSeach ? '0px' : '180px')};
     transition: height .4s;
     overflow: hidden;
     img {
         width: 100%;
-        margin-bottom: 33px;
+        margin-bottom: 15px;
     }
     h3 {
         font-size: 16px;
