@@ -7,7 +7,7 @@ const Footer = styled.div`
     bottom: ${props => (props.isFooterOut ? '-250px' : '0px')};;
     left: 0;
     width: 100%;
-    height: 161px;
+    height: 100px;
     padding: 20px;
     box-sizing: border-box;
     background-color: #19307d;
@@ -20,7 +20,6 @@ const Content = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 25px;
 `;
 
 const Footertext = styled.p`

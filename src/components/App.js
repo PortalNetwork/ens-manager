@@ -65,6 +65,10 @@ class App extends Component {
     this.fetchAccount(web3);
   }
 
+  async initError (error) {
+    console.log(error);
+  }
+
   footerOutFn = (isOut) =>{
     this.setState({isFooterOut: isOut})
   }
