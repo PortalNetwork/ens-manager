@@ -23,9 +23,9 @@ export const mode = ["Open", "Auction", "Owned", "Forbidden", "Reveal", "NotYetA
  * @param {*} name 
  * @returns {array} tuple
  */
-export const getEntries = async (name) => {
+export const getEntries = async (name, web3Provider) => {
   try {
-    setWeb3Provider();
+    let registrar = new Registrar(web3Provider, getEthereumRegistrarAddress(process.env.WNS_NETWORK));
     const result = await registrar.entries(web3.sha3(name));
     return {
       state: mode[result[0].toString()],
