@@ -80,7 +80,7 @@ export default class Web3Checker extends Component {
     } catch (error) {
       console.error(error)
 
-      await this.props.onCheckError(error)
+      //await this.props.onCheckError(error)
 
       this.setState({
         isErrored: true,
