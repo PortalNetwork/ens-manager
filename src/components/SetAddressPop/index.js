@@ -137,8 +137,8 @@ export default class extends Component {
 
     return (
       <SetResoverPop>
-        <h1>Set Resolver <a><img onClick={SetAddressClose} src={closeSvg} alt=""/></a></h1>
-        <p>Enter the resolver you assigned, or use the default value to complete the setup.</p>
+        <h1>Set Address <a><img onClick={SetAddressClose} src={closeSvg} alt=""/></a></h1>
+        <p>Enter the mapping address, or bind with the current address.</p>
         <div>
             <AddressInout
                 type="text" 
