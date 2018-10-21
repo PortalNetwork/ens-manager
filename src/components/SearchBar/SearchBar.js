@@ -101,7 +101,7 @@ class SearchBar extends Component {
 
     const resolver = await getResolver(this.state.searchValue, this.props.web3);
     const owner = await getOwner(this.state.searchValue, this.props.web3);
-    const entries = await getEntries(seachdamain);
+    const entries = await getEntries(seachdamain, this.props.web3);
 
     let ipfsHash = "";
     this.setState({resolver, owner, entries});
