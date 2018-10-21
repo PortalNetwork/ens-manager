@@ -152,7 +152,7 @@ class App extends Component {
   render() {
     const funcs = {
       onCheckSuccess : async (web3, provider, account, network) => await this.initialize(web3, provider, account, network),
-      onCheckError : async (error) => await this.initError(error)
+      //onCheckError : async (error) => await this.initError(error)
     }
     const {hasProvider, isConnect, reoverData, isEditResover, isFilter, isTransferOwner, isSetSubdomain, isSetAddress, isSetIpfs } = this.state;
 
