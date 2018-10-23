@@ -97,6 +97,7 @@ class SearchBar extends Component {
     this.props.SeachPageSwitch(0);
   }
 
+  // 呼叫合約撈取資料
   handleSearchData = async () => {
     this.props.handleWarningClose();
     // 

@@ -124,24 +124,28 @@ class App extends Component {
     } = this.state;
 
     const {
+      handleWarningClose,
+    } = this.props;
+
+    const {
       isFoggy,
       isEditResover,
       isTransferOwner,
       isSetSubdomain,
       isSetAddress,
       isSetIpfs,
+      warning,
     } = this.props.app;
 
     return (
       <div className="wrap">
         <FilterDiv Filter={isFoggy}>
-
           <div className="header">
             {SeachPageIdx === 0 && <h1><img src={logo} alt="" /></h1>}
             {SeachPageIdx === 1 && <h1><img src={claimSubmainlogo} alt="" /></h1>}
           </div>
 
-          <Warning {...this.props} />
+          <Warning handleWarningClose={handleWarningClose} warning={warning} />
           <MetamaskChecker {...funcs} />
 
           {(!hasProvider) ? <Clients /> : null}

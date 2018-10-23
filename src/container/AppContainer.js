@@ -37,19 +37,12 @@ const mapDispatchToProps = (dispatch) => {
     handleHealth: () => {
       dispatch(healthAction());
     },
-    handleWarningOpen: (message) => {
-      dispatch(warningOpenAction(message));
-    },
-    handleWarningClose: () => {
-      dispatch(warningCloseAction());
-    },
     handleMetaMaskAccount: (account) => {
       dispatch(metaMaskAccountAction(account));
     },
     handleMetaMaskNetwork: (network) => {
       dispatch(metaMaskNetworkAction(network));
     },
-
     handleOpenTransferEditor: () => {
       dispatch(appActions.openTransferPop());
     },
@@ -67,6 +60,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleClosePopUpEditor: () => {
       dispatch(appActions.closePopUp());
+    },
+    handleWarningOpen: (message) => {
+      dispatch(appActions.openWarning({message}));
+    },
+    handleWarningClose: () => {
+      dispatch(appActions.closeWarning());
     },
   }
 };

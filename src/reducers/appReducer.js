@@ -1,15 +1,12 @@
 // duck pattern
 const OPEN_TRANSFER_POP = 'ENSManager/app/OPEN_TRANSFER_POP';
-
 const OPEN_SET_RESOLVER_POP = 'ENSManager/app/OPEN_SET_RESOLVER_POP';
-
 const OPEN_SET_SUBDOMAIN_POP = 'ENSManager/app/OPEN_SET_SUBDOMAIN_POP';
-
 const OPEN_SET_ADDRESS_POP = 'ENSManager/app/OPEN_SET_ADDRESS_POP';
-
 const OPEN_IPFS_POP = 'ENSManager/app/OPEN_IPFS_POP';
-
 const CLOSE_POPUP = 'ENSManager/app/CLOSE_POPUP';
+const OPEN_WARNING = 'ENSManager/app/OPEN_WARNING';
+const CLOSE_WARNING = 'ENSManager/app/CLOSE_WARNING';
 
 export function openTransferPop() {
   return ({
@@ -47,6 +44,19 @@ export function closePopUp() {
   });
 }
 
+export function openWarning(payload) {
+  return ({
+    type: OPEN_WARNING,
+    payload,
+  });
+}
+
+export function closeWarning() {
+  return ({
+    type: CLOSE_WARNING,
+  });
+}
+
 const initialState = {
   isFoggy: false,             // 模糊效果
   isEditResover: false,
@@ -54,6 +64,10 @@ const initialState = {
   isSetSubdomain: false,
   isSetAddress: false,
   isSetIpfs: false,
+  warning: {
+    message: '',
+    isShow: false,
+  },
 };
 
 export default (state = initialState, action = {}) => {
@@ -102,6 +116,24 @@ export default (state = initialState, action = {}) => {
         isSetSubdomain: false,
         isSetAddress: false,
         isSetIpfs: false,
+      });
+      break;
+    case OPEN_WARNING:
+      return ({
+        ...state,
+        warning: {
+          message: action.payload.message,
+          isShow: true,
+        },
+      });
+      break;
+    case CLOSE_WARNING:
+      return ({
+        ...state,
+        warning: {
+          message: '',
+          isShow: false,
+        },
       });
       break;
     default:
