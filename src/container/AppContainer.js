@@ -13,6 +13,7 @@ import {
   metaMaskAccountAction,
   metaMaskNetworkAction
 } from '../actions/metaMaskActions';
+import * as appActions from '../reducers/appReducer.js';
 
 const  mapStateToProps = (state) => ({
   isFetching: state.isFetching,
@@ -21,7 +22,8 @@ const  mapStateToProps = (state) => ({
   health: state.health,
   simpleToken: state.simpleToken,
   warning: state.warning,
-  metaMask: state.metaMask
+  metaMask: state.metaMask,
+  app: state.app,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -46,7 +48,26 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleMetaMaskNetwork: (network) => {
       dispatch(metaMaskNetworkAction(network));
-    }
+    },
+
+    handleOpenTransferEditor: () => {
+      dispatch(appActions.openTransferPop());
+    },
+    handleOpenResolverEditor: () => {
+      dispatch(appActions.openSetResolverPop());
+    },
+    handleOpenSubDomainEditor: () => {
+      dispatch(appActions.openSetSubDomainPop());
+    },
+    handleOpenAddressEditor: () => {
+      dispatch(appActions.openSetAddressPop());
+    },
+    handleOpenIPFSEditor: () => {
+      dispatch(appActions.openSetIPFSPop());
+    },
+    handleClosePopUpEditor: () => {
+      dispatch(appActions.closePopUp());
+    },
   }
 };
 
