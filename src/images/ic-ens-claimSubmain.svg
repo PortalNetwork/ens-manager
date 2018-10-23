@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="189" height="27" viewBox="0 0 189 27">
+    <defs>
+        <text id="b" fill="#FFF" font-family="Ubuntu-Bold, Ubuntu" font-size="18" font-weight="bold" letter-spacing=".085">
+            <tspan x="0" y="17">Claim Subdomain</tspan>
+        </text>
+        <filter id="a" width="109.4%" height="170%" x="-4.7%" y="-25%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+        <path id="d" d="M26.058 8.183v8.298a3.031 3.031 0 0 1-1.55 2.656 5.283 5.283 0 0 1-5.234 0l-11.93-6.812V4.032l7.272 4.15 4.658 2.657a5.283 5.283 0 0 0 5.233 0 3.034 3.034 0 0 0 1.551-2.656z"/>
+        <filter id="c" width="121.4%" height="125.3%" x="-10.7%" y="-6.3%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"/>
+        </filter>
+        <path id="f" d="M14.546 24.895v-8.298L0 8.298v8.299z"/>
+        <filter id="e" width="127.5%" height="124.1%" x="-13.7%" y="-6%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#FFF" transform="translate(37 3)">
+            <use filter="url(#a)" xlink:href="#b"/>
+            <use xlink:href="#b"/>
+        </g>
+        <g fill-rule="nonzero">
+            <g transform="translate(1)">
+                <use fill="#000" filter="url(#c)" xlink:href="#d"/>
+                <use fill="#2B3990" xlink:href="#d"/>
+            </g>
+            <path fill="#231F20" d="M8.271 4.15L15.546 0l9.888 5.645a3.06 3.06 0 0 1 1.551 2.656 3.06 3.06 0 0 1-1.551 2.656 5.28 5.28 0 0 1-5.231 0L8.27 4.151z"/>
+            <path fill="#231F20" d="M1 8.298L15.546 0v16.597z"/>
+            <g transform="translate(1)">
+                <use fill="#000" filter="url(#e)" xlink:href="#f"/>
+                <use fill="#FFD105" xlink:href="#f"/>
+            </g>
+        </g>
+    </g>
+</svg>

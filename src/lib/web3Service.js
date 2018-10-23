@@ -1,9 +1,9 @@
-const isSupTestNet = false;
+const isSupTestNet = true;
 const nId = isSupTestNet ? "3" : "1";
 const RegistrarAddr = '0xc19fd9004b5c9789391679de6d766b981db94610';
 const RegistryAddr = '0x112234455c3a32fd11230c42e7bccd4a84e02010';
 const ResolverAddr = '0x4c641fb9bad9b60ef180c31f56051ce826d21a9a';
-
+const SubDomainAddr = '0x5c5860c3f35efd9b72a6c789d393769deb64399f';
 export const getEtherscanUrl = (result, networkId = nId) => {
   switch (networkId) {
     case '1':
@@ -52,6 +52,20 @@ export const getEthereumRegistryAddress = (networkId = nId) => {
       return '0x0';
   }
 }
+
+export const getEthereumSubdomainRegistryAddress = (networkId = nId) => {
+  switch (networkId) {
+    case '1':
+      return '0x0';
+    case '3':
+      return isSupTestNet ? SubDomainAddr : '0x0';
+    default:
+      return '0x0';
+  }
+}
+
+
+
 
 export const getEthereumResolverAddress = (networkId = nId) => {
   switch (networkId) {

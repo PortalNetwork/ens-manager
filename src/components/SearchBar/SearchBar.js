@@ -10,78 +10,28 @@ import Subdomain from './Subdomain/Subdomain';
 import IPFS from './IPFS';
 import Address from './Address';
 import Overview from './Overview';
-// import Events from './Events/Events';
-import Introduction from '../Introduction';
 import MenuBar from './MenuBar';
+import IdentityPage from './IdentityPage';
+import SeachPage from './SeachPage.js';
 import overview from '../../images/ic-overview-on.svg';
 import resolver from '../../images/ic-resolver-on.svg';
 import subdomain from '../../images/ic-subdomain-on.svg';
 import wallet from '../../images/ic-wallet-on.svg';
 import ipfs from '../../images/ic-ipfs-on.svg';
-import test from '../../images/metamask.png';
 import './SearchBar.css';
-
 const Main = styled.div`
     max-width: 480px;
     width: 100%;
     height: auto;
     min-height: 600px;
     margin: 0px auto;
-    padding: 48px 20px 161px 20px;
+    padding: 10px 20px 161px 20px;
     background-color: #1f398f;
     box-sizing: border-box;
     @media screen and (max-width: 720px) {
       min-height: 500px;
     }
 `;
-
-const IdentityBtn = styled.a`
-    cursor: pointer;
-    display: flex;
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    border-radius: 4px;
-    background-color: rgba(5, 21, 74, 0.9);
-    justify-content: center;
-    align-items: center;
-    padding: 14px 16px;
-    >img{
-      width: 46px;
-      height: 35px;
-      margin-right: 20px;
-    }
-    >div{
-      >h1 ,>p{
-        color: #fff;
-      }
-      >h1{
-        font-family: SFProText;
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 1.73;
-        letter-spacing: 0.6px;
-        color: #ffffff;
-      }
-      >p{
-        font-family: SFProText;
-        font-size: 12px;
-        letter-spacing: 0.4px;
-        color: #ffffff;
-      }
-    }
-`
-const IdentityText = styled.p`
-    font-family: SFProText;
-    font-size: 12px;
-    line-height: 1.6;
-    text-align: center;
-    color: #6878ad;
-    margin-bottom: 16px;
-
-`
-
-
 class SearchBar extends Component {
   // baerwerew.eth
   state = {
@@ -103,6 +53,7 @@ class SearchBar extends Component {
     entries:"",
     url: "",
     accounts: '',
+    isIdentityBtn: true,
     menuItem: [
       { imgurl: overview, name: "Overview" },
       { imgurl: resolver, name: "Resolver" },
@@ -123,6 +74,8 @@ class SearchBar extends Component {
     if(e.keyCode !== 13) return;
     this.handleSearchData();
     this.props.footerOutFn(true);
+    this.setState({isIdentityBtn: false});
+    this.props.SeachPageSwitch(0);
   }
 
   handleSearchItemClick = () => {
@@ -130,6 +83,8 @@ class SearchBar extends Component {
     if(this.state.isKeyDown) return;
     this.handleSearchData();
     this.props.footerOutFn(true);
+    this.setState({isIdentityBtn: false});
+    this.props.SeachPageSwitch(0);
   }
 
   handleSearchData = async () => {
@@ -146,7 +101,7 @@ class SearchBar extends Component {
 
     const resolver = await getResolver(this.state.searchValue, this.props.web3);
     const owner = await getOwner(this.state.searchValue, this.props.web3);
-    const entries = await getEntries(seachdamain);
+    const entries = await getEntries(seachdamain, this.props.web3);
 
     let ipfsHash = "";
     this.setState({resolver, owner, entries});
@@ -203,6 +158,7 @@ class SearchBar extends Component {
     })
   }
   
+  
   componentWillUpdate(nextProps, nextState) {
     if(nextProps.accounts != this.props.accounts){
       this.setState({menuAcitveidx:0, isKeyDown: true, isSeach: true, isOverview: true, isOpenResolver: false, isOpenSubdomain: false, isOpenURL: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
@@ -215,39 +171,14 @@ class SearchBar extends Component {
 
   // baerwerew.ethEditResOverFn
   render() {
-    const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen, SetIpfsOpen  } = this.props;
+    const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen, SetIpfsOpen, web3, handleWarningOpen, metaMask, SeachPageIdx  } = this.props;
     return (
       <Main>
 
-        <div>
-          <Introduction
-            isSeach={this.state.isSeach}
-          />
-
-          <div className="search_bar">
-            <input type="text" 
-              className="search_type"
-              onKeyDown={this.handleSearchItem} 
-              name="searchValue"
-              value={this.state.searchValue}
-              onChange={this.handleInputChange}
-              placeholder="Your Domain Name"
-            />
-            <a href="javascript:;" className="search_icon" onClick={this.handleSearchItemClick}></a>
-          </div>
-
-          <IdentityText>The wallet address you choose to logged in must be the owner of the domain to be able to manage it.</IdentityText>
+      
+        { SeachPageIdx === 0 && <SeachPage {...this.props} {...this} {...this.state}/>}
+        { SeachPageIdx === 1 && <IdentityPage {...this.props} {...this} {...this.state}/>}
         
-          <IdentityBtn>
-              <img src={test} alt=""/>
-              <div>
-                <h1>Get your exclusive identity</h1>
-                <p>Claim domain name as your wallet address.</p>
-              </div>
-          </IdentityBtn>
-        </div>
-
-
         { this.state.isKeyDown && <Loading/> }
         {/* { this.menuAcitveidx === 0 && this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> } */}
         { this.state.menuAcitveidx === 0 && this.state.isOverview && <Overview TransferOwnerOpen={TransferOwnerOpen} {...this.props} {...this.state}/> }

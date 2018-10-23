@@ -6,6 +6,7 @@ import { Warning } from './Warning/Warning';
 import Connect from './Connect/Connect';
 import './App.css';
 import logo from '../images/ic-ens-manager.svg';
+import claimSubmainlogo from '../images/ic-ens-claimSubmain.svg';
 import Clients from '../components/Clients';
 import Footer from '../components/Footer';
 import SetResolver from "./SetResolver";
@@ -39,8 +40,14 @@ class App extends Component {
     isSetSubdomain: false,
     isSetAddress: false,
     isSetIpfs: false,
-    accounts: ''
+    accounts: '',
+    SeachPageIdx: 0,
   };
+
+
+  SeachPageSwitch = (idx) =>{
+    this.setState({SeachPageIdx: idx});
+  }
 
   handleConnect = () => {
     this.setState({isConnect: true});
@@ -63,6 +70,10 @@ class App extends Component {
     this.props.handleMetaMaskAccount(account);
     this.props.handleMetaMaskNetwork(network);
     this.fetchAccount(web3);
+  }
+
+  async initError (error) {
+    console.log(error);
   }
 
   footerOutFn = (isOut) =>{
@@ -148,16 +159,19 @@ class App extends Component {
   render() {
     const funcs = {
       onCheckSuccess : async (web3, provider, account, network) => await this.initialize(web3, provider, account, network),
-      onCheckError : async (error) => await this.initError(error)
+      //onCheckError : async (error) => await this.initError(error)
     }
-    const {hasProvider, isConnect, reoverData, isEditResover, isFilter, isTransferOwner, isSetSubdomain, isSetAddress, isSetIpfs } = this.state;
+    const {hasProvider, isConnect, reoverData, isEditResover, isFilter, isTransferOwner, isSetSubdomain, isSetAddress, isSetIpfs, SeachPageIdx } = this.state;
 
     return (
       <div className="wrap">
         <FilterDiv Filter={isFilter}>
+
           <div className="header">
-            <h1><img src={logo} alt=""/></h1>
+            {SeachPageIdx === 0 && <h1><img src={logo} alt=""/></h1>}
+            {SeachPageIdx === 1 && <h1><img src={claimSubmainlogo} alt=""/></h1>}
           </div>
+
           <Warning {...this.props}/>
           <MetamaskChecker {...funcs} />
 
@@ -167,6 +181,7 @@ class App extends Component {
             <SearchBar 
               {...this.props} 
               {...this.state}
+              SeachPageSwitch={this.SeachPageSwitch}
               SetSubdomainPopOpen={this.SetSubdomainPopOpen}
               SetIpfsOpen={this.SetIpfsOpen}
               TransferOwnerOpen={this.TransferOwnerOpen}
@@ -178,8 +193,6 @@ class App extends Component {
           
           
           <Footer isFooterOut={this.state.isFooterOut}/>
-          
-
         </FilterDiv>
         {isEditResover && <SetResolver EditResCloseFn={this.EditResCloseFn} reoverData={reoverData}/>}
         {isTransferOwner && <TransferOwnerPop TransferOwnerClose={this.TransferOwnerClose} reoverData={reoverData}/>}
