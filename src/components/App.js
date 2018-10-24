@@ -36,6 +36,20 @@ class App extends Component {
     isFilter: false,
     accounts: '',
     SeachPageIdx: 0,
+    searchBarData: {
+      searchValue: '',
+      resolver: '',
+      owner: '',
+      entries: '',
+      address: '',
+      ipfsHash: '',
+      url: '',
+      isOpenResolver: false,
+      isOpenIPFS: false,
+      isOpenAddress: false,
+      isOpenURL: false,
+      isOpenSubdomain: false,
+    },
   };
 
 
@@ -102,14 +116,16 @@ class App extends Component {
   SetIpfsOpen = () => {
     this.props.handleOpenIPFSEditor();
   }
-  
+
   // 關閉 pop up 編輯
   handleClosePopUpEditor = (e) => {
     this.props.handleClosePopUpEditor();
   }
 
   getReoverData = (data) => {
-    this.setState({ reoverData: data });
+    this.setState({
+      searchBarData: Object.assign({}, data),
+    });
   }
 
   render() {
@@ -124,10 +140,14 @@ class App extends Component {
       isConnect,
       reoverData,
       SeachPageIdx,
+      searchBarData,
+      web3,
     } = this.state;
 
     const {
+      metaMask,
       handleWarningClose,
+      handleWarningOpen,
     } = this.props;
 
     const {
@@ -172,11 +192,49 @@ class App extends Component {
           <Footer isFooterOut={isHiddenFooter} />
         </FilterDiv>
 
-        {isEditResover && <SetResolver EditResCloseFn={this.handleClosePopUpEditor} reoverData={reoverData} />}
-        {isTransferOwner && <TransferOwnerPop TransferOwnerClose={this.handleClosePopUpEditor} reoverData={reoverData} />}
-        {isSetSubdomain && <SetSubdomainPop SetSubdomainPopClose={this.handleClosePopUpEditor} reoverData={reoverData} />}
-        {isSetAddress && <SetAddressPop SetAddressClose={this.handleClosePopUpEditor} reoverData={reoverData} />}
-        {isSetIpfs && <SetIpfsPop SetIpfsClose={this.handleClosePopUpEditor} reoverData={reoverData} />}
+        {isEditResover && <SetResolver
+                            searchValue={searchBarData.searchValue}
+                            metaMask={metaMask}
+                            web3={web3}
+                            handleClose={this.handleClosePopUpEditor}
+                            handleWarningOpen={handleWarningOpen}
+                          />
+        }
+        {isTransferOwner && <TransferOwnerPop
+                              searchValue={searchBarData.searchValue}
+                              metaMask={metaMask}
+                              web3={web3}
+                              handleClose={this.handleClosePopUpEditor}
+                              handleWarningOpen={handleWarningOpen}
+                            />
+        }
+        {isSetSubdomain && <SetSubdomainPop
+                            searchValue={searchBarData.searchValue}
+                            owner={searchBarData.owner}
+                            reoverData={reoverData}
+                            metaMask={metaMask}
+                            web3={web3}
+                            handleClose={this.handleClosePopUpEditor}
+                            handleWarningOpen={handleWarningOpen}
+                          />
+        }
+        {isSetAddress && <SetAddressPop
+                          metaMask={metaMask}
+                          web3={web3}
+                          handleClose={this.handleClosePopUpEditor}
+                          handleWarningOpen={handleWarningOpen}
+                          searchValue={searchBarData.searchValue}
+                          handleClose={this.handleClosePopUpEditor}
+                        />
+        }
+        {isSetIpfs && <SetIpfsPop
+                        metaMask={metaMask}
+                        web3={web3}
+                        handleClose={this.handleClosePopUpEditor}
+                        handleWarningOpen={handleWarningOpen}
+                        searchValue={searchBarData.searchValue}
+                      />
+        }
       </div>
     );
   }

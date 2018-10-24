@@ -161,6 +161,7 @@ class SearchBar extends Component {
     const hasResolver = resolver !== '0x0000000000000000000000000000000000000000';
 
     const newData = {
+      searchValue: lowerCaseValue,
       resolver,
       owner,
       entries,
