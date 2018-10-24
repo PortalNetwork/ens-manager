@@ -14,7 +14,6 @@ import TransferOwnerPop from "./TransferOwnerPop";
 import SetSubdomainPop from "./SetSubdomainPop";
 import SetAddressPop from "./SetAddressPop";
 import SetIpfsPop from "./SetIpfsPop";
-import * as appActions from '../reducers/appReducer.js';
 
 const FilterDiv = styled.div`
   width: 100%;
@@ -72,7 +71,11 @@ class App extends Component {
   }
 
   footerOutFn = (isOut) => {
-    this.setState({ isFooterOut: isOut })
+    this.props.handleToggleFooter(isOut);
+
+    // this.setState({ 
+    //   isFooterOut: isOut,
+    // });
   }
 
   // 打開編輯ResOver
@@ -134,6 +137,7 @@ class App extends Component {
       isSetSubdomain,
       isSetAddress,
       isSetIpfs,
+      isHiddenFooter,
       warning,
     } = this.props.app;
 
@@ -155,17 +159,17 @@ class App extends Component {
             <SearchBar
               {...this.props}
               {...this.state}
+              getReoverData={this.getReoverData}
+              EditResOverFn={this.EditResOverFn}
+              footerOutFn={this.footerOutFn}
               SeachPageSwitch={this.SeachPageSwitch}
               SetSubdomainPopOpen={this.SetSubdomainPopOpen}
               SetIpfsOpen={this.SetIpfsOpen}
               TransferOwnerOpen={this.TransferOwnerOpen}
               SetAddressOpen={this.SetAddressOpen}
-              getReoverData={this.getReoverData}
-              EditResOverFn={this.EditResOverFn}
-              footerOutFn={this.footerOutFn}
             />
           }
-          <Footer isFooterOut={this.state.isFooterOut} />
+          <Footer isFooterOut={isHiddenFooter} />
         </FilterDiv>
 
         {isEditResover && <SetResolver EditResCloseFn={this.handleClosePopUpEditor} reoverData={reoverData} />}

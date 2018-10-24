@@ -7,6 +7,7 @@ const OPEN_IPFS_POP = 'ENSManager/app/OPEN_IPFS_POP';
 const CLOSE_POPUP = 'ENSManager/app/CLOSE_POPUP';
 const OPEN_WARNING = 'ENSManager/app/OPEN_WARNING';
 const CLOSE_WARNING = 'ENSManager/app/CLOSE_WARNING';
+const TOGGLE_FOOTER = 'ENSManager/app/TOGGLE_FOOTER';
 
 export function openTransferPop() {
   return ({
@@ -57,6 +58,13 @@ export function closeWarning() {
   });
 }
 
+export function toggleFooter(payload) {
+  return ({
+    type: TOGGLE_FOOTER,
+    payload,
+  });
+}
+
 const initialState = {
   isFoggy: false,             // 模糊效果
   isEditResover: false,
@@ -64,6 +72,7 @@ const initialState = {
   isSetSubdomain: false,
   isSetAddress: false,
   isSetIpfs: false,
+  isHiddenFooter: false,
   warning: {
     message: '',
     isShow: false,
@@ -134,6 +143,12 @@ export default (state = initialState, action = {}) => {
           message: '',
           isShow: false,
         },
+      });
+      break;
+    case TOGGLE_FOOTER:
+      return ({
+        ...state,
+        isHiddenFooter: action.payload,
       });
       break;
     default:

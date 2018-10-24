@@ -67,6 +67,9 @@ const mapDispatchToProps = (dispatch) => {
     handleWarningClose: () => {
       dispatch(appActions.closeWarning());
     },
+    handleToggleFooter: (isShow) => {
+      dispatch(appActions.toggleFooter(isShow));
+    },
   }
 };
 
