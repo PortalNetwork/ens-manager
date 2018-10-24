@@ -32,6 +32,24 @@ const Main = styled.div`
       min-height: 500px;
     }
 `;
+
+function validateSearchDomain(value) {
+  return /^[a-z]{7,}.eth$/.test(value);
+}
+
+function fetchIPFSHash(domain, resolver, web3) {
+  return getContent(domain, resolver, web3).then(ipfsHash => {
+    if (ipfsHash === '0x') {
+      return Promise.resolve('');
+    } else {
+      return Promise.resolve(fromContentHash(ipfsHash));
+    }
+  }).catch(error => {
+    console.log('fetch ipfs hash error', error);
+    return Promise.resolve('');
+  });
+}
+
 class SearchBar extends Component {
   // baerwerew.eth
   state = {
@@ -46,11 +64,11 @@ class SearchBar extends Component {
     isOpenURL: true,
     owner: "",
     resolver: "",
+    entries: {},
     ipfsHash: "",
     address: "",
     menuAcitveidx: 0,
     domainValue: "",
-    entries: "",
     url: "",
     accounts: '',
     isIdentityBtn: true,
@@ -65,8 +83,8 @@ class SearchBar extends Component {
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ 
-      [name]: value.toLowerCase() 
+    this.setState({
+      [name]: value.toLowerCase()
     });
   }
 
@@ -99,56 +117,77 @@ class SearchBar extends Component {
 
   // 呼叫合約撈取資料
   handleSearchData = async () => {
-    this.props.handleWarningClose();
-    // 
-    const keydomain = this.state.searchValue.toLowerCase().split(".eth");
-    if (keydomain[keydomain.length - 1] !== "") return this.props.handleWarningOpen("ENS format error");
+    const { searchValue, } = this.state;
+    const { handleWarningOpen, handleWarningClose, web3, metaMask, } = this.props;
 
-    const domain = keydomain[keydomain.length - 2].split(".");
-    const seachdamain = domain[domain.length - 1];
-
-    if (seachdamain.length < 7) return this.props.handleWarningOpen("ENS has the minimum character length of 7");
-    this.setState({ isKeyDown: true, isSeach: true, isOverview: true, isOpenResolver: false, isOpenSubdomain: false, isOpenURL: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: "" })
-
-    const resolver = await getResolver(this.state.searchValue, this.props.web3);
-    const owner = await getOwner(this.state.searchValue, this.props.web3);
-    const entries = await getEntries(seachdamain, this.props.web3);
-
-    let ipfsHash = "";
-    this.setState({ resolver, owner, entries });
-
-
-    if (resolver !== '0x0000000000000000000000000000000000000000') {
-
-      ipfsHash = await getContent(this.state.searchValue, resolver, this.props.web3);
-      this.setState({ owner, resolver, entries });
-
-      if (owner !== '0x0000000000000000000000000000000000000000' && owner === this.props.metaMask.account) {
-        this.setState({ isOpenIPFS: true, isOpenAddress: true, isOpenURL: true, isOpenSubdomain: true });
-      }
-
-      if (ipfsHash !== '0x0000000000000000000000000000000000000000000000000000000000000000') {
-        this.setState({ ipfsHash: fromContentHash(ipfsHash) });
-      }
+    handleWarningClose();
+    const lowerCaseValue = searchValue.toLowerCase();
+    if (validateSearchDomain(lowerCaseValue) === false) {
+      handleWarningOpen('ENS has the minimum character length of 7 and should be end with .eth');
+      return;
     }
 
-    if (owner === '0x0000000000000000000000000000000000000000') {
-      this.props.handleWarningOpen('This ENS is OPEN for bid!');
-    }
+    const label = lowerCaseValue.split('.').shift();
+    this.setState({
+      isKeyDown: true,
+      isSeach: true,
+      isOverview: true,
+      isOpenResolver: false,
+      isOpenSubdomain: false,
+      isOpenURL: false,
+      isOpenAddress: false,
+      isOpenIPFS: false,
+      ipfsHash: "",
+      owner: "",
+      resolver: "",
+    });
 
-    const address = await getAddress(this.state.searchValue, resolver, this.props.web3);
-    const textInterface = await getSupportsInterface("0x59d1d43c", resolver, this.props.web3);
-    const multihashInterface = await getSupportsInterface("0xe89401a1", resolver, this.props.web3);
+    const resolver = await getResolver(lowerCaseValue, web3);
+    const fetchData = await Promise.all([
+      getOwner(lowerCaseValue, web3),
+      getEntries(label, web3),
+      getAddress(lowerCaseValue, resolver, web3),
+      getSupportsInterface("0x59d1d43c", resolver, web3),
+      getSupportsInterface("0xe89401a1", resolver, web3),
+      fetchIPFSHash(lowerCaseValue, resolver, web3),
+    ]);
+    const owner = fetchData[0];
+    const entries = fetchData[1];
+    const address = fetchData[2];
+    const textInterface = fetchData[3];
+    const multihashInterface = fetchData[4];
+    const ipfsHash = fetchData[5];
+    const isOwner = owner === metaMask.account;
+    const hasResolver = resolver !== '0x0000000000000000000000000000000000000000';
+
+    const newData = {
+      resolver,
+      owner,
+      entries,
+      address,
+      ipfsHash,
+      isOpenResolver: true,
+      isOpenIPFS: hasResolver && isOwner, 
+      isOpenAddress: hasResolver && isOwner, 
+      isOpenURL: hasResolver && isOwner, 
+      isOpenSubdomain: hasResolver && isOwner,
+      url: '',
+    };
+
+    // TODO: ...
     if (textInterface) {
-      const url = await getText(this.state.searchValue, "url", resolver, this.props.web3);
-      this.setState({ url });
+      newData.url = await getText(lowerCaseValue, "url", resolver, web3);
     }
-    this.setState({ isOpenResolver: true, address });
+
+    this.setState({
+      ...newData,
+    });
+
+    this.props.getReoverData(newData);
     this.handleLoadingClose();
-
-
-    let deta = { ...this.props, ...this.state }
-    this.props.getReoverData(deta);
+    if (newData.owner === '0x0000000000000000000000000000000000000000') {
+      handleWarningOpen('This ENS is OPEN for bid!');
+    }
   }
 
   handleLoadingClose = () => {
@@ -169,44 +208,43 @@ class SearchBar extends Component {
     })
   }
 
-
   componentWillUpdate(nextProps, nextState) {
     if (nextProps.accounts != this.props.accounts) {
-      this.setState({ 
-        menuAcitveidx: 0, 
-        isKeyDown: true, 
-        isSeach: true, 
-        isOverview: true, 
-        isOpenResolver: false, 
-        isOpenSubdomain: false, 
-        isOpenURL: false, 
-        isOpenAddress: false, 
-        isOpenIPFS: false, 
-        ipfsHash: "", 
-        owner: "", 
-        resolver: "" 
+      this.setState({
+        menuAcitveidx: 0,
+        isKeyDown: true,
+        isSeach: true,
+        isOverview: true,
+        isOpenResolver: false,
+        isOpenSubdomain: false,
+        isOpenURL: false,
+        isOpenAddress: false,
+        isOpenIPFS: false,
+        ipfsHash: "",
+        owner: "",
+        resolver: ""
       });
       this.handleSearchData();
     }
   }
 
   componentDidMount() {
-    this.setState({ 
+    this.setState({
       accounts: this.props.accounts,
     });
   }
 
   // baerwerew.ethEditResOverFn
   render() {
-    const { 
-      EditResOverFn, 
-      TransferOwnerOpen, 
-      SetSubdomainPopOpen, 
-      SetAddressOpen, 
-      SetIpfsOpen, 
+    const {
+      EditResOverFn,
+      TransferOwnerOpen,
+      SetSubdomainPopOpen,
+      SetAddressOpen,
+      SetIpfsOpen,
       SeachPageIdx,
     } = this.props;
-    
+
     return (
       <Main>
         {SeachPageIdx === 0 && <SeachPage {...this.props} {...this} {...this.state} />}
@@ -219,6 +257,8 @@ class SearchBar extends Component {
         {this.state.menuAcitveidx === 2 && this.state.isOpenSubdomain && <Subdomain handleSearchItemClick={this.handleSearchItemClick} SetSubdomainPopOpen={SetSubdomainPopOpen} {...this.props} {...this.state} />}
         {this.state.menuAcitveidx === 3 && this.state.isOpenAddress && <Address SetAddressOpen={SetAddressOpen} {...this.props} {...this.state} />}
         {this.state.menuAcitveidx === 4 && this.state.isOpenIPFS && <IPFS SetIpfsOpen={SetIpfsOpen} {...this.props} {...this.state} />}
+
+
         {/* { this.state.isOpenURL && <URL {...this.props} {...this.state}/> }
         <FileUpload {...this.props} {...this.state}/> */}
 
