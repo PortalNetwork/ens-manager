@@ -79,7 +79,6 @@ const SeedBtn = styled.a`
   align-items: center;
 `
 export default class extends Component {
-
   state={
     hash: "",
   }
@@ -90,34 +89,44 @@ export default class extends Component {
   }
 
   handleSetIPFSHash = () => {
-    if (this.state.hash.length !== 46) {
-      this.props.handleWarningOpen('IPFS Hash incorrect');
+    const { 
+      hash: ipfsHash, 
+    } = this.state;
+
+    const {
+      metaMask,
+      web3,
+      handleWarningOpen,
+      searchValue,
+    } = this.props;
+
+    if (ipfsHash.length !== 46) {
+      handleWarningOpen('IPFS Hash incorrect');
       return;
     }
 
-    const { metaMask, web3, searchValue, handleWarningOpen } = this.props.reoverData;
     const to = getEthereumResolverAddress();
-    const ipfsData = setContent(searchValue, this.state.hash);
+    const ipfsData = setContent(searchValue, ipfsHash);
     web3.eth.sendTransaction({
       from: metaMask.account, 
       to: to,
       value: 0,
       data: ipfsData 
-    },(err, result)=> {
+    }, (err, result) => {
         if (err) return handleWarningOpen(err.message);
         // alert("Success");
         // window.open(getEtherscanUrl(result));
-        this.props.SetIpfsClose();
+        this.props.handleClose();
         const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
         handleWarningOpen(tx);
     });
   }
 
   render() {
-    const { SetIpfsClose } = this.props;
+    const { handleClose } = this.props;
     return (
       <TOPop>
-        <h1>Set IPFS HASH <a onClick={SetIpfsClose}><img src={closeSvg} alt=""/></a></h1>
+        <h1>Set IPFS HASH <a onClick={handleClose}><img src={closeSvg} alt=""/></a></h1>
         <p>Enter your specified IPFS hash, you will be able to visit the Dweb (with the installation of browser extension). </p>
         <InputItem 
             name="hash" 

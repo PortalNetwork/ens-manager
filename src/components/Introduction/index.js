@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 import styled from 'styled-components';
 import landing from '../../images/landing.png';
 const Introduction = styled.div`
-	margin-bottom: 10px;
-    height: ${props => (props.isSeach ? '0px' : '180px')};
+    height: ${props => (props.isSeach ? '0px' : '110px')};
     transition: height .4s;
     overflow: hidden;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
         width: 100%;
         margin-bottom: 15px;
@@ -29,8 +33,8 @@ export default class extends Component {
     return (
         <Introduction isSeach={isSeach}>
             <img src={landing} alt=""/>
-            <h3>Connect DWeb/DApp & Wallet</h3>
-            <p>You can easily manage your domain by using ENS Manager, such as set resolver, set top-level domain, bind or set IPFS Hash.</p>
+            {/* <h3>Connect DWeb/DApp & Wallet</h3>
+            <p>You can easily manage your domain by using ENS Manager, such as set resolver, set top-level domain, bind or set IPFS Hash.</p> */}
         </Introduction>
     )
   }
