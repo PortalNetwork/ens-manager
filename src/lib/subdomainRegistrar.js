@@ -336,19 +336,18 @@ const subdomainInterface = [
         "stateMutability": "view",
         "type": "function"
     }
-]
+];
+
 /**
  * @class
  */
-class SubdomainRegistrar{
-    constructor(web3, address){
-        this.web3 = web3;
-        const subdomainContract = web3.eth.contract(subdomainInterface);
-        this.registrarPromise = Promise.resolve(Promise.promisifyAll(subdomainContract.at(address)));
-    }
+function SubdomainRegistrar(web3, address){
+    this.web3 = web3;
+    const subdomainRegistrarContract = web3.eth.contract(subdomainInterface);
+    this.subdomainRegistrarPromise = Promise.resolve(Promise.promisifyAll(subdomainRegistrarContract.at(address)));
 }
-export default SubdomainRegistrar
 
+module.exports = SubdomainRegistrar;
 
 // function SubdomainRegistrar(web3, address) {
 //     this.web3 = web3;
