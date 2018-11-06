@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Introduction, Title, Context, SetDomainBox, ClaimBtn } from './IdentityPageUi';
+import { Introduction, Title, Context, SetDomainBox, ClaimBtn, GoBackBtn } from './IdentityPageUi';
 import identity from '../../../images/identity.svg';
 import { getEthereumSubdomainRegistryAddress, getEtherscanUrl, getEthereumProvider } from '../../../lib/web3Service';
 import { setSubdomain } from "../../../lib/subdomainRegistrarService";
@@ -41,6 +41,7 @@ export default class extends Component {
 
     render() {
         const { subdomain } = this.state;
+        const { SeachPageSwitch } = this.props;
         return (
             <div>
                 <Introduction>
@@ -58,6 +59,8 @@ export default class extends Component {
                     <p>The subdomain will automatically bind with the currently wallet address, yet you can reset it through ENS Manager.</p>
                     <ClaimBtn onClick={this.handleSetSubnode}>Claim Subdomain</ClaimBtn>
                 </SetDomainBox>
+
+                <GoBackBtn onClick={()=> SeachPageSwitch(0)}><i class="fas fa-angle-left"></i> Go Back</GoBackBtn>
             </div>
         )
     }

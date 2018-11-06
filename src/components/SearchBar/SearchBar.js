@@ -72,26 +72,35 @@ class SearchBar extends Component {
     if(this.state.searchValue === "") return;
     if(this.state.isKeyDown) return;
     if(e.keyCode !== 13) return;
-    this.handleSearchData();
     this.props.footerOutFn(true);
     this.setState({isIdentityBtn: false});
     this.props.SeachPageSwitch(0);
+    this.handleSearchData();
   }
 
   handleSearchItemClick = () => {
     if(this.state.searchValue === "") return;
     if(this.state.isKeyDown) return;
-    this.handleSearchData();
     this.props.footerOutFn(true);
     this.setState({isIdentityBtn: false});
     this.props.SeachPageSwitch(0);
+    this.handleSearchData();
   }
 
   handleSearchData = async () => {
     this.props.handleWarningClose();
     // 
     const keydomain = this.state.searchValue.toLowerCase().split(".eth");
-    if (keydomain[keydomain.length - 1] !== "") return this.props.handleWarningOpen("ENS format error");
+
+    if(keydomain[0]===""){
+      this.setState({isIdentityBtn: true, isKeyDown: false, isSeach: false, isOverview: false});
+      return;
+    }
+
+    if (keydomain[keydomain.length - 1] !== "") {
+      this.props.handleWarningOpen("ENS format error");
+      return ;
+    }
 
     const domain = keydomain[keydomain.length - 2].split(".");
     const seachdamain = domain[domain.length-1];

@@ -36,6 +36,7 @@ export const SetDomainBox = styled.div`
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     padding: 20px;
+    margin-bottom: 26px;
     .inputBox{
         width: 100%;
         height: 36px;
@@ -75,4 +76,14 @@ export const ClaimBtn = styled.a`
     text-align: center;
     line-height: 36px;
     color: #ffffff;
+`
+
+
+export const GoBackBtn = styled.a`
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    >i{
+        margin-right: 15px;
+    }
 `
