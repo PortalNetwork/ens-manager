@@ -48,40 +48,40 @@ const IdentityText = styled.p`
 
 `
 export default class extends Component {
-    render() {
-        const { 
-            isSeach, searchValue, isIdentityBtn,
-            handleSearchItem, handleInputChange, handleSearchItemClick , SeachPageSwitch 
-        } = this.props;
-        return (
-            <div id="SeachPage">
-                <Introduction
-                    isSeach={isSeach}
-                />
-                <div className="search_bar">
-                    <input type="text" 
-                        className="search_type"
-                        onKeyDown={handleSearchItem} 
-                        name="searchValue"
-                        value={searchValue}
-                        onChange={handleInputChange}
-                        placeholder="Your Domain Name"
-                    />
-                    <a href="javascript:;" className="search_icon" onClick={handleSearchItemClick}></a>
-                </div>
+  render() {
+    const {
+      isSeach, searchValue, isIdentityBtn,
+      handleSearchItem, handleInputChange, handleSearchItemClick, SeachPageSwitch
+    } = this.props;
+    return (
+      <div id="SeachPage">
+        <Introduction
+          isSeach={isSeach}
+        />
+        <div className="search_bar">
+          <input type="text"
+            className="search_type"
+            onKeyDown={handleSearchItem}
+            name="searchValue"
+            value={searchValue}
+            onChange={handleInputChange}
+            placeholder="Your Domain Name"
+          />
+          <a href="javascript:;" className="search_icon" onClick={handleSearchItemClick}></a>
+        </div>
 
-                <IdentityText>The wallet address you choose to logged in must be the owner of the domain to be able to manage it.</IdentityText>
-                {
-                    isIdentityBtn && 
-                    <IdentityBtn onClick={()=>SeachPageSwitch(1)}>
-                        <img src={identity} alt=""/>
-                        <div>
-                            <h1>Get your exclusive identity</h1>
-                            <p>Claim domain name as your wallet address.</p>
-                        </div>
-                    </IdentityBtn>
-                }
-            </div> 
-        )
-    }
+        <IdentityText>The wallet address you choose to logged in must be the owner of the domain to be able to manage it.</IdentityText>
+        {
+          isIdentityBtn &&
+          <IdentityBtn onClick={() => SeachPageSwitch(1)}>
+            <img src={identity} alt="" />
+            <div>
+              <h1>Get your exclusive identity</h1>
+              <p>Claim domain name as your wallet address.</p>
+            </div>
+          </IdentityBtn>
+        }
+      </div>
+    )
+  }
 }
