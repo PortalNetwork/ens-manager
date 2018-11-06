@@ -23,8 +23,8 @@ const setWeb3Provider = () => {
  */
 export const setSubdomain = (_subdomain, _domain, _topdomain, _owner, _target) => {
     try {
-        let byteData = "0x" + 		
-            abi.methodID("newSubdomain", [ "string", "string", "string", "address", "address" ]).toString("hex") + 		
+        let byteData = "0x" +
+            abi.methodID("newSubdomain", ["string", "string", "string", "address", "address"]).toString("hex") + 		
             abi.rawEncode([ "string", "string", "string", "address", "address" ], [ _subdomain, _domain, _topdomain, _owner, _target ]).toString("hex");
         return byteData;
     } catch (err) {

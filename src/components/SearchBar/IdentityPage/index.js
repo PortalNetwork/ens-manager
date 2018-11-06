@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Introduction, Title, Context, SetDomainBox, ClaimBtn } from './IdentityPageUi';
 import identity from '../../../images/identity.svg';
-import { getEthereumSubdomainRegistryAddress, getEtherscanUrl, getEthereumProvider } from '../../../lib/web3Service';
+import { getEthereumSubdomainRegistrarAddress, getEtherscanUrl, getEthereumProvider } from '../../../lib/web3Service';
 import { setSubdomain } from "../../../lib/subdomainRegistrarService";
 
 export default class extends Component {
@@ -24,7 +24,7 @@ export default class extends Component {
         if(this.state.subdomain === '') return alert("Subdomain must not be empty");
         const { metaMask, web3, handleWarningOpen } = this.props;
         const { domain, subdomain } = this.state;
-        const to = getEthereumSubdomainRegistryAddress();
+        const to = getEthereumSubdomainRegistrarAddress();
         const subnodeData = setSubdomain(subdomain, domain, 'eth', metaMask.account, metaMask.account);
         web3.eth.sendTransaction({
             from: metaMask.account, 
