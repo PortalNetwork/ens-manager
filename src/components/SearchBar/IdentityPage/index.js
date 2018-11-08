@@ -7,7 +7,7 @@ import { setSubdomain } from "../../../lib/subdomainRegistrarService";
 export default class extends Component {
 
     state = {
-        domain: 'coingecko',
+        domain: 'portalid',
         subdomain: '',
     }
 
