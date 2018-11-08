@@ -93,7 +93,7 @@ export default class extends Component {
 
   handleSetSubnodeOwner = () => {
     if (/[a-zA-Z0-9]+/g.test(this.state.subnode) === false) return alert('Subdomain incorrect');
-    const { searchValue, metaMask, web3, owner, handleWarningOpen } = this.props.reoverData;
+    const { searchValue, metaMask, web3, owner, handleWarningOpen } = this.props;
     const to = getEthereumRegistryAddress();
     const subnodeData = setSubnodeOwner(searchValue, this.state.subnode, owner);
 
@@ -106,7 +106,7 @@ export default class extends Component {
       if (err) return handleWarningOpen(err.message);
       // alert("Success");
       // window.open(getEtherscanUrl(result));
-      this.props.SetSubdomainPopClose();
+      this.props.handleClose();
       const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
       handleWarningOpen(tx);
     });
@@ -114,11 +114,11 @@ export default class extends Component {
   }
   
   render() {
-    const { SetSubdomainPopClose } = this.props;
+    const { handleClose } = this.props;
 
     return (
       <TOPop>
-        <h1>Set Subdomain <a onClick={SetSubdomainPopClose}><img src={closeSvg} alt=""/></a></h1>
+        <h1>Set Subdomain <a onClick={handleClose}><img src={closeSvg} alt=""/></a></h1>
         <p>Enter the subdomain name you desire, it will show as  ＜subdomain＞ . christopher.eth </p>
         <InputItem 
             name="subnode" 

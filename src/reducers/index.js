@@ -5,14 +5,16 @@ import isFetching from './fetchingReducer';
 import health from './healthReducer';
 import warning from './warningReducer';
 import metaMask from './metaMaskReducer';
+import app from './appReducer.js';
 
 const appReducer = combineReducers({
+  app,
   count,
   system,
   isFetching,
   health,
   warning,
-  metaMask
+  metaMask,
 });
 
 const rootReducer = (state, action) => {

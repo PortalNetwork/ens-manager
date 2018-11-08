@@ -3,7 +3,7 @@ const nId = isSupTestNet ? "3" : "1";
 const RegistrarAddr = '0xc19fd9004b5c9789391679de6d766b981db94610';
 const RegistryAddr = '0x112234455c3a32fd11230c42e7bccd4a84e02010';
 const ResolverAddr = '0x4c641fb9bad9b60ef180c31f56051ce826d21a9a';
-
+const SubDomainAddr = '0x5c5860c3f35efd9b72a6c789d393769deb64399f';
 export const getEtherscanUrl = (result, networkId = nId) => {
   switch (networkId) {
     case '1':
@@ -14,7 +14,6 @@ export const getEtherscanUrl = (result, networkId = nId) => {
       return `https://ropsten.etherscan.io/tx/${result}`;
   }
 }
-
 
 export const getEthereumProvider = (networkId = nId) => {
   switch (networkId) {
@@ -48,6 +47,17 @@ export const getEthereumRegistryAddress = (networkId = nId) => {
       return '0x314159265dD8dbb310642f98f50C066173C1259b';
     case '3':
       return isSupTestNet ? RegistryAddr : '0x0';
+    default:
+      return '0x0';
+  }
+}
+
+export const getEthereumSubdomainRegistrarAddress = (networkId = nId) => {
+  switch (networkId) {
+    case '1':
+      return '0xf2b95d46e0e191115c5e9079c0c79a0105f36dd9';
+    case '3':
+      return isSupTestNet ? SubDomainAddr : '0x0';
     default:
       return '0x0';
   }

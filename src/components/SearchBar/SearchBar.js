@@ -10,18 +10,15 @@ import Subdomain from './Subdomain/Subdomain';
 import IPFS from './IPFS';
 import Address from './Address';
 import Overview from './Overview';
-// import Events from './Events/Events';
-import Introduction from '../Introduction';
 import MenuBar from './MenuBar';
+import IdentityPage from './IdentityPage';
+import SeachPage from './SeachPage.js';
 import overview from '../../images/ic-overview-on.svg';
 import resolver from '../../images/ic-resolver-on.svg';
 import subdomain from '../../images/ic-subdomain-on.svg';
 import wallet from '../../images/ic-wallet-on.svg';
 import ipfs from '../../images/ic-ipfs-on.svg';
-// import URL from './URL/URL';
-// import FileUpload from "./FileUpload"
 import './SearchBar.css';
-
 const Main = styled.div`
     max-width: 480px;
     width: 100%;
@@ -35,8 +32,6 @@ const Main = styled.div`
       min-height: 500px;
     }
 `;
-
-
 class SearchBar extends Component {
   // baerwerew.eth
   state = {
@@ -58,6 +53,7 @@ class SearchBar extends Component {
     entries:"",
     url: "",
     accounts: '',
+    isIdentityBtn: true,
     menuItem: [
       { imgurl: overview, name: "Overview" },
       { imgurl: resolver, name: "Resolver" },
@@ -76,22 +72,35 @@ class SearchBar extends Component {
     if(this.state.searchValue === "") return;
     if(this.state.isKeyDown) return;
     if(e.keyCode !== 13) return;
-    this.handleSearchData();
     this.props.footerOutFn(true);
+    this.setState({isIdentityBtn: false});
+    this.props.SeachPageSwitch(0);
+    this.handleSearchData();
   }
 
   handleSearchItemClick = () => {
     if(this.state.searchValue === "") return;
     if(this.state.isKeyDown) return;
-    this.handleSearchData();
     this.props.footerOutFn(true);
+    this.setState({isIdentityBtn: false});
+    this.props.SeachPageSwitch(0);
+    this.handleSearchData();
   }
 
   handleSearchData = async () => {
     this.props.handleWarningClose();
     // 
     const keydomain = this.state.searchValue.toLowerCase().split(".eth");
-    if (keydomain[keydomain.length - 1] !== "") return this.props.handleWarningOpen("ENS format error");
+
+    if(keydomain[0]===""){
+      this.setState({isIdentityBtn: true, isKeyDown: false, isSeach: false, isOverview: false});
+      return;
+    }
+
+    if (keydomain[keydomain.length - 1] !== "") {
+      this.props.handleWarningOpen("ENS format error");
+      return ;
+    }
 
     const domain = keydomain[keydomain.length - 2].split(".");
     const seachdamain = domain[domain.length-1];
@@ -158,6 +167,7 @@ class SearchBar extends Component {
     })
   }
   
+  
   componentWillUpdate(nextProps, nextState) {
     if(nextProps.accounts != this.props.accounts){
       this.setState({menuAcitveidx:0, isKeyDown: true, isSeach: true, isOverview: true, isOpenResolver: false, isOpenSubdomain: false, isOpenURL: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
@@ -170,24 +180,14 @@ class SearchBar extends Component {
 
   // baerwerew.ethEditResOverFn
   render() {
-    const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen, SetIpfsOpen  } = this.props;
+    const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen, SetIpfsOpen, web3, handleWarningOpen, metaMask, SeachPageIdx  } = this.props;
     return (
       <Main>
-        <Introduction
-          isSeach={this.state.isSeach}
-        />
-        <div className="search_bar">
-          <input type="text" 
-            className="search_type"
-            onKeyDown={this.handleSearchItem} 
-            name="searchValue"
-            value={this.state.searchValue}
-            onChange={this.handleInputChange}
-            placeholder="Your Domain Name"
-          />
-          <a href="javascript:;" className="search_icon" onClick={this.handleSearchItemClick}></a>
-        </div>
 
+      
+        { SeachPageIdx === 0 && <SeachPage {...this.props} {...this} {...this.state}/>}
+        { SeachPageIdx === 1 && <IdentityPage {...this.props} {...this} {...this.state}/>}
+        
         { this.state.isKeyDown && <Loading/> }
         {/* { this.menuAcitveidx === 0 && this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> } */}
         { this.state.menuAcitveidx === 0 && this.state.isOverview && <Overview TransferOwnerOpen={TransferOwnerOpen} {...this.props} {...this.state}/> }
@@ -203,6 +203,9 @@ class SearchBar extends Component {
           menuItem={this.state.menuItem} 
           handMenuAcitve={this.handMenuAcitve}
         />
+
+
+
       </Main>
     );
   }

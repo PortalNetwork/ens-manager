@@ -118,7 +118,7 @@ export default class extends Component {
   seedTransFerAddress = () =>{
     if(this.state.address === "") return alert("Address must not be empty");
     if(this.state.address.length < 42) return alert("Address format error");
-    const { searchValue, web3, metaMask, handleWarningOpen } = this.props.reoverData;
+    const { searchValue, web3, metaMask, handleWarningOpen } = this.props;
     const to = getEthereumRegistrarAddress();
     const subnodeData = transfer(searchValue.replace(".eth", ""), this.state.address);
     web3.eth.sendTransaction({
@@ -130,18 +130,18 @@ export default class extends Component {
       if (err) return handleWarningOpen(err.message);
       // alert("Success");
       // window.open(getEtherscanUrl(result));
-      this.props.TransferOwnerClose();
+      this.props.handleClose();
       const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
       handleWarningOpen(tx);
     });
   }
 
   render() {
-    const { TransferOwnerClose } = this.props;
-    const { searchValue } = this.props.reoverData;
+    const { handleClose } = this.props;
+    const { searchValue } = this.props;
     return (
       <TOPop>
-        <h1>Transfer Domain Name Owner <a onClick={TransferOwnerClose}><img src={closeSvg} alt=""/></a></h1>
+        <h1>Transfer Domain Name Owner <a onClick={handleClose}><img src={closeSvg} alt=""/></a></h1>
         <p>Domain transfer needs to wait for the transaction to be confirmed, you won’t be able to access it during this period</p>
         <Title>
           <h2>TRANSFERING DOMAIN NAME</h2>

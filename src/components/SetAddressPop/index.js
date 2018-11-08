@@ -103,7 +103,7 @@ export default class extends Component {
         return;
     }
 
-    const { searchValue, metaMask, web3, handleWarningOpen } = this.props.reoverData;
+    const { searchValue, metaMask, web3, handleWarningOpen } = this.props;
     const to = getEthereumResolverAddress();
     const addressData = setAddress(searchValue, this.state.address);
 
@@ -116,7 +116,7 @@ export default class extends Component {
         if (err) return handleWarningOpen(err.message);
         // alert("Success");
         // window.open(getEtherscanUrl(result));
-        this.props.SetAddressClose();
+        this.props.handleClose();
         const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
         handleWarningOpen(tx);
     });
@@ -126,18 +126,18 @@ export default class extends Component {
     console.log(this.props);
   }
 
-  SetDefaultBtn = (account) =>{
+  SetDefaultBtn = (account) => e => {
     this.setState({address: account},()=> this.handleSetAddress());
   }
 
 
   render() {
-    const { SetAddressClose } = this.props;
-    const { metaMask } = this.props.reoverData;
+    const { handleClose } = this.props;
+    const { metaMask } = this.props;
 
     return (
       <SetResoverPop>
-        <h1>Set Address <a><img onClick={SetAddressClose} src={closeSvg} alt=""/></a></h1>
+        <h1>Set Address <a><img onClick={handleClose} src={closeSvg} alt=""/></a></h1>
         <p>Enter the mapping address, or bind with the current address.</p>
         <div>
             <AddressInout
@@ -149,8 +149,8 @@ export default class extends Component {
             >
             </AddressInout>
             <BtnBox>
-                <SerAddressBtn onClick={()=>this.SetDefaultBtn(metaMask.account)}>Set Default</SerAddressBtn>
-                <SerAddressBtn Resolver>Set Address</SerAddressBtn>
+                <SerAddressBtn onClick={this.SetDefaultBtn(metaMask.account)}>Set Default</SerAddressBtn>
+                <SerAddressBtn Resolver onClick={this.handleSetAddress}>Set Address</SerAddressBtn>
             </BtnBox>
         </div>
       </SetResoverPop>
