@@ -56,7 +56,7 @@ export default class extends Component {
                         <input type="text" name="domain" defaultValue={this.viewDomain()} disabled/>
                         <h1>.eth</h1>
                     </div>
-                    <p>The subdomain will automatically bind with the currently wallet address, yet you can reset it through ENS Manager.</p>
+                    <p>The subdomain will be bond with your current wallet address, you may reset it later at the Manager.</p>
                     <ClaimBtn onClick={this.handleSetSubnode}>Claim Subdomain</ClaimBtn>
                 </SetDomainBox>
 
