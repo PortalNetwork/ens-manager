@@ -33,7 +33,7 @@ const Main = styled.div`
     }
 `;
 class SearchBar extends Component {
-  // baerwerew.eth
+  // fororderidtest.eth
   state = {
     searchValue: "",
     isKeyDown: false,
@@ -115,7 +115,6 @@ class SearchBar extends Component {
     let ipfsHash = "";
     this.setState({resolver, owner, entries});
 
-
     if (resolver !== '0x0000000000000000000000000000000000000000') {
 
       ipfsHash = await getContent(this.state.searchValue, resolver, this.props.web3);
@@ -156,6 +155,7 @@ class SearchBar extends Component {
   handMenuAcitve = (idx) =>{
     const {isOpenResolver, isOpenSubdomain, isOpenAddress, isOpenIPFS} = this.state;
     const state = [true, isOpenResolver, isOpenSubdomain, isOpenAddress, isOpenIPFS];
+    
     if(!state[idx]) return;
     this.setState({menuAcitveidx: idx});
   }
@@ -170,12 +170,25 @@ class SearchBar extends Component {
   
   componentWillUpdate(nextProps, nextState) {
     if(nextProps.accounts != this.props.accounts){
-      this.setState({menuAcitveidx:0, isKeyDown: true, isSeach: true, isOverview: true, isOpenResolver: false, isOpenSubdomain: false, isOpenURL: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
+      this.setState({
+        menuAcitveidx:0, 
+        isKeyDown: true, 
+        isSeach: true, 
+        isOverview: true, 
+        isOpenResolver: false, 
+        isOpenSubdomain: false, 
+        isOpenURL: false, 
+        isOpenAddress: false, 
+        isOpenIPFS: false, 
+        ipfsHash: "", 
+        owner: "", 
+        resolver: ""
+      })
       this.handleSearchData();
     }
   }
   componentDidMount(){
-    this.setState({accounts: this.props.accounts})
+    this.setState({accounts: this.props.accounts});
   }
 
   // baerwerew.ethEditResOverFn

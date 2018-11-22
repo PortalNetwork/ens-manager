@@ -105,11 +105,11 @@ export default class extends Component {
       return;
     }
 
-    const to = getEthereumResolverAddress();
+    // const to = getEthereumResolverAddress();
     const ipfsData = setContent(searchValue, ipfsHash);
     web3.eth.sendTransaction({
       from: metaMask.account, 
-      to: to,
+      to: this.props.resolver,
       value: 0,
       data: ipfsData 
     }, (err, result) => {
@@ -121,7 +121,7 @@ export default class extends Component {
         handleWarningOpen(tx);
     });
   }
-
+  
   render() {
     const { handleClose } = this.props;
     return (

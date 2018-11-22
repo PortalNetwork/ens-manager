@@ -4,7 +4,7 @@
 
 ## Usage
 
-![Interface](./assets/interface.png)
+![Interface](./assets/ens-manager.png)
 
 ## How To Install Dependencies
 
