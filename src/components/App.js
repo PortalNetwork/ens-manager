@@ -225,6 +225,7 @@ class App extends Component {
                           handleWarningOpen={handleWarningOpen}
                           searchValue={searchBarData.searchValue}
                           handleClose={this.handleClosePopUpEditor}
+                          resolver={searchBarData.resolver}
                         />
         }
         {isSetIpfs && <SetIpfsPop
@@ -233,6 +234,7 @@ class App extends Component {
                         handleClose={this.handleClosePopUpEditor}
                         handleWarningOpen={handleWarningOpen}
                         searchValue={searchBarData.searchValue}
+                        resolver={searchBarData.resolver}
                       />
         }
       </div>
