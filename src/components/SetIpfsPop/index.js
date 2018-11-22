@@ -57,7 +57,7 @@ const InputItem = styled.input`
   margin-top: 16px;
   padding-left: 11px;
   border: 0;
-  margin-bottom: 14px;
+  /* margin-bottom: 14px; */
   &::placeholder { 
     color: #aeaeae;
     opacity: 1;
@@ -77,10 +77,12 @@ const SeedBtn = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 24px;
 `
 export default class extends Component {
   state={
     hash: "",
+    resolver: getEthereumResolverAddress(),
   }
 
   handleInputChange = (e) =>{
@@ -89,9 +91,10 @@ export default class extends Component {
   }
 
   handleSetIPFSHash = () => {
-    const { 
-      hash: ipfsHash, 
-    } = this.state;
+    const { hash: ipfsHash,  resolver, } = this.state;
+
+    if(resolver.length < 42) return alert("Wrong resolver");
+    if(resolver === "") this.setState({"resolver": getEthereumResolverAddress()})
 
     const {
       metaMask,
@@ -105,17 +108,15 @@ export default class extends Component {
       return;
     }
 
-    const to = getEthereumResolverAddress();
+    // const to = getEthereumResolverAddress();
     const ipfsData = setContent(searchValue, ipfsHash);
     web3.eth.sendTransaction({
       from: metaMask.account, 
-      to: to,
+      to: resolver,
       value: 0,
       data: ipfsData 
     }, (err, result) => {
         if (err) return handleWarningOpen(err.message);
-        // alert("Success");
-        // window.open(getEtherscanUrl(result));
         this.props.handleClose();
         const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
         handleWarningOpen(tx);
@@ -124,6 +125,7 @@ export default class extends Component {
 
   render() {
     const { handleClose } = this.props;
+    const to = getEthereumResolverAddress();
     return (
       <TOPop>
         <h1>Set IPFS HASH <a onClick={handleClose}><img src={closeSvg} alt=""/></a></h1>
@@ -134,6 +136,13 @@ export default class extends Component {
             placeholder="QmcvpYRiw2ReaZp5GRK25fSQ6wCuqjjwpegSL"
             onChange={this.handleInputChange}
         />
+        <InputItem 
+            name="resolver" 
+            value={this.state.resolver} 
+            placeholder={to}
+            onChange={this.handleInputChange}
+        />
+        <p>Default Resolver, can be changed</p>
         <SeedBtn onClick={this.handleSetIPFSHash}>Set IPFS Hash</SeedBtn>
       </TOPop>
     )
