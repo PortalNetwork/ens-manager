@@ -104,20 +104,20 @@ export default class extends Component {
   }
 
   handleSetResovler = (type) => {
-    const { EditResCloseFn } = this.props;
+    const { handleClose } = this.props;
     if(type === "Default"){
       return this.handleDefaultResolver(()=> this.gotoSetResovler());
     }
     if (this.state.resolverAddr.length !== 42) {
-      EditResCloseFn();
+      handleClose();
       return alert("Resolver hash incorrect")
     }
     this.gotoSetResovler();
   }
 
   gotoSetResovler = () =>{
-    const { EditResCloseFn } = this.props;
-    const {web3, searchValue, metaMask, handleWarningOpen} = this.props.reoverData;
+    const { handleClose } = this.props;
+    const {web3, searchValue, metaMask, handleWarningOpen} = this.props;
     const to = getEthereumRegistryAddress();
     const resolverData = setResolver(searchValue, this.state.resolverAddr);
     web3.eth.sendTransaction({
@@ -127,11 +127,11 @@ export default class extends Component {
       data: resolverData 
     }, (err, result)=> {
         if (err) {
-          EditResCloseFn();
+          handleClose();
           return handleWarningOpen(err.message);
         }
         const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
-        EditResCloseFn();
+        handleClose();
         handleWarningOpen(tx);
     });
   }
@@ -139,14 +139,11 @@ export default class extends Component {
 
   render() {
     const { resolverAddr } = this.state
-    const { EditResCloseFn } = this.props;
-    const { owner, metaMask } = this.props.reoverData;
+    const { handleClose } = this.props;
     return (
       <SetResoverPop>
-        <h1>Set Resolver <a onClick={EditResCloseFn}><img src={closeSvg} alt=""/></a></h1>
+        <h1>Set Resolver <a onClick={handleClose}><img src={closeSvg} alt=""/></a></h1>
         <p>Enter the resolver you assigned, or use the default value to complete the setup.</p>
-        {/* { 
-            owner !== '0x0000000000000000000000000000000000000000' && owner === metaMask.account && */}
             <div>
                 <ResoverInout
                   type="text" 
