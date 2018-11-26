@@ -53,7 +53,7 @@ const ResoverInout = styled.input`
   background-color: #ffffff;
   font-family: SFProText;
   font-size: 12px;
-  color: #aeaeae;
+  color: #303030;
   padding-left: 11px;
   margin-top: 20px;
 `
