@@ -33,9 +33,10 @@ const Main = styled.div`
     }
 `;
 class SearchBar extends Component {
-  // fororderidtest.eth
   state = {
     searchValue: "",
+    searchValue2: "",
+    mainDomain: "",
     isKeyDown: false,
     isSeach: false,
     isOpenResolver: false,
@@ -89,9 +90,9 @@ class SearchBar extends Component {
 
   handleSearchData = async () => {
     this.props.handleWarningClose();
-    // 
-    const keydomain = this.state.searchValue.toLowerCase().split(".eth");
 
+
+    const keydomain = this.state.searchValue.toLowerCase().split(".eth");
     if(keydomain[0]===""){
       this.setState({isIdentityBtn: true, isKeyDown: false, isSeach: false, isOverview: false});
       return;
@@ -102,8 +103,11 @@ class SearchBar extends Component {
       return ;
     }
 
+    this.setState({searchValue2: this.state.searchValue})
+
     const domain = keydomain[keydomain.length - 2].split(".");
     const seachdamain = domain[domain.length-1];
+    this.setState({mainDomain: seachdamain})
 
     if (seachdamain.length < 7) return this.props.handleWarningOpen("ENS has the minimum character length of 7");
     this.setState({ isKeyDown: true,isSeach: true, isOverview: true, isOpenResolver: false, isOpenSubdomain: false, isOpenURL: false, isOpenAddress: false, isOpenIPFS: false, ipfsHash: "", owner: "", resolver: ""})
@@ -191,7 +195,7 @@ class SearchBar extends Component {
     this.setState({accounts: this.props.accounts});
   }
 
-  // baerwerew.ethEditResOverFn
+  // fororderidtest.eth
   render() {
     const { EditResOverFn, TransferOwnerOpen, SetSubdomainPopOpen, SetAddressOpen, SetIpfsOpen, web3, handleWarningOpen, metaMask, SeachPageIdx  } = this.props;
     return (
@@ -202,22 +206,17 @@ class SearchBar extends Component {
         { SeachPageIdx === 1 && <IdentityPage {...this.props} {...this} {...this.state}/>}
         
         { this.state.isKeyDown && <Loading/> }
-        {/* { this.menuAcitveidx === 0 && this.state.isOpenSubdomain && <Events {...this.props} {...this.state}/> } */}
         { this.state.menuAcitveidx === 0 && this.state.isOverview && <Overview TransferOwnerOpen={TransferOwnerOpen} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 1 && this.state.isOpenResolver && <Resolver EditResOverFn={EditResOverFn} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 2 && this.state.isOpenSubdomain && <Subdomain handleSearchItemClick={this.handleSearchItemClick} SetSubdomainPopOpen={SetSubdomainPopOpen} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 3 && this.state.isOpenAddress && <Address SetAddressOpen={SetAddressOpen} {...this.props} {...this.state}/> }
         { this.state.menuAcitveidx === 4 && this.state.isOpenIPFS && <IPFS SetIpfsOpen={SetIpfsOpen} {...this.props} {...this.state}/> }
-        {/* { this.state.isOpenURL && <URL {...this.props} {...this.state}/> }
-        <FileUpload {...this.props} {...this.state}/> */}
-
+        
         <MenuBar
           menuAcitveidx={this.state.menuAcitveidx}
           menuItem={this.state.menuItem} 
           handMenuAcitve={this.handMenuAcitve}
         />
-
-
 
       </Main>
     );

@@ -49,29 +49,8 @@ export default class extends Component {
     this.setState({ [name]: value });
   }
 
-  // handleSetIPFSHash = () => {
-  //   if (this.state.ipfs.length !== 46) {
-  //     this.props.handleWarningOpen('IPFS Hash incorrect');
-  //     return;
-  //   }
-  //   const to = getEthereumResolverAddress();
-  //   const ipfsData = setContent(this.props.searchValue, this.state.ipfs);
-  //   this.props.web3.eth.sendTransaction({
-  //     from: this.props.metaMask.account, 
-  //     to: to,
-  //     value: 0,
-  //     data: ipfsData },(err, result)=> {
-  //       if (err) {
-  //         this.props.handleWarningOpen(err.message);
-  //       } else {
-  //         const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
-  //         this.props.handleWarningOpen(tx);
-  //       }
-  //     });
-  // }
-
   render() {
-    const { ipfsHash, SetIpfsOpen } = this.props;
+    const { ipfsHash, SetIpfsOpen, searchValue2 } = this.props;
 
     return (
       <div className="setting_box">
@@ -79,7 +58,7 @@ export default class extends Component {
 
         <TypeList>
           <TitleH1>
-            Current IPFS Hash
+            Current IPFS Hash :【 {searchValue2 }】
             <a onClick={SetIpfsOpen}><img src={IconEdit} alt=""/></a>
           </TitleH1>
          
