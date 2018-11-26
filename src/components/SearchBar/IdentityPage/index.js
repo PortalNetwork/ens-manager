@@ -26,6 +26,12 @@ export default class extends Component {
         const { domain, subdomain } = this.state;
         const to = getEthereumSubdomainRegistrarAddress();
         const subnodeData = setSubdomain(subdomain, domain, 'eth', metaMask.account, metaMask.account);
+        
+        if(metaMask.account === undefined){
+            const tx = <span className="tx">Please unlock your wallet before send transaction</span>;
+            return handleWarningOpen(tx);
+        }
+        
         web3.eth.sendTransaction({
             from: metaMask.account, 
             to: to,
