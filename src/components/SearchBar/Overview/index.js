@@ -97,7 +97,7 @@ export default class extends Component {
     
 
     render() {
-        const {isKeyDown, entries, owner, TransferOwnerOpen, metaMask} = this.props;
+        const {isKeyDown, entries, owner, TransferOwnerOpen, metaMask, mainDomain} = this.props;
         // const AuctionTimeregDate = new Date(entries.registrationDate);
         // const SubmitBidsTimeregDate = new Date(entries.registrationDate);
         // const AuctionTime = moment.utc(AuctionTimeregDate.removeDays(5)).format('MMMM Do YYYY, h:mm:ss a');
@@ -106,9 +106,9 @@ export default class extends Component {
 
         return (
             <OverviewBox isKeyDown={isKeyDown} bulletpng={bulletpng}>
-                <h3><span>OVERVIEW</span></h3>
+                <h3><span>OVERVIEW</span> </h3>
                 <Overview>
-                    <DomainInfo>Domain Info</DomainInfo>
+                    <DomainInfo>Domain Info :【 {mainDomain }.eth】</DomainInfo>
                     <ListItem>
                         <Titlebar>Status</Titlebar>
                         <Valuebox>{entries.state}</Valuebox>

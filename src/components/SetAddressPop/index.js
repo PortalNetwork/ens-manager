@@ -104,18 +104,16 @@ export default class extends Component {
     }
 
     const { searchValue, metaMask, web3, handleWarningOpen } = this.props;
-    const to = getEthereumResolverAddress();
+    // const to = getEthereumResolverAddress();
     const addressData = setAddress(searchValue, this.state.address);
 
     web3.eth.sendTransaction({
       from: metaMask.account, 
-      to: to,
+      to: this.props.resolver,
       value: 0,
       data: addressData 
     }, (err, result)=> {
         if (err) return handleWarningOpen(err.message);
-        // alert("Success");
-        // window.open(getEtherscanUrl(result));
         this.props.handleClose();
         const tx = <span className="tx">Tx: <a href={getEtherscanUrl(result)} target="_blank">{result}</a></span>;
         handleWarningOpen(tx);

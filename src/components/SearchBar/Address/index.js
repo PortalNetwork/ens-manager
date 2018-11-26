@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import {getEthereumResolverAddress} from '../../../lib/web3Service';
-// import {setAddress} from '../../../lib/resolverService';
 import IconEdit from '../../../images/ic-edit.svg'
 import styled from 'styled-components';
 
@@ -54,71 +52,22 @@ export default class extends Component {
     this.setState({address});
   }
 
-  // handleSetAddress = () => {
-  //   if (this.state.address.length !== 42) {
-  //     this.props.handleWarningOpen('Address hash incorrect');
-  //     return;
-  //   }
-  //   const to = getEthereumResolverAddress();
-  //   const addressData = setAddress(this.props.searchValue, this.state.address);
-  //   this.props.web3.eth.sendTransaction({
-  //     from: this.props.metaMask.account, 
-  //     to: to,
-  //     value: 0,
-  //     data: addressData }, (err, result)=> {
-  //       if (err) {
-  //         // this.props.handleWarningOpen(err.message);
-  //       } else {
-  //         // const tx = <span className="tx">Tx: <a href={`https://etherscan.io/tx/${result}`} target="_blank">{result}</a></span>;
-  //         // this.props.handleWarningOpen(tx);
-  //       }
-  //     });
-  // }
-
   render() {
-    const { address, SetAddressOpen } = this.props;
+    const { address, SetAddressOpen, searchValue2 } = this.props;
     return (
       <div className="setting_box">
         <h3>
           <span>ADDRESS</span>
         </h3>
+
         <TypeList>
           <TitleH1>
-            Current Address
+            Current Address :【 {searchValue2 }】
             <a onClick={SetAddressOpen}><img src={IconEdit} alt=""/></a>
           </TitleH1>
           <Address>{address}</Address>
         </TypeList>
 
-        {/* <div className="type_list">
-          <div className="type_box">
-            <label>Current Address</label>
-        <p className="status_check">{this.props.address}&nbsp;
-          { this.props.address !== '0x0000000000000000000000000000000000000000' && 
-            <span className="icon_check"></span>
-          }
-        </p>
-          </div>
-        { this.props.owner !== '0x0000000000000000000000000000000000000000' &&
-          this.props.owner === this.props.metaMask.account &&
-        <div className="type_enter">
-          <input 
-            type="text" 
-            name="address" 
-            value={this.state.address} 
-            placeholder="0x0000000000000000000000000000000000000000"
-            onChange={this.handleInputChange}
-            />
-          <a className="setting_btn" onClick={() => this.handleDefaultAddress()}>
-            <p>Your Address</p>
-          </a>
-        </div>
-        }
-        { this.props.owner !== '0x0000000000000000000000000000000000000000' && 
-          this.props.owner === this.props.metaMask.account &&
-          <button onClick={() => this.handleSetAddress()}>Set Address</button>
-        }
-        </div> */}
       </div>
     )
   }
