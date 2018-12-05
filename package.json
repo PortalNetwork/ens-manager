@@ -45,7 +45,7 @@
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
-    "ipfs-api": "^25.0.0",
+    "ipfs-http-client": "^27.0.0",
     "material-ui": "^1.0.0-beta.6",
     "material-ui-icons": "^1.0.0-beta.5",
     "moment": "^2.22.2",

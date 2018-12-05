@@ -1,7 +1,7 @@
-var ipfsAPI = require('ipfs-api');
+var ipfsClient = require('ipfs-http-client');
 var fs = require('fs');
 
-const ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https'});
+const ipfs = ipfsClient({host: 'ipfs.infura.io', port: '5001', protocol: 'https'});
 
 const content = fs.readFileSync(__dirname + "/icon-iot.png");
 console.log(content);
