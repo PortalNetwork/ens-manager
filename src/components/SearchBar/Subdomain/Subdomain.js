@@ -125,19 +125,18 @@ class Subdomain extends Component {
     let labelsArr = labels == null ? [] : labels;
     let labelHash = [];
     let BidLength = labelsArr.length;
-    // let idx = 0;
     if(BidLength!=0){
       labelsArr.forEach(async hash => {
         let dL = await decryptLabel([hash]);
-        // idx ++;
-        labelHash.push(dL.data[0]);
-        let result = [...(new Set(labelHash))];
-        this.subdomainCombination(result);
+        if (dL && dL.data && dL.data.length > 0) {
+          labelHash.push(dL.data[0]);
+          let result = [...(new Set(labelHash))];
+          this.subdomainCombination(result);
+        }
       });
     }else{
       this.setState({"isItemShow": true});
     }
-    
   }
 
   subdomainCombination = (result) =>{
